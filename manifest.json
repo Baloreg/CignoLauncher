@@ -1,0 +1,561 @@
+{
+  "version": "1.0.0",
+  "minecraft_version": "1.21.1",
+  "forge_version": "neoforge-1.21.1-21.1.72",
+  "modpack_name": "Il Mio Modpack",
+  "last_updated": "",
+  "mods": [
+    {
+      "name": "[1.21.1] SecurityCraft v1.10.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/[1.21.1] SecurityCraft v1.10.jar",
+      "sha256": "ed98e1ad30360ec36d58962ce9d3891e2e6c1a3c68ed07f9545040b9ced85ede",
+      "size": 4809883
+    },
+    {
+      "name": "amendments-1.21-2.0.8-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/amendments-1.21-2.0.8-neoforge.jar",
+      "sha256": "33f5b4f2667475919ddd79c6428d207a21f1f2ca23868dd963571d196d275015",
+      "size": 1136831
+    },
+    {
+      "name": "appleskin-neoforge-mc1.21-3.0.7.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/appleskin-neoforge-mc1.21-3.0.7.jar",
+      "sha256": "99a2f1b22f05b1215c6c967c0cf0518a39d30e18a94ac3dac248385e38dcfe10",
+      "size": 74100
+    },
+    {
+      "name": "architectury-13.0.8-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/architectury-13.0.8-neoforge.jar",
+      "sha256": "5ec578f814e8cca87aeffa6e424032e78d9ea5ea6b603dd834c2dc13c31141ee",
+      "size": 584004
+    },
+    {
+      "name": "ars_nouveau-1.21.1-5.10.5.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/ars_nouveau-1.21.1-5.10.5.jar",
+      "sha256": "2f48a96a09085a9e5acc93a49c31fee327f29c8f3d1b7f32afaa7bc3851cb93d",
+      "size": 20241166
+    },
+    {
+      "name": "artifacts-neoforge-13.0.7.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/artifacts-neoforge-13.0.7.jar",
+      "sha256": "8dd69e962b3461d4d286d5b1ecb27ae988c22e38ef73254da6e699180b1c3b33",
+      "size": 978772
+    },
+    {
+      "name": "astikorcartsredux-1.2.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/astikorcartsredux-1.2.2.jar",
+      "sha256": "44b2db02a6699481d212f0fa0a766b52776650396fa67951a428ad32b2d7dc24",
+      "size": 531765
+    },
+    {
+      "name": "better_weaponry-1.1.3-neoforge-1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/better_weaponry-1.1.3-neoforge-1.21.1.jar",
+      "sha256": "ddcd05a85657a65a90419a0610e0260dc9650d03618eae9ba82cb79fbe634f20",
+      "size": 666931
+    },
+    {
+      "name": "betterarcheology-neoforge-1.3.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/betterarcheology-neoforge-1.3.2.jar",
+      "sha256": "dd6095202a6bffb0c189db35350388c875608aa2cb55e15f8fa23cb933dea323",
+      "size": 3093851
+    },
+    {
+      "name": "bookshelf-neoforge-1.21.1-21.1.69.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/bookshelf-neoforge-1.21.1-21.1.69.jar",
+      "sha256": "9d868be040c2ba6e2f31c40278b73d8ff383e1f8d7005a6f9820c0d1c4cf61b5",
+      "size": 340336
+    },
+    {
+      "name": "carryon-neoforge-1.21.1-2.2.2.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/carryon-neoforge-1.21.1-2.2.2.11.jar",
+      "sha256": "b18c734fb574c05c78dd33c4cd4c152e55efc8aecc0b6de876cc21be3c147f7f",
+      "size": 347647
+    },
+    {
+      "name": "chat_heads-0.14.0-neoforge-1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/chat_heads-0.14.0-neoforge-1.21.jar",
+      "sha256": "246a92b608cac6b354caa21f85b8983eaba2dfa76cdedde17185e6d569cee457",
+      "size": 85010
+    },
+    {
+      "name": "cloth-config-15.0.140-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/cloth-config-15.0.140-neoforge.jar",
+      "sha256": "65e722e0d98431a07c45f8bdd8d529a217cc8c175fde1740248bd5c1b4f3c0d4",
+      "size": 1163890
+    },
+    {
+      "name": "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Clumps-neoforge-1.21.1-19.0.0.1.jar",
+      "sha256": "b524ccdace2ef8fd19f5b2074f7de1103ac5065c52553f064c00e098346c293e",
+      "size": 18382
+    },
+    {
+      "name": "connector-2.0.0-beta.10+1.21.1-full.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/connector-2.0.0-beta.10+1.21.1-full.jar",
+      "sha256": "2c7ebc13c1895f1748ba1bd82bc5228138225898b1a304914e10e78f517cf8b0",
+      "size": 4589762
+    },
+    {
+      "name": "continuity-3.0.0+1.21.neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/continuity-3.0.0+1.21.neoforge.jar",
+      "sha256": "4cc0a4a09ae09c64bb567e42381652b700f9cade5067a75e83115662cc475f0a",
+      "size": 1014626
+    },
+    {
+      "name": "create-1.21.1-6.0.6.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/create-1.21.1-6.0.6.jar",
+      "sha256": "2d403500cd550db452a975ec3d4ba21b6097360d4dd575311112fe322055b1ee",
+      "size": 18599196
+    },
+    {
+      "name": "createaddition-1.5.3.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/createaddition-1.5.3.jar",
+      "sha256": "c46474e2b57200ac11ccaaa98a120d9660447cd1a73ce49aa009ef67a117accb",
+      "size": 1605665
+    },
+    {
+      "name": "crittersandcompanions-neoforge-1.21.1-2.3.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/crittersandcompanions-neoforge-1.21.1-2.3.2.jar",
+      "sha256": "5a250ca7f2b9dc6be1864c40a6a062e7562ba51b3c93319ff757fb56768a54a6",
+      "size": 1356530
+    },
+    {
+      "name": "curios-neoforge-9.5.1+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/curios-neoforge-9.5.1+1.21.1.jar",
+      "sha256": "a45df2125c26219974aba7507ffc9afe7b83acc941a386af3faacb1cc0056fde",
+      "size": 410690
+    },
+    {
+      "name": "CustomPlayerModels-1.21-0.6.24a.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/CustomPlayerModels-1.21-0.6.24a.jar",
+      "sha256": "1e9ee2aa1a7ac0cf300e53a2a46921b11ba89ae333229f2b32aa206b29c31482",
+      "size": 2777215
+    },
+    {
+      "name": "cwb-neoforge-3.0.0+mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/cwb-neoforge-3.0.0+mc1.21.jar",
+      "sha256": "be7144647bc160858e659f6793fcce993914443b9256c2df0369b1c616a2a5d4",
+      "size": 81843
+    },
+    {
+      "name": "dungeons-and-taverns-v4.4.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/dungeons-and-taverns-v4.4.4.jar",
+      "sha256": "1db28e89e0cb76aebe9e40955d1866e8ac1779575d15c2a1e250ac804a762d05",
+      "size": 24859622
+    },
+    {
+      "name": "dynamic-fps-3.9.5+minecraft-1.21.0-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/dynamic-fps-3.9.5+minecraft-1.21.0-neoforge.jar",
+      "sha256": "269ea911c14ba63c972b85f43ff4da1c940faae4e80a496d6416a5f683d1b7c2",
+      "size": 192872
+    },
+    {
+      "name": "emotecraft-for-MC1.21.1-2.4.12-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/emotecraft-for-MC1.21.1-2.4.12-neoforge.jar",
+      "sha256": "8cff63e900acd55bb39d41978cc2a70a974e326e2038c30ff20ccfde4c953a43",
+      "size": 861829
+    },
+    {
+      "name": "entity_model_features_1.21-neoforge-3.0.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/entity_model_features_1.21-neoforge-3.0.1.jar",
+      "sha256": "d44d7542a4e0aec561bfd6528b90f382e6847ce8019fe0df6cfeda782f2e1f7f",
+      "size": 470634
+    },
+    {
+      "name": "entity_texture_features_1.21-neoforge-7.0.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/entity_texture_features_1.21-neoforge-7.0.2.jar",
+      "sha256": "73923a8262919df8a684b841187efd4c3d85c748bc2519d3aca5d554307cbc45",
+      "size": 700889
+    },
+    {
+      "name": "entityculling-neoforge-1.8.2-mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/entityculling-neoforge-1.8.2-mc1.21.jar",
+      "sha256": "cea07c73c3da2a4396dc4e6af8fdb5f460d7a0c32b2ce6b645d6279ee9b5e2f2",
+      "size": 473832
+    },
+    {
+      "name": "Explorify v1.6.2 f10-48.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Explorify v1.6.2 f10-48.jar",
+      "sha256": "8280dd4b3fa9a25a34dd663c3e0dc6342ba792ae31ab97d75c3c20e44bcc2df5",
+      "size": 974818
+    },
+    {
+      "name": "exposure-neoforge-1.21.1-1.9.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/exposure-neoforge-1.21.1-1.9.11.jar",
+      "sha256": "35339f608762d0c886d2cb9a21f6eb8ca9d56ff9a9701cc4bf9c6f8000bba20e",
+      "size": 2179406
+    },
+    {
+      "name": "fabric-api-0.116.6+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/fabric-api-0.116.6+1.21.1.jar",
+      "sha256": "cc531256ecce945b65b179bcedc45ca40b69d7364b95448d255270bb6fccaac8",
+      "size": 2424827
+    },
+    {
+      "name": "fancymenu_neoforge_3.7.0_MC_1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/fancymenu_neoforge_3.7.0_MC_1.21.1.jar",
+      "sha256": "3c6cce7ef18254c13e2e061cb882160c9d00f91b09bb589423baccc4f4366462",
+      "size": 3432729
+    },
+    {
+      "name": "FarmersDelight-1.21.1-1.2.9.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/FarmersDelight-1.21.1-1.2.9.jar",
+      "sha256": "bdc8dea5ea3f1ee81494a4587a6aef88976d942294a8ceddc3287cf0436bfd4f",
+      "size": 2964387
+    },
+    {
+      "name": "ferritecore-7.0.2-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/ferritecore-7.0.2-neoforge.jar",
+      "sha256": "235e2081dfe050d7642b0d432a786668f079168505ba5d6bf0ec70c962a36539",
+      "size": 118911
+    },
+    {
+      "name": "forgified-fabric-api-0.115.6+2.1.3+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/forgified-fabric-api-0.115.6+2.1.3+1.21.1.jar",
+      "sha256": "29ec780f70d73de0e07cbdfa1b0d88726024b1f472bf35fd8e00ee75cf16c781",
+      "size": 5577338
+    },
+    {
+      "name": "friendsandfoes-neoforge-4.0.10+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/friendsandfoes-neoforge-4.0.10+mc1.21.1.jar",
+      "sha256": "d266a97a7d144efa75cbb2ed86ad379324d50718fbf888226c30d12ab668d06d",
+      "size": 5176986
+    },
+    {
+      "name": "fusion-1.2.11b-neoforge-mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/fusion-1.2.11b-neoforge-mc1.21.jar",
+      "sha256": "626340f7a4ff1cf406d73da3d7e328c17818e8f41b983912333da47287143b56",
+      "size": 532221
+    },
+    {
+      "name": "geckolib-neoforge-1.21.1-4.8.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/geckolib-neoforge-1.21.1-4.8.2.jar",
+      "sha256": "a733757157bd914b56a24c09d2797c522f0f339eb5e45ec1d70a8a9326ecd9df",
+      "size": 621848
+    },
+    {
+      "name": "handcrafted-neoforge-1.21.1-4.0.3.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/handcrafted-neoforge-1.21.1-4.0.3.jar",
+      "sha256": "6f2a776fb28ed07d370899814e5e711fbeebe31396097d78a3b550439b364948",
+      "size": 7132842
+    },
+    {
+      "name": "HorseExpert-v21.1.0-1.21.1-NeoForge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/HorseExpert-v21.1.0-1.21.1-NeoForge.jar",
+      "sha256": "57ae91fb10c8616a6dc8c9067e3827d4a0c6b7ee22f7f841c662db72176ce80c",
+      "size": 91896
+    },
+    {
+      "name": "ImmediatelyFast-NeoForge-1.6.7+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/ImmediatelyFast-NeoForge-1.6.7+1.21.1.jar",
+      "sha256": "1998d56edb0ddb6caeedd09dd2fde405ee85cd8f706398cb8e08009fe9019058",
+      "size": 254163
+    },
+    {
+      "name": "immersive_aircraft-1.4.1+1.21.1-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/immersive_aircraft-1.4.1+1.21.1-neoforge.jar",
+      "sha256": "cf956d7084f66f020a28b09a1fedb79ad34031bc0dbbb48538b7b6dbf0667a88",
+      "size": 2436870
+    },
+    {
+      "name": "immersive_armors-1.7.5+1.21.1-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/immersive_armors-1.7.5+1.21.1-neoforge.jar",
+      "sha256": "69a2a6482d446529e2c402ab94da7abd4a1ab63acb08578575ebdd166fe76b13",
+      "size": 1271062
+    },
+    {
+      "name": "immersive_melodies-neoforge-0.6.2+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/immersive_melodies-neoforge-0.6.2+1.21.1.jar",
+      "sha256": "80843f8b76f22a44726448f3c03d0f337c0b28703bff726430445e64359467ff",
+      "size": 5520152
+    },
+    {
+      "name": "Incendium_1.21.x_v5.4.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Incendium_1.21.x_v5.4.4.jar",
+      "sha256": "285a4f69fe2391f2175f7fc9316d727a39c79bdd214923c59284d569bce656f4",
+      "size": 4267528
+    },
+    {
+      "name": "iris-neoforge-1.8.12+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/iris-neoforge-1.8.12+mc1.21.1.jar",
+      "sha256": "3e3f94d2d5cdcb8145c4385d521974aa2d8669b2cc212351f70cf06488182e83",
+      "size": 2438548
+    },
+    {
+      "name": "Jade-1.21.1-NeoForge-15.10.3.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Jade-1.21.1-NeoForge-15.10.3.jar",
+      "sha256": "7087a9672a208071e774571423793d499a56adc8dd09fabe36f8652a3bb9c418",
+      "size": 725736
+    },
+    {
+      "name": "jei-1.21.1-neoforge-19.25.0.322.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/jei-1.21.1-neoforge-19.25.0.322.jar",
+      "sha256": "360d627c4c81f9eb42e0d1f316bac66765596405790809cf64655bdefc0b0307",
+      "size": 1505377
+    },
+    {
+      "name": "konkrete_neoforge_1.9.9_MC_1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/konkrete_neoforge_1.9.9_MC_1.21.jar",
+      "sha256": "791c5538751dd3015ef3a2ce92d98719e1a28a48ebbd817b78506771256654cd",
+      "size": 618842
+    },
+    {
+      "name": "kotlinforforge-5.10.0-all.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/kotlinforforge-5.10.0-all.jar",
+      "sha256": "3f6e1d0e34c86e62abce3a9f86764a6861a2101aaa8858ada9d81f4588336efe",
+      "size": 6730190
+    },
+    {
+      "name": "lambdynamiclights-4.7.2+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/lambdynamiclights-4.7.2+1.21.1.jar",
+      "sha256": "e6a376b4e539edc683960970ca77b8ec470eee5d92a7498632a94b905d59b045",
+      "size": 1960422
+    },
+    {
+      "name": "leafscopperbackport-1.2-neoforge-1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/leafscopperbackport-1.2-neoforge-1.21.1.jar",
+      "sha256": "b43e955fdd520411bb5e624e39de9eff416cdddb36696d2f41f461c022ba4e29",
+      "size": 641147
+    },
+    {
+      "name": "letsdo-bakery-neoforge-2.1.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-bakery-neoforge-2.1.2.jar",
+      "sha256": "b2b09fce36b3fcb6d5ba593695209040826208944b10b5b7f5578f8ef1e7b546",
+      "size": 1226159
+    },
+    {
+      "name": "letsdo-beachparty-neoforge-2.1.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-beachparty-neoforge-2.1.1.jar",
+      "sha256": "64418f58aa3b19746326dd614edf40381951d65e3279c55a22374eb58d1b3ad5",
+      "size": 7574514
+    },
+    {
+      "name": "letsdo-brewery-neoforge-2.1.5.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-brewery-neoforge-2.1.5.jar",
+      "sha256": "2cbcddaf692890af139b4cf21457cd9b25ba580e880225f445a979837b53f917",
+      "size": 2004777
+    },
+    {
+      "name": "letsdo-candlelight-neoforge-2.1.3.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-candlelight-neoforge-2.1.3.jar",
+      "sha256": "95a20831edb795f2cab2131fd755995c5b30cfe966d7be2c3b37fff6a4e1b58b",
+      "size": 2566412
+    },
+    {
+      "name": "letsdo-farm_and_charm-neoforge-1.1.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-farm_and_charm-neoforge-1.1.11.jar",
+      "sha256": "278fcc3c5382bab191ca73157dbd60dc37c06d2ab347287b32e138c144e09eae",
+      "size": 2392317
+    },
+    {
+      "name": "letsdo-furniture-neoforge-1.1.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-furniture-neoforge-1.1.1.jar",
+      "sha256": "b80848984fc03e7771d6148a180da62cee9e615c5b2fefb3a87537dfde648be3",
+      "size": 2825191
+    },
+    {
+      "name": "letsdo-herbalbrews-neoforge-1.1.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-herbalbrews-neoforge-1.1.2.jar",
+      "sha256": "5bdc0d25706e1724694444f913c94abad2a9d17395a2ad45d47d94e6f222ffe5",
+      "size": 736515
+    },
+    {
+      "name": "lithium-neoforge-0.15.0+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/lithium-neoforge-0.15.0+mc1.21.1.jar",
+      "sha256": "8b671fa5486487c03d13543560a4909bc57c8933e200f62a7d79947aa48a8e41",
+      "size": 747405
+    },
+    {
+      "name": "melody_neoforge_1.0.10_MC_1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/melody_neoforge_1.0.10_MC_1.21.jar",
+      "sha256": "6b973a4564703c531fc0eae09db08b07a38091e0a743c687b8d2049457e84871",
+      "size": 36096
+    },
+    {
+      "name": "modernfix-neoforge-5.24.3+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/modernfix-neoforge-5.24.3+mc1.21.1.jar",
+      "sha256": "0f1f987cdb9f1896217d45d91a9eaa20ee4c0054c41602624b54d81513a8cc22",
+      "size": 558771
+    },
+    {
+      "name": "moonlight-1.21-2.23.11-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/moonlight-1.21-2.23.11-neoforge.jar",
+      "sha256": "ca026580a0bf13d8351d76e565557288fcee481dd72b2bf5cca9b74fc3d282b0",
+      "size": 1289087
+    },
+    {
+      "name": "moreculling-neoforge-1.21.1-1.0.6.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/moreculling-neoforge-1.21.1-1.0.6.jar",
+      "sha256": "0f45d6ca33fe250a4d7e63e552f848f267810c19d9887b4604755541973e5050",
+      "size": 342982
+    },
+    {
+      "name": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+      "sha256": "866ac9a47afcd829bdb03890b5d8f80bb4c6f47332c64717b6e909bee51337b6",
+      "size": 306668
+    },
+    {
+      "name": "Nullscape_1.21.x_v1.2.13.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Nullscape_1.21.x_v1.2.13.jar",
+      "sha256": "4c3d5805319c2d29e9bb2181a36d806b5014e1a07a90a1a9b9f62bd79a705bcd",
+      "size": 350988
+    },
+    {
+      "name": "polymorph-neoforge-1.1.0+1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/polymorph-neoforge-1.1.0+1.21.1.jar",
+      "sha256": "bec8118978adeb052de9c4eaf9a595830621d82515a764f32f9c8a4dd52ab94b",
+      "size": 174972
+    },
+    {
+      "name": "prickle-neoforge-1.21.1-21.1.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/prickle-neoforge-1.21.1-21.1.11.jar",
+      "sha256": "ccf46c442ed3c7fe41ad056f0940560829ec4dd88360985dfacd78f4614eb167",
+      "size": 84812
+    },
+    {
+      "name": "PuzzlesLib-v21.1.38-1.21.1-NeoForge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/PuzzlesLib-v21.1.38-1.21.1-NeoForge.jar",
+      "sha256": "f9af300d28c87c3aff30f215be67ffb96b966a659293b7d8162b280acfad64cd",
+      "size": 1080651
+    },
+    {
+      "name": "rechiseled-1.1.6a-neoforge-mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/rechiseled-1.1.6a-neoforge-mc1.21.jar",
+      "sha256": "7e64fa40a2c54fd139d1a02b121260cf3c543638924ac09e25dd5b795fc1ccb4",
+      "size": 3484553
+    },
+    {
+      "name": "reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar",
+      "sha256": "e00e960f9cae9ea411429fadaa48e2d778f8064667cf6aaee7ce88332813b0bf",
+      "size": 78451
+    },
+    {
+      "name": "resourcefulconfig-neoforge-1.21-3.0.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/resourcefulconfig-neoforge-1.21-3.0.11.jar",
+      "sha256": "25b4f3502d25c535004acd4a9420272fff01d2f1e2df352239fec93fdab005d4",
+      "size": 341009
+    },
+    {
+      "name": "resourcefullib-neoforge-1.21-3.0.12.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/resourcefullib-neoforge-1.21-3.0.12.jar",
+      "sha256": "5e36f2c69de008dc5795f730c84ab767688f15c810944b585485349a0c911261",
+      "size": 484332
+    },
+    {
+      "name": "runelic-neoforge-1.21.1-21.1.3.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/runelic-neoforge-1.21.1-21.1.3.jar",
+      "sha256": "afd9226e56c08f0f16132266bfa3c9a624ea37f019f2ac64fb68ff4924ec8345",
+      "size": 67345
+    },
+    {
+      "name": "sawmill-1.21-1.7.1-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sawmill-1.21-1.7.1-neoforge.jar",
+      "sha256": "ef669bda74e0066d8a99693a1971ccb5dab7c9b37149eccaff04197deb4e5a93",
+      "size": 521519
+    },
+    {
+      "name": "smallships-neoforge-1.21.1-2.0.0-b2.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/smallships-neoforge-1.21.1-2.0.0-b2.1.jar",
+      "sha256": "423d81eaeccf32088ed0b42a3a1c0976695fa5ab99c2b6b1d4c5706537fcbf62",
+      "size": 1914804
+    },
+    {
+      "name": "smarterfarmers-1.21-2.2.3-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/smarterfarmers-1.21-2.2.3-neoforge.jar",
+      "sha256": "14fff360648d700a98e2d7cd5823db85934c99ca5fd235fed8ac1ca3154fc5db",
+      "size": 65669
+    },
+    {
+      "name": "sodium-extra-neoforge-0.6.0+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sodium-extra-neoforge-0.6.0+mc1.21.1.jar",
+      "sha256": "c20fe1a554916cde5dd0ac72ba2b82ed04263026d4394ac51be6f7a300902443",
+      "size": 367047
+    },
+    {
+      "name": "sodium-neoforge-0.6.13+mc1.21.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sodium-neoforge-0.6.13+mc1.21.1.jar",
+      "sha256": "7acd7af2ef75ec883a6872c17494ead65e38025151eb08a1d60e36d34377f403",
+      "size": 1162994
+    },
+    {
+      "name": "sound-physics-remastered-neoforge-1.21.1-1.5.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sound-physics-remastered-neoforge-1.21.1-1.5.1.jar",
+      "sha256": "bddc71ecd4f074a101eb3785599d13c69e64025e1029aa0fd0a28fcf9bccf2ea",
+      "size": 202454
+    },
+    {
+      "name": "StorageDrawers-neoforge-1.21.1-13.11.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/StorageDrawers-neoforge-1.21.1-13.11.4.jar",
+      "sha256": "7d768aaaecbd0228c57d3a3c1fcee0c04469a42ea218925f93763ed33afe566c",
+      "size": 1131420
+    },
+    {
+      "name": "supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+      "sha256": "d2ba7b839a2268e4e223457e813d11aa2476c3bf708a7bba691d8fc851778a4b",
+      "size": 207514
+    },
+    {
+      "name": "supermartijn642corelib-1.1.18a-neoforge-mc1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/supermartijn642corelib-1.1.18a-neoforge-mc1.21.jar",
+      "sha256": "6f43f2fa77968569927edefde859f1c46d7317c5519cdcefea729e9b84342420",
+      "size": 518643
+    },
+    {
+      "name": "supplementaries-1.21-3.4.16-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/supplementaries-1.21-3.4.16-neoforge.jar",
+      "sha256": "2200f725ffd1b2d1f3e772c2a32b344b0700ed6fe4d56285287d20c929c0157d",
+      "size": 12420022
+    },
+    {
+      "name": "Terralith_1.21.x_v2.5.8.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Terralith_1.21.x_v2.5.8.jar",
+      "sha256": "00333a130ac38b7b9ca93700098d5e02e0612bdc2d3522aada2f36e5600621bf",
+      "size": 3115385
+    },
+    {
+      "name": "travelersbackpack-neoforge-1.21.1-10.1.24.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/travelersbackpack-neoforge-1.21.1-10.1.24.jar",
+      "sha256": "d08a2845988edc1d47fadb0467e42d78d5668dd493e07659418a9f21cd6c191c",
+      "size": 1259213
+    },
+    {
+      "name": "visuality-forge-2.1.0.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/visuality-forge-2.1.0.jar",
+      "sha256": "f4c134d3041e9e6626276a26d2864f3aed177c08c8a109cd3788c5470c28d02e",
+      "size": 115765
+    },
+    {
+      "name": "voicechat-neoforge-1.21.1-2.6.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/voicechat-neoforge-1.21.1-2.6.4.jar",
+      "sha256": "b4b14e7a8cf6b7d06fc26bac7a2a29c4ccb7d7179b5639967d0ed54f8d9c1ca6",
+      "size": 4869302
+    },
+    {
+      "name": "Xaeros_Minimap_25.2.10_NeoForge_1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Xaeros_Minimap_25.2.10_NeoForge_1.21.jar",
+      "sha256": "35d5217f497d7747a78670b0280b28dc22630a244ffd93a09c4cf8789b9353ba",
+      "size": 1710781
+    },
+    {
+      "name": "XaerosWorldMap_1.39.12_NeoForge_1.21.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/XaerosWorldMap_1.39.12_NeoForge_1.21.jar",
+      "sha256": "39285c3533f8b83f22cb2454cb05a5350041d08581677f6ed1e21cbaf6c92d81",
+      "size": 955196
+    },
+    {
+      "name": "yet_another_config_lib_v3-3.8.0+1.21.1-neoforge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/yet_another_config_lib_v3-3.8.0+1.21.1-neoforge.jar",
+      "sha256": "cc1b2a46b1e3216f4ab3cd8576a2a42d0b0ed89376265083cd13d44f2aaaec5c",
+      "size": 1117442
+    },
+    {
+      "name": "youre-in-grave-danger-neoforge-2.0.13.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/youre-in-grave-danger-neoforge-2.0.13.jar",
+      "sha256": "dd2142a3c6a9d5b990ab36220be482f7aa9f528755f93b8fef8996f509ddcda2",
+      "size": 448888
+    }
+  ]
+}
