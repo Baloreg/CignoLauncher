@@ -51,6 +51,50 @@ class ManifestGenerator:
         """Ottiene la dimensione del file in bytes"""
         return os.path.getsize(file_path)
     
+    def process_root_files(self, root_files):
+        """Processa i file nella root della cartella base"""
+        if not root_files:
+            return []
+        
+        print(f"\n📄 Processando file root: {len(root_files)} file")
+        print("-" * 60)
+        
+        files = []
+        for filename in root_files:
+            file_path = self.base_folder / filename
+            
+            print(f"  [•] {filename}")
+            
+            try:
+                # Calcola hash SHA256
+                sha256 = self.calculate_sha256(file_path)
+                
+                # Ottieni dimensione file
+                size = self.get_file_size(file_path)
+                
+                # URL: file nella root
+                url = f"{self.base_url}/{filename}"
+                
+                file_info = {
+                    "name": filename,
+                    "path": filename,  # Path è solo il nome per file root
+                    "url": url,
+                    "sha256": sha256,
+                    "size": size
+                }
+                
+                files.append(file_info)
+                
+                print(f"      ✓ Hash: {sha256[:16]}...")
+                print(f"      ✓ Size: {size:,} bytes")
+                
+            except Exception as e:
+                print(f"      ❌ Errore: {e}")
+        
+        print(f"\n  ✅ Totale: {len(files)} file root processati")
+        
+        return files
+    
     def process_folder(self, folder_path, folder_name):
         """Processa ricorsivamente una cartella e ritorna la lista dei file"""
         if not folder_path.exists():
@@ -59,20 +103,35 @@ class ManifestGenerator:
         
         files = []
         total_files = 0
+        ignored_files = 0
         
         print(f"\n📁 Processando cartella: {folder_name}/")
+        print(f"   Percorso: {folder_path.absolute()}")
         print("-" * 60)
         
         # Processa ricorsivamente tutti i file
         for root, dirs, filenames in os.walk(folder_path):
+            root_path = Path(root)
+            
+            # Debug: mostra le directory trovate
+            if dirs:
+                print(f"\n  📂 In {root_path.relative_to(folder_path) if root_path != folder_path else '.'}")
+                print(f"     Sottocartelle: {', '.join(dirs)}")
+            
             # Rimuovi cartelle da ignorare
+            original_dirs = dirs.copy()
             dirs[:] = [d for d in dirs if not self.should_ignore(Path(root) / d)]
+            
+            removed_dirs = set(original_dirs) - set(dirs)
+            if removed_dirs:
+                print(f"     Ignorate: {', '.join(removed_dirs)}")
             
             for filename in sorted(filenames):
                 file_path = Path(root) / filename
                 
                 # Ignora file da ignorare
                 if self.should_ignore(file_path):
+                    ignored_files += 1
                     continue
                 
                 total_files += 1
@@ -109,40 +168,154 @@ class ManifestGenerator:
                 except Exception as e:
                     print(f"      ❌ Errore: {e}")
         
+        print()
         if total_files == 0:
             print(f"  ℹ️  Nessun file trovato")
+            if ignored_files > 0:
+                print(f"  ⚠️  {ignored_files} file ignorati")
         else:
-            print(f"\n  ✅ Totale: {len(files)} file processati")
+            print(f"  ✅ Totale: {len(files)} file processati")
+            if ignored_files > 0:
+                print(f"  ⚠️  {ignored_files} file ignorati")
+        
+        return files
+        """Processa ricorsivamente una cartella e ritorna la lista dei file"""
+        if not folder_path.exists():
+            print(f"⚠️  Cartella {folder_name}/ non trovata, skip...")
+            return []
+        
+        files = []
+        total_files = 0
+        ignored_files = 0
+        
+        print(f"\n📁 Processando cartella: {folder_name}/")
+        print(f"   Percorso: {folder_path.absolute()}")
+        print("-" * 60)
+        
+        # Processa ricorsivamente tutti i file
+        for root, dirs, filenames in os.walk(folder_path):
+            root_path = Path(root)
+            
+            # Debug: mostra le directory trovate
+            if dirs:
+                print(f"\n  📂 In {root_path.relative_to(folder_path) if root_path != folder_path else '.'}")
+                print(f"     Sottocartelle: {', '.join(dirs)}")
+            
+            # Rimuovi cartelle da ignorare
+            original_dirs = dirs.copy()
+            dirs[:] = [d for d in dirs if not self.should_ignore(Path(root) / d)]
+            
+            removed_dirs = set(original_dirs) - set(dirs)
+            if removed_dirs:
+                print(f"     Ignorate: {', '.join(removed_dirs)}")
+            
+            for filename in sorted(filenames):
+                file_path = Path(root) / filename
+                
+                # Ignora file da ignorare
+                if self.should_ignore(file_path):
+                    ignored_files += 1
+                    continue
+                
+                total_files += 1
+                
+                # Calcola il path relativo dalla cartella della categoria
+                relative_path = file_path.relative_to(folder_path)
+                path_str = str(relative_path).replace('\\', '/')  # Windows -> Unix path
+                
+                print(f"  [{total_files}] {path_str}")
+                
+                try:
+                    # Calcola hash SHA256
+                    sha256 = self.calculate_sha256(file_path)
+                    
+                    # Ottieni dimensione file
+                    size = self.get_file_size(file_path)
+                    
+                    # Crea l'URL completo
+                    url = f"{self.base_url}/{folder_name}/{path_str}"
+                    
+                    file_info = {
+                        "name": filename,
+                        "path": path_str,
+                        "url": url,
+                        "sha256": sha256,
+                        "size": size
+                    }
+                    
+                    files.append(file_info)
+                    
+                    print(f"      ✓ Hash: {sha256[:16]}...")
+                    print(f"      ✓ Size: {size:,} bytes")
+                    
+                except Exception as e:
+                    print(f"      ❌ Errore: {e}")
+        
+        print()
+        if total_files == 0:
+            print(f"  ℹ️  Nessun file trovato")
+            if ignored_files > 0:
+                print(f"  ⚠️  {ignored_files} file ignorati")
+        else:
+            print(f"  ✅ Totale: {len(files)} file processati")
+            if ignored_files > 0:
+                print(f"  ⚠️  {ignored_files} file ignorati")
         
         return files
     
     def get_all_folders(self):
-        """Trova tutte le sottocartelle nella cartella base"""
+        """Trova tutte le sottocartelle nella cartella base + file root"""
         if not self.base_folder.exists():
             print(f"❌ Errore: La cartella {self.base_folder} non esiste!")
+            print(f"   Percorso assoluto: {self.base_folder.absolute()}")
             return []
         
-        folders = []
-        for item in sorted(self.base_folder.iterdir()):
-            if item.is_dir() and not self.should_ignore(item):
-                folders.append(item.name)
+        print(f"\n🔍 Scansione cartella: {self.base_folder.absolute()}")
         
-        return folders
+        folders = []
+        root_files = []
+        ignored = []
+        
+        for item in sorted(self.base_folder.iterdir()):
+            if item.is_dir():
+                if self.should_ignore(item):
+                    ignored.append(item.name)
+                else:
+                    folders.append(item.name)
+                    print(f"  ✓ Trovata cartella: {item.name}/")
+            else:
+                # File nella root
+                if not self.should_ignore(item):
+                    root_files.append(item.name)
+                    print(f"  ✓ Trovato file root: {item.name}")
+                else:
+                    print(f"  ⊗ File ignorato: {item.name}")
+        
+        if ignored:
+            print(f"\n  ⚠️  Cartelle ignorate: {', '.join(ignored)}")
+        
+        if not folders and not root_files:
+            print(f"\n  ❌ Nessuna cartella o file valido trovato!")
+            print(f"  💡 Assicurati che la cartella contenga file o sottocartelle")
+        
+        return folders, root_files
     
     def generate_manifest(self, minecraft_version="1.20.1", forge_version="1.20.1-47.3.0", modpack_name="Cignopack"):
-        """Genera il manifest.json completo processando tutte le cartelle"""
+        """Genera il manifest.json completo processando tutte le cartelle e file root"""
         print("\n" + "=" * 60)
         print("🚀 GENERAZIONE MANIFEST AUTOMATICA")
         print("=" * 60)
         
-        # Trova tutte le cartelle
-        folders = self.get_all_folders()
+        # Trova tutte le cartelle e file root
+        folders, root_files = self.get_all_folders()
         
-        if not folders:
-            print("❌ Nessuna cartella trovata!")
+        if not folders and not root_files:
+            print("❌ Nessuna cartella o file trovato!")
             return None
         
-        print(f"\n📂 Cartelle trovate: {', '.join(folders)}")
+        print(f"\n📂 Cartelle: {', '.join(folders) if folders else 'nessuna'}")
+        if root_files:
+            print(f"📄 File root: {', '.join(root_files)}")
         
         # Crea la struttura base del manifest
         manifest = {
@@ -153,8 +326,16 @@ class ManifestGenerator:
             "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         
-        # Processa ogni cartella trovata
         total_files = 0
+        
+        # Processa i file nella root (se ci sono)
+        if root_files:
+            root_file_list = self.process_root_files(root_files)
+            if root_file_list:
+                manifest["root"] = root_file_list
+                total_files += len(root_file_list)
+        
+        # Processa ogni cartella trovata
         for folder_name in folders:
             folder_path = self.base_folder / folder_name
             files = self.process_folder(folder_path, folder_name)
@@ -201,7 +382,9 @@ class ManifestGenerator:
                 total_size += category_size
                 total_files += file_count
                 
-                print(f"  • {key}: {file_count} file ({category_size / (1024*1024):.2f} MB)")
+                # Mostra nome speciale per file root
+                display_name = "File root" if key == "root" else key
+                print(f"  • {display_name}: {file_count} file ({category_size / (1024*1024):.2f} MB)")
         
         print(f"\n💾 Totale: {total_files} file - {total_size / (1024*1024):.2f} MB")
         print("=" * 60)
