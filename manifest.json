@@ -3,13 +3,13 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-05 16:38:53",
+  "last_updated": "2025-10-05 17:09:35",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "32d0165a7d602b1c3fb224da65a8d0b3a46fcb6e10b4c5ec6a31a5d3d7634b2b",
+      "sha256": "806cbdfe96500d409c85df7828593020eeb16262d6117830a002e02d9aca5d5c",
       "size": 10589
     }
   ],
@@ -32,28 +32,28 @@
       "name": "alexsmobs.toml",
       "path": "alexsmobs.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs.toml",
-      "sha256": "7c01df704a66653df7793e4c6a856815be283106df03765f196c89bd962d463c",
+      "sha256": "401efa9056289c8a375d11a4eed5bb4fdcea8bee7340304ef9971ab6493aeca6",
       "size": 36192
     },
     {
       "name": "amendments-client.toml",
       "path": "amendments-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/amendments-client.toml",
-      "sha256": "e9fe4642e7b080bca0b0de01344e83559d4739f9a0368617e6bf7d4987a02067",
+      "sha256": "eef1598b69f6a650a1ed05a9bb54906b71ac60b81b5f58ce2ae5b99d960109d8",
       "size": 4208
     },
     {
       "name": "amendments-common.toml",
       "path": "amendments-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/amendments-common.toml",
-      "sha256": "7c0d6e5285fa81d9967a2562e03bc3e4aaf202b696defb3ad29973d38599c154",
+      "sha256": "bd98c35e394d4ae37e2385f719680d2365527df98894b337d6cf0f2089b15ee6",
       "size": 5008
     },
     {
       "name": "appleskin-client.toml",
       "path": "appleskin-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/appleskin-client.toml",
-      "sha256": "e6609ffbea927ee6390b1317bb6f3abb3f31ee591ca5c1d5e748f5e625fefea1",
+      "sha256": "28c6ad7570268b02ec6f73fb7c39c49ecf90f0697d0db9447899e8aa96285200",
       "size": 1361
     },
     {
@@ -74,28 +74,28 @@
       "name": "beachparty.toml",
       "path": "beachparty.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/beachparty.toml",
-      "sha256": "5c808677268b0abe456c152cdac2be0f664e31a52b47b43c1a504048c42df7ec",
+      "sha256": "f40a82d8d40961f42831e3aa385aa69fb2fe8b678310f393792c301769238904",
       "size": 394
     },
     {
       "name": "betterarcheology-common.toml",
       "path": "betterarcheology-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/betterarcheology-common.toml",
-      "sha256": "b2729a5916c5aac214f67337d1d38ee7767e1e14b7f2dcb7b7371a9509829a96",
+      "sha256": "ad9e40f11ad0196f04edb97ed058148a207992d768137266d7279502d5186bf2",
       "size": 4734
     },
     {
       "name": "carryon-client.toml",
       "path": "carryon-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/carryon-client.toml",
-      "sha256": "eb247bd22d2ae144c4cb1a2f24862e6aeb1467167d36112258ad36b6da0597db",
+      "sha256": "099145bca17d3a362f8c5078438c29a14db444ee354757d42aff232094e8a10c",
       "size": 590
     },
     {
       "name": "carryon-common.toml",
       "path": "carryon-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/carryon-common.toml",
-      "sha256": "9c31f7f00ebe4025a6a11ee6257fe672b57866f7ec6206f97656b6cdf095b0b1",
+      "sha256": "e309110397629770f5080b9ba81ab26e9476250c4372a051ece7c13557370f29",
       "size": 7153
     },
     {
@@ -109,7 +109,7 @@
       "name": "citadel-common.toml",
       "path": "citadel-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/citadel-common.toml",
-      "sha256": "3fcd8013137a86c00953d4be1e56945b84b87594be722bbf3b3be8d752e2577f",
+      "sha256": "0a41518641bbb4133fc61b934e8663ae5271ffd8190a281e5b35d1efd97fb3e3",
       "size": 648
     },
     {
@@ -137,28 +137,28 @@
       "name": "create-client.toml",
       "path": "create-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/create-client.toml",
-      "sha256": "7c40bc004ba478b13d0c99c2b644e50cf3a1d2d60d9b40df15822da8d8ad710c",
+      "sha256": "5b9ee8bee23d0f12b926567309802eed6f1f46a195726b2b034d692deb833b65",
       "size": 4397
     },
     {
       "name": "create-common.toml",
       "path": "create-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/create-common.toml",
-      "sha256": "36a4d9f5da68f6801b83ce0c4a1a8805fbeffb0dd997f2d405465d7774522296",
+      "sha256": "6c0f6254798808bce8079a1cfafe4d6c082cead42c51d1e3121f3580f8a44eca",
       "size": 157
     },
     {
       "name": "createaddition-common.toml",
       "path": "createaddition-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/createaddition-common.toml",
-      "sha256": "1f45a741dc79ba3ad0000884a5677bd76f0235ccb81d99957a181247e416cae6",
+      "sha256": "1d28b40d466308be422d511bcd662b26807a9616144055591ccabb53b42fad92",
       "size": 4446
     },
     {
       "name": "crittersandcompanions-common.toml",
       "path": "crittersandcompanions-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/crittersandcompanions-common.toml",
-      "sha256": "c902ae9bda878b0bb9be20c0f6f27c89737ff3df2dc59248c19f06e91ac679b1",
+      "sha256": "17c62b295d88d749f0d52dc349d437ad642483ff64335cdb4fb7c291879626fd",
       "size": 201
     },
     {
@@ -172,14 +172,14 @@
       "name": "curios-client.toml",
       "path": "curios-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/curios-client.toml",
-      "sha256": "ebc96c813d601e9c61b6929a8490e71fa990dc64918c19e1f9937bb275510abc",
+      "sha256": "3903cd1fcf402a8c155f21bb581eb78d26e067537cb8af0b24bb8b8be63b3b30",
       "size": 706
     },
     {
       "name": "curios-common.toml",
       "path": "curios-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/curios-common.toml",
-      "sha256": "5fe808869d46a4b80e1191fbe40f40a4d63987beda0eaeb2d89b909a990ea2ea",
+      "sha256": "541ee90994c1cf3d4e132df2ac3ff74004bc3952d3914ae843b5089a4dda8a95",
       "size": 161
     },
     {
@@ -235,77 +235,77 @@
       "name": "exposure-client.toml",
       "path": "exposure-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/exposure-client.toml",
-      "sha256": "4ad8b1ff7452bc6314a778a45ecc370fef4b586963c650f8836de2ce110ee4f0",
+      "sha256": "3afa14f7cb92f38e48c08e95b9cf6d3d46c6cdbda13d65d616c22ed68a828aaf",
       "size": 3410
     },
     {
       "name": "exposure-common.toml",
       "path": "exposure-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/exposure-common.toml",
-      "sha256": "03666ca5d1fd2fa23406e92532186b0e729c46ed1fbce4aee88a26e237d77558",
+      "sha256": "0cd1197eb83647380ba51d127a8206d338ea24cb77f05cfd3ae521af2b61c970",
       "size": 2369
     },
     {
       "name": "farmandcharm.toml",
       "path": "farmandcharm.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/farmandcharm.toml",
-      "sha256": "154f39438ed32c86edba2a0eb1bd1407a04daf3230ea3f37bbaa7bb1f33e7ccf",
+      "sha256": "68821ed9ccb662fa46bb6d30f39e55530ec7a8d25852840add371a0a28e5ab62",
       "size": 4416
     },
     {
       "name": "farmersdelight-client.toml",
       "path": "farmersdelight-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/farmersdelight-client.toml",
-      "sha256": "e5f8f5743c23e6c1e569070d720f91e66495e8da03550a0d37d9a07c6d543014",
+      "sha256": "13a11f20b305f6f975ebc35802d87c7bf22a04dc79464e41089823603b76a227",
       "size": 369
     },
     {
       "name": "farmersdelight-common.toml",
       "path": "farmersdelight-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/farmersdelight-common.toml",
-      "sha256": "ab93780fbfe30774558ac2ea7cedbc367f08b4d3aae0c300e1931acfba7c00cf",
+      "sha256": "76aecd29d065d018c440e93bb107cfbf9793ca73b55e12afab63b17bce25dfb2",
       "size": 4540
     },
     {
       "name": "ferritecore-mixin.toml",
       "path": "ferritecore-mixin.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/ferritecore-mixin.toml",
-      "sha256": "c164439c632aa7c95c07edec5cfef74b8e2d5671a8445a781deeb4de7ad0c8b6",
+      "sha256": "e3ca99e0f233e3bcf8b6762a85b1139f716bf96644318fe9cb022c270461b287",
       "size": 1516
     },
     {
       "name": "flywheel-client.toml",
       "path": "flywheel-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/flywheel-client.toml",
-      "sha256": "a1f5418ea2735fe080ad97efa9718712496e309bf0e7e859c47b1dd56e751149",
+      "sha256": "9dbbbbf8a27341be108f0fa8b557caa1d18a7c7bdc6584ba623bb8358cbfd407",
       "size": 623
     },
     {
       "name": "fml.toml",
       "path": "fml.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fml.toml",
-      "sha256": "eb6e8b8eda9682889a83d55262ef96cf37153d58fe7f0fa5d5cb1da5d9f7dd9b",
+      "sha256": "1ed9280977d03a3e6d0661ae5c7217b49a4c40e255c88c6811b12b1b28f69ea5",
       "size": 1147
     },
     {
       "name": "forge-client.toml",
       "path": "forge-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/forge-client.toml",
-      "sha256": "0b1b3c45343435184c9dde3149b38afcdb97953e287686ecda54385f53ebcddc",
+      "sha256": "a8448518860cd8b542dadf75521bfab981451775212ee1b51ddc646d998f9311",
       "size": 1628
     },
     {
       "name": "friendsandfoes.json",
       "path": "friendsandfoes.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/friendsandfoes.json",
-      "sha256": "df93dbd6994b265a3fdd13961dc58cb6c465d413b315e749520ecfcd590a5f45",
+      "sha256": "ee3c57121829b033819d410d1d684b66865d165cee38ce62dbb36e4c4639d4b2",
       "size": 1936
     },
     {
       "name": "gravestone-client.toml",
       "path": "gravestone-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/gravestone-client.toml",
-      "sha256": "0f7657373c8cccc3e9f11a79533c0c85c84e68762b65e5c6f9728ca9226873d3",
+      "sha256": "25d84c998664dc4aea1c5dd2ae85f25088b517082b74ad44253f3b09eb40fa94",
       "size": 217
     },
     {
@@ -333,7 +333,7 @@
       "name": "modernfix-common.toml",
       "path": "modernfix-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/modernfix-common.toml",
-      "sha256": "fad9aea710ec3508eab562cd8f2b5f8e2dda6ee1c5fb1fe818f90ce253017f66",
+      "sha256": "d40a0510a5eaf56e3c48e881348d7d826c5a1f61aa29b69cf0fc33dd96d6fdcd",
       "size": 107
     },
     {
@@ -347,56 +347,56 @@
       "name": "moonlight-client.toml",
       "path": "moonlight-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/moonlight-client.toml",
-      "sha256": "47297d47ca3fa4525d1adbc7234b9b0dc2ee490b87216fe6002e34ff69acac08",
+      "sha256": "f85ad76e43a673255d83bb837a72389a5a593877a04ce037a6c0c1d6c52fc898",
       "size": 1027
     },
     {
       "name": "moonlight-common.toml",
       "path": "moonlight-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/moonlight-common.toml",
-      "sha256": "a9426a4ac57696e303947f831e5357ec53870d16a2d83304581be0db6e9b9691",
+      "sha256": "f28173484cb81557cba16b36b87af8a4ca36592c7570f8e1a524cb453dd7d4fa",
       "size": 649
     },
     {
       "name": "nyfsspiders.toml",
       "path": "nyfsspiders.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/nyfsspiders.toml",
-      "sha256": "1988b86b1249cd3e48054df8c94f0225022dbc17689cc0fec2f0e0bde40709c8",
+      "sha256": "d3677ed2cee0a1837f12ce661727a7b2eeda9eaad2ff6c5e398ae95b477165a4",
       "size": 191
     },
     {
       "name": "oculus.properties",
       "path": "oculus.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/oculus.properties",
-      "sha256": "fe273b871a0fc27889625852cac0598cab1205268f71829be5b0fd3c04baf74b",
+      "sha256": "b837d19d1ea4d4cf1c9e3fcfeb55a7461601e343b3c5b49742cfcc7295431b14",
       "size": 255
     },
     {
       "name": "polymorph-integrations.toml",
       "path": "polymorph-integrations.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/polymorph-integrations.toml",
-      "sha256": "43a7425a314be7d78c2e31d44ab8f46c5ee824ab10906ab8909923d23646b6ad",
+      "sha256": "47c2b8a65ca08ee0a73400bf6b8ccc0a831b4c220fa95097eff6216456fc511a",
       "size": 333
     },
     {
       "name": "ponder-client.toml",
       "path": "ponder-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/ponder-client.toml",
-      "sha256": "56291af4bc3506692c79f5c0155c47cce8577d0aae6ed5930c9074d5cb9bc5c8",
+      "sha256": "7508f3f5ceed80c7c606d01ee2dc93e2c72a8afa199ccb691fc5225c894d5bbd",
       "size": 619
     },
     {
       "name": "railways-client.toml",
       "path": "railways-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/railways-client.toml",
-      "sha256": "f8123939190b704403ec8acdfb72be0c21398414c372038c8ee7b7ef60af9e6c",
+      "sha256": "b71a55c298472d02e9d60b3003640d3cbaf96d49e16c4fc228447fb444ab6247",
       "size": 2103
     },
     {
       "name": "railways-common.toml",
       "path": "railways-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/railways-common.toml",
-      "sha256": "1f660c8bd0c374799862392ef7a56253544f5adaf653e59386cd1eb34f94fa2f",
+      "sha256": "58f7821842631af9ec8bcaddb60526b81cd1b9ad63cbba87c83c70e53c3a9b16",
       "size": 337
     },
     {
@@ -410,77 +410,77 @@
       "name": "sawmill-common.toml",
       "path": "sawmill-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sawmill-common.toml",
-      "sha256": "4b5e8dc2e5b2c5738287bd75e318e4a52fd32b3c74e1d27a9f2cc06832ba2638",
+      "sha256": "57445881a93acbb3f98839650593066ed373f9a4af0bd3ffe10f3276928573c8",
       "size": 2404
     },
     {
       "name": "securitycraft-client.toml",
       "path": "securitycraft-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/securitycraft-client.toml",
-      "sha256": "cfcb8e6f02c9dcab45bc89c4087faece94ca2254d3bda312768985e53207c499",
+      "sha256": "f9b4b8faf0b9abd4641cd93d14be471c95d7e3eafb9677a5175b5adc949a32b8",
       "size": 1307
     },
     {
       "name": "smallships-client.toml",
       "path": "smallships-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/smallships-client.toml",
-      "sha256": "2055d621b5cb01a3a0cc7134bb97d8109f56152938131f7c31bf27b28c264f9b",
+      "sha256": "bcb7919d3911085ed068e902f46de9971bf152a7b09376bc06e29e6d3d4fdf35",
       "size": 1187
     },
     {
       "name": "smallships-common.toml",
       "path": "smallships-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/smallships-common.toml",
-      "sha256": "0c89c2c56094816dcad1d0693cb52dbb61720797d8b2b0e2d25f9937a464de56",
+      "sha256": "2c2914337fc96d44520ac1758afed504616cd9b13a11a0992c3d3528c79a5c5b",
       "size": 6271
     },
     {
       "name": "smarterfarmers-common.toml",
       "path": "smarterfarmers-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/smarterfarmers-common.toml",
-      "sha256": "32722ba1b3094c0ae26fcb43cd15d35ed8d4a8333529e1350fc4db83c91c9153",
+      "sha256": "5236a63d3f2dbe7a514fdb86ea19b46571fc2feb899984e148bece8398a30b69",
       "size": 514
     },
     {
       "name": "sophisticatedbackpacks-common.toml",
       "path": "sophisticatedbackpacks-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sophisticatedbackpacks-common.toml",
-      "sha256": "6674ec92f625296aa8accc93d71fdf1eecfc8050111c5ae7b6d9a94b4fe14506",
+      "sha256": "b377e97ca3d8ae8560448b92ab820872d7c11bef0ca52dcf3f4901b44c6ddca7",
       "size": 122
     },
     {
       "name": "sophisticatedcore-client.toml",
       "path": "sophisticatedcore-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sophisticatedcore-client.toml",
-      "sha256": "3175ac14ac1da55ba706d1f0321c0b5620cd968a381e60323b283778e7b6d9e6",
+      "sha256": "4d77564fb4509f9ee615aab4d07a0d524dc63b6671c8afdb60b194f8529bac65",
       "size": 478
     },
     {
       "name": "sophisticatedcore-common.toml",
       "path": "sophisticatedcore-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sophisticatedcore-common.toml",
-      "sha256": "18efac1c1eb33f4179f79688d461624bfa4496887bf2d9bc01bd0946e948a529",
+      "sha256": "fd5dfc4ae058c89fcc94df8dbb11bed73dd8b08d4985776670b2b69df39ee8cf",
       "size": 112
     },
     {
       "name": "supplementaries-client.toml",
       "path": "supplementaries-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/supplementaries-client.toml",
-      "sha256": "33057c518c3901a5bfadedb064c0bcfbd6fc6fcb7519736ac11e4c9e440ae4d8",
+      "sha256": "86206026902fc37dcb7903ad01be97b2516b1806b24d6360fab5416cceaae5eb",
       "size": 9371
     },
     {
       "name": "supplementaries-common.toml",
       "path": "supplementaries-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/supplementaries-common.toml",
-      "sha256": "960f6ab5f13a3e2e439545c825762d661f24f7a183746c5708fbb78c4aadda77",
+      "sha256": "8de907546c47a5165bf161bb3b37d164c7a120a8baa79654537759005e769bbb",
       "size": 24787
     },
     {
       "name": "vinery.toml",
       "path": "vinery.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/vinery.toml",
-      "sha256": "fe8acd27cd79406ce57b35ef6c41fe2641faab6ce230e94e17554ca188b77e5f",
+      "sha256": "e2e15d173048831c77626d267f42148590f9f333291b3b5c7fff3c09ed1bed59",
       "size": 2933
     },
     {
@@ -494,14 +494,14 @@
       "name": "xaerominimap-common.txt",
       "path": "xaerominimap-common.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap-common.txt",
-      "sha256": "771a844d13ab6c2ff99f14b8fd912d02c55a1a4104361692b740c3e596084f6f",
+      "sha256": "b410746ddef0f7dd5f1d860ef3fcd6ad29c10988abbf6281181cb9c3acb628ca",
       "size": 145
     },
     {
       "name": "xaerominimap.txt",
       "path": "xaerominimap.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap.txt",
-      "sha256": "71cffe7689e579cdf95700b08791f8382f9ae4e9709c5f6f4addc736f145ab3e",
+      "sha256": "cecae3a750fb40a17ed8de5be3421efa388ec8a338aa7842116d70dd5a9e175f",
       "size": 3640
     },
     {
@@ -522,14 +522,14 @@
       "name": "xaeroworldmap-common.txt",
       "path": "xaeroworldmap-common.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaeroworldmap-common.txt",
-      "sha256": "f02ca95d7246bd4b9c7de895c46108fff42fd5fcf9d56816b7bdba821597b58f",
+      "sha256": "ab09b6171d1f5f9c15d3ea653be739b53bca6f88db1ec38ae80575143c4c68cd",
       "size": 120
     },
     {
       "name": "xaeroworldmap.txt",
       "path": "xaeroworldmap.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaeroworldmap.txt",
-      "sha256": "6028733f967d0d0f6a80dd236d3dcc7d2446912c719ab9a7d3f83d8624d9b92d",
+      "sha256": "6cae8c6c64eeebf4dd15076b8f172a440bf1ece460aef63d3abe206e2d45fe8f",
       "size": 1218
     },
     {
@@ -1187,7 +1187,7 @@
       "name": "indigo-renderer.properties",
       "path": "fabric/indigo-renderer.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fabric/indigo-renderer.properties",
-      "sha256": "f91355c312e7a94a39e27ea90556c6ff41fb8d96d6cde78d91762b56202afef0",
+      "sha256": "bf0a531d3bf3d9991bf647b76eb5631b7e95601798599782fac77ddd00b0c013",
       "size": 291
     },
     {
@@ -1313,28 +1313,28 @@
       "name": "jei-client.ini",
       "path": "jei/jei-client.ini",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-client.ini",
-      "sha256": "8c5ae3646c07bfd87fe9259333c2df2b7eb2670cd0c64c21f48f69e0a5629a18",
+      "sha256": "cba337712ed12b05bbbe3c7a046d88cdba7c2b301f4dbcfb47cfd82e3759897e",
       "size": 7991
     },
     {
       "name": "jei-colors.ini",
       "path": "jei/jei-colors.ini",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-colors.ini",
-      "sha256": "5f37aacd70460fdc2631ff45e98e8a2ce4e52d3e9a50917edf40eeed1236952e",
+      "sha256": "30ffef1681a9b0255e65a756406f85b1cca8b0bb3c0fab357c2727e325401bd0",
       "size": 1338
     },
     {
       "name": "jei-debug.ini",
       "path": "jei/jei-debug.ini",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-debug.ini",
-      "sha256": "ee9bb0f0f8465629951fe9a532f3ebe3327671a12d4cc6395860d7f7494b970b",
+      "sha256": "44e73ad4423c5bf0381da8e934861ac552cca4a12d4a007801cacf6eb85d12e9",
       "size": 918
     },
     {
       "name": "jei-mod-id-format.ini",
       "path": "jei/jei-mod-id-format.ini",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-mod-id-format.ini",
-      "sha256": "326b4f9b813ca8183bfaeee184cf7248c7a75c4d85b59322e349c0e964c253f3",
+      "sha256": "07052785400b48d3757dbbcfff0b50899fbaed1ac54ea09bc9024ea7f73b7644",
       "size": 463
     },
     {
@@ -1404,35 +1404,35 @@
       "name": "occlusion.properties",
       "path": "sound_physics_remastered/occlusion.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sound_physics_remastered/occlusion.properties",
-      "sha256": "ebbac45fbb3ca01487b85ffee9601b213b71896e6606fb297bcb0f3ac9c30ffb",
+      "sha256": "cb08fad009eefaaf888bb4324c351ac426a49fb0db7cb75c4fddbcdcf8d8f414",
       "size": 4831
     },
     {
       "name": "reflectivity.properties",
       "path": "sound_physics_remastered/reflectivity.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sound_physics_remastered/reflectivity.properties",
-      "sha256": "e26b00784bb6239988759ed1a64551b9f301dc33c5a855d91e976ee4bf40ac8a",
+      "sha256": "bc029afc200ba2fba522a27245d65c8e5db0f20cd0eddd5873a316054d962923",
       "size": 4713
     },
     {
       "name": "sound_rates.properties",
       "path": "sound_physics_remastered/sound_rates.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sound_physics_remastered/sound_rates.properties",
-      "sha256": "0c494502d7104af9d5bccd89d26513d23f69e25160907c09dc83c50b00c7eb30",
+      "sha256": "d4ec21cbf0d986cce272410131cb193ee9edc1faea25c0bda8ee2bb8f682fc02",
       "size": 78625
     },
     {
       "name": "soundphysics.properties",
       "path": "sound_physics_remastered/soundphysics.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sound_physics_remastered/soundphysics.properties",
-      "sha256": "d29dede3f214ee4b1aa03314f92c3f973c21ee6e26d173eba3d01a2083237b6d",
+      "sha256": "9573c64dd047712ef1c7ec7f8e2a2b442906f7272eb0c0c73986fc876a3e6235",
       "size": 5104
     },
     {
       "name": "config.toml",
       "path": "visuality/config.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/visuality/config.toml",
-      "sha256": "4127fd1edf4e15159bb8365cb8816c5ae0b6108a02d34aa1d964f4e16b7e3275",
+      "sha256": "c3896d3971b99a6b36bb1ba94e82dca634566f250147df25a52f8987876a1a5e",
       "size": 267
     },
     {
@@ -1467,35 +1467,35 @@
       "name": "category-volumes.properties",
       "path": "voicechat/category-volumes.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/category-volumes.properties",
-      "sha256": "94c1c4f70e5b995fbd71e86d4fa646030437fecae0685875b560a55fbd0d0e56",
+      "sha256": "3747c48bcb3a60834f88f056ee9b3a025153b11f6ca88652b4bddebb77cea009",
       "size": 46
     },
     {
       "name": "player-volumes.properties",
       "path": "voicechat/player-volumes.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/player-volumes.properties",
-      "sha256": "0332261861a5ace96f503e85b0d48a8df74ea6c2f3545cd229543a6afb55ad96",
+      "sha256": "cd385ca1eeda4df612631e2713cc6d503793157ef8bd5518d736429e6c1ae474",
       "size": 44
     },
     {
       "name": "translations.properties",
       "path": "voicechat/translations.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/translations.properties",
-      "sha256": "693643b1d393cbb3ea7f062afc4474fcd66e4036c4f8d7c056434979cbf512d1",
+      "sha256": "b258a94a5ed60fbf93b66c452c3d6e36b044f630741f90e5b13852a4805b235e",
       "size": 1182
     },
     {
       "name": "voicechat-client.properties",
       "path": "voicechat/voicechat-client.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/voicechat-client.properties",
-      "sha256": "d5aae706942b4af41a0a43ec9bbc755c918de962fcb4bcf3ab28f2ceb0284af8",
+      "sha256": "0dc4b7f25e6f44e4ff90918e7b81a225fc8d9f709f63c610c57a581f7dbf41f5",
       "size": 4898
     },
     {
       "name": "voicechat-server.properties",
       "path": "voicechat/voicechat-server.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/voicechat-server.properties",
-      "sha256": "b8610b2eb11c880adc88bd90b193cf4009ccc8747ea4284a28de311d6d0d1e14",
+      "sha256": "047d533b065798083e5089131d2ebe745cb40f61b7156a058fc01fb55d55e30b",
       "size": 2441
     }
   ],
