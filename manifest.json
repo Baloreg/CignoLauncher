@@ -144,16 +144,16 @@
       "size": 398066
     },
     {
-      "name": "CustomPlayerModels-1.20-0.6.24a.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/CustomPlayerModels-1.20-0.6.24a.jar",
-      "sha256": "037876c9398355018a87183a0bc0eab22d65336509d2b35a0584a92d3e4c83ec",
-      "size": 2789531
-    },
-    {
       "name": "cwb-forge-3.0.0+mc1.20.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/cwb-forge-3.0.0+mc1.20.jar",
       "sha256": "97b0827f20b6213c97d2244f7da205d85ffa72e51fa167d69466b49018532478",
       "size": 258613
+    },
+    {
+      "name": "drippyloadingscreen_forge_3.0.12_MC_1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/drippyloadingscreen_forge_3.0.12_MC_1.20.1.jar",
+      "sha256": "cf60e933cbf075c286f60ee259b2ed26da053d1fef1f4e23d88adb0bb558bde5",
+      "size": 239365
     },
     {
       "name": "dungeons-and-taverns-3.0.3.f.jar",
