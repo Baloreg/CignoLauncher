@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-05 15:12:00",
+  "last_updated": "2025-10-05 15:46:01",
   "config": [
     {
       "name": "ad_astra-client.jsonc",
@@ -58,8 +58,8 @@
       "name": "bakery.toml",
       "path": "bakery.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/bakery.toml",
-      "sha256": "6a6ccd51b77c9fad53449f783d1f12d2c46f424bdd6bfba0c8f98d5211dd6237",
-      "size": 5617
+      "sha256": "2be13ae4a1ca9b9183001e25081825805382379fd05b96891c647a8f1c3b03d8",
+      "size": 5420
     },
     {
       "name": "beachparty.toml",
@@ -303,8 +303,8 @@
       "name": "herbalbrews.toml",
       "path": "herbalbrews.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/herbalbrews.toml",
-      "sha256": "7c4ba324bf4778cd520d4b5ac36a1d475b45265e27f17ff70f8a1d7f53bbebcd",
-      "size": 742
+      "sha256": "d9d0b04f4dfd4d3ea40ac3ca7bf92386e11f0b6aef587eec015643927fd9c3fd",
+      "size": 715
     },
     {
       "name": "immersive_aircraft.json",
@@ -354,6 +354,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/nyfsspiders.toml",
       "sha256": "1988b86b1249cd3e48054df8c94f0225022dbc17689cc0fec2f0e0bde40709c8",
       "size": 191
+    },
+    {
+      "name": "oculus.properties",
+      "path": "oculus.properties",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/oculus.properties",
+      "sha256": "fe273b871a0fc27889625852cac0598cab1205268f71829be5b0fd3c04baf74b",
+      "size": 255
     },
     {
       "name": "polymorph-integrations.toml",
@@ -471,8 +478,8 @@
       "name": "voicechat-client.toml",
       "path": "voicechat-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat-client.toml",
-      "sha256": "24a7b91377e08d0d8bc2805793c8150d473241aa816cbaa6fca9d254aa537ca5",
-      "size": 94
+      "sha256": "366f0ef6b5ef068aa1e5ef636fa2ec723803b8bcf1b200f958ac99ec21edde72",
+      "size": 91
     },
     {
       "name": "xaerominimap-common.txt",
@@ -492,7 +499,7 @@
       "name": "xaerominimap_entities.json",
       "path": "xaerominimap_entities.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap_entities.json",
-      "sha256": "b8ddf54611a9ab8c53177fc0d062321e9e731192b65b9e50d0fcb38a86a91696",
+      "sha256": "c63fa9862b71e4d7d39f0ba3c214ec8482c622d960574003eabe56dd021cbead",
       "size": 5531
     },
     {
@@ -1171,7 +1178,7 @@
       "name": "indigo-renderer.properties",
       "path": "fabric/indigo-renderer.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fabric/indigo-renderer.properties",
-      "sha256": "d132fd4a9c13ac9b8415fccf032c465ab79fa35c3a27fb2dc4cad6d9671de70a",
+      "sha256": "f91355c312e7a94a39e27ea90556c6ff41fb8d96d6cde78d91762b56202afef0",
       "size": 291
     },
     {
@@ -1227,15 +1234,15 @@
       "name": "drippy_loading_overlay_layout.txt",
       "path": "fancymenu/customization/drippy_loading_overlay_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/drippy_loading_overlay_layout.txt",
-      "sha256": "d9c5fd88fb3398388dffeb596f52d60502716758f73450ef626acf3461001c47",
-      "size": 6135
+      "sha256": "9581c31205b3d771f035a3a8fa0cd45ab0f88b3318161483f0ab2581e663e2a4",
+      "size": 6293
     },
     {
       "name": "title_screen_layout.txt",
       "path": "fancymenu/customization/title_screen_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/title_screen_layout.txt",
-      "sha256": "5b5c156bdb1b4bd24a4b5ff3dcea2cb7da78042f161e4afe82b1e03cd983d2ec",
-      "size": 30425
+      "sha256": "df7e3adf5306cb7285a587927d779e09b1527074d3fb091c7d002a6af8c76a18",
+      "size": 30426
     },
     {
       "name": "element_layer_control.lewidget",
@@ -1483,6 +1490,16 @@
       "size": 2441
     }
   ],
+  "data": [
+    {
+      "name": "fabricDefaultResourcePacks.dat",
+      "path": "fabricDefaultResourcePacks.dat",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/data/fabricDefaultResourcePacks.dat",
+      "sha256": "56dcdc36f4d3fe993c688cd6d60c2ef0d83480a63305425e068d171f8fcda7db",
+      "size": 34
+    }
+  ],
+  "emotes": [],
   "fancymenu_data": [
     {
       "name": "last_world.fmdata",
@@ -1502,7 +1519,7 @@
       "name": "buddy_save.json",
       "path": "buddy/buddy_save.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_save.json",
-      "sha256": "d05bd34cd4bfaaeb6c49e9b3309fbcbbf266394615e63890dea4fd2197133ff9",
+      "sha256": "a8863e0629fe4bac937e7202ab7d50856786f37984f65c527b91db7df3c46c48",
       "size": 260
     }
   ],
@@ -1996,6 +2013,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-vinery-forge-1.4.41.jar",
       "sha256": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
       "size": 2041283
+    },
+    {
+      "name": "mcef-forge-2.1.6-1.20.1.jar",
+      "path": "mcef-forge-2.1.6-1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/mcef-forge-2.1.6-1.20.1.jar",
+      "sha256": "5c462342264ac89597891d5d4bcdf6b8134ce4cc5dd97894dbd87ecc197f0cb3",
+      "size": 218417
     },
     {
       "name": "melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",

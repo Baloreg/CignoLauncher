@@ -3,13 +3,19 @@ type = fancymenu_layout
 layout-meta {
   identifier = drippy_loading_overlay
   render_custom_elements_behind_vanilla = false
-  last_edited_time = 1759661362155
+  last_edited_time = 1759671608759
   is_enabled = true
   randommode = false
   randomgroup = 1
   randomonlyfirsttime = false
   layout_index = 0
-  [loading_requirement_container_meta:cf61a00a-6f9b-4528-ba94-9fa9c32cb207-1759661043151] = [groups:][instances:]
+  [loading_requirement_container_meta:29fb63fa-854a-431c-bff2-4a050cf057bf-1759671594384] = [groups:][instances:]
+}
+
+menu_background {
+  color = #110e0d
+  instance_identifier = 4091fa21-e412-4e67-8195-74b656328f14-1759671515822
+  background_type = drippy_color_background
 }
 
 customization {
