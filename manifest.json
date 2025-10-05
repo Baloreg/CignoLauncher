@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-05 14:32:04",
+  "last_updated": "2025-10-05 15:12:00",
   "config": [
     {
       "name": "ad_astra-client.jsonc",
@@ -2033,6 +2033,13 @@
       "size": 178046
     },
     {
+      "name": "oculus-mc1.20.1-1.8.0.jar",
+      "path": "oculus-mc1.20.1-1.8.0.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/oculus-mc1.20.1-1.8.0.jar",
+      "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+      "size": 2851119
+    },
+    {
       "name": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
       "path": "player-animation-lib-forge-1.0.2-rc1+1.20.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar",
@@ -2154,11 +2161,25 @@
   ],
   "resourcepacks": [
     {
-      "name": "-1.21.2 Fresh Moves v3.1 (With Animated Eyes).zip",
-      "path": "-1.21.2 Fresh Moves v3.1 (With Animated Eyes).zip",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/-1.21.2 Fresh Moves v3.1 (With Animated Eyes).zip",
-      "sha256": "c433f3d831e86faa956836bf327ca00151bd813d1a8ab36aa064d518a58790f7",
-      "size": 321871
+      "name": "-1.21.2 Fresh Moves v3.1 (No Animated Eyes).zip",
+      "path": "-1.21.2 Fresh Moves v3.1 (No Animated Eyes).zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/-1.21.2 Fresh Moves v3.1 (No Animated Eyes).zip",
+      "sha256": "91c2549cb3a462ca3d493a72a0ab478dc5fa74b047ac1b2a664d86a0f6f51f2d",
+      "size": 251791
+    },
+    {
+      "name": "Dark Smooth GUI 0.6.7+1.20-1.20.1.zip",
+      "path": "Dark Smooth GUI 0.6.7+1.20-1.20.1.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/Dark Smooth GUI 0.6.7+1.20-1.20.1.zip",
+      "sha256": "193d41b3152476273165c12e4ab845d7d2d70850f504334f116665b7c8151465",
+      "size": 1970432
+    },
+    {
+      "name": "FA+All_Extensions-v1.6.zip",
+      "path": "FA+All_Extensions-v1.6.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FA+All_Extensions-v1.6.zip",
+      "sha256": "63186dc000c0e10c890e8826ac2c058964f56304c4655be0d286ec2b87c3ff2e",
+      "size": 591615
     },
     {
       "name": "FreshAnimations_v1.10.1.zip",
@@ -2166,13 +2187,6 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FreshAnimations_v1.10.1.zip",
       "sha256": "2e2f0152469fcaac19c46f2959e0232f9b2c12a255e0481d85f845ecba003692",
       "size": 815824
-    },
-    {
-      "name": "MandalasGUI+Darkmode_1.21.5_1.zip",
-      "path": "MandalasGUI+Darkmode_1.21.5_1.zip",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/MandalasGUI+Darkmode_1.21.5_1.zip",
-      "sha256": "6f6159779c23ca740bd92d3e445dd93d68cbc32a34570d85596ce5d4bc74dc81",
-      "size": 604422
     }
   ],
   "shaderpacks": [
