@@ -1,0 +1,5 @@
+mods/**/*.jar filter=lfs diff=lfs merge=lfs -text
+mods/**/*.dll filter=lfs diff=lfs merge=lfs -text
+mods/**/*.so filter=lfs diff=lfs merge=lfs -text
+resourcepacks/*.zip filter=lfs diff=lfs merge=lfs -text
+shaderpacks/*.zip filter=lfs diff=lfs merge=lfs -text
