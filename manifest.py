@@ -41,11 +41,33 @@ class ManifestGenerator:
         
     def calculate_sha256(self, file_path):
         """Calcola l'hash SHA256 di un file"""
-        sha256_hash = hashlib.sha256()
-        with open(file_path, "rb") as f:
-            for byte_block in iter(lambda: f.read(4096), b""):
-                sha256_hash.update(byte_block)
-        return sha256_hash.hexdigest()
+        # Determina se è un file di testo
+        is_text_file = str(file_path).endswith(('.txt', '.properties', '.json', '.toml',
+                                                '.ini', '.cfg', '.conf', '.md', '.jsonc',
+                                                '.json5', '.local', '.lewidget'))
+
+        try:
+            if is_text_file:
+                # Per file di testo, leggi come testo per normalizzare i line endings
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    content = f.read()
+                # Calcola l'hash del contenuto testuale
+                return hashlib.sha256(content.encode('utf-8')).hexdigest()
+            else:
+                # Per file binari, calcola normalmente
+                sha256_hash = hashlib.sha256()
+                with open(file_path, "rb") as f:
+                    for byte_block in iter(lambda: f.read(8192), b""):
+                        sha256_hash.update(byte_block)
+                return sha256_hash.hexdigest()
+        except Exception as e:
+            print(f"      ❌ Errore calcolo hash: {e}")
+            # Fallback: prova comunque con metodo binario
+            sha256_hash = hashlib.sha256()
+            with open(file_path, "rb") as f:
+                for byte_block in iter(lambda: f.read(4096), b""):
+                    sha256_hash.update(byte_block)
+            return sha256_hash.hexdigest()
     
     def get_file_size(self, file_path):
         """Ottiene la dimensione del file in bytes"""

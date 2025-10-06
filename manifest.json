@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-05 17:18:12",
+  "last_updated": "2025-10-06 08:48:18",
   "root": [
     {
       "name": "options.txt",
@@ -330,6 +330,13 @@
       "size": 435
     },
     {
+      "name": "immersive_melodies.json",
+      "path": "immersive_melodies.json",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/immersive_melodies.json",
+      "sha256": "72ba7262061fd04b913780cebb1e43983893f0fcbc62ba46cff8c1b8f4a70a85",
+      "size": 994
+    },
+    {
       "name": "modernfix-common.toml",
       "path": "modernfix-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/modernfix-common.toml",
@@ -509,7 +516,7 @@
       "path": "xaerominimap_entities.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap_entities.json",
       "sha256": "c63fa9862b71e4d7d39f0ba3c214ec8482c622d960574003eabe56dd021cbead",
-      "size": 5531
+      "size": 5721
     },
     {
       "name": "xaeropatreon.txt",
@@ -1216,7 +1223,7 @@
       "path": "fancymenu/options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/options.txt",
       "sha256": "0a6ddf1b2170c0c1bca5cf7f5e877d84a815950227006d61cf39023c68ad503c",
-      "size": 2048
+      "size": 2140
     },
     {
       "name": "user_variables.db",
@@ -1224,6 +1231,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/user_variables.db",
       "sha256": "3d7d4cda73d6bde134a568ccbe4e8d2e7fbe701570012b71fa45acdb2258c823",
       "size": 23
+    },
+    {
+      "name": "video_element_controller_metas.json",
+      "path": "fancymenu/video_element_controller_metas.json",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/video_element_controller_metas.json",
+      "sha256": "2fc5a1ed8c615e086a45a97454ae218b775456f79c9ee4c32eadbb49cbe0eeb0",
+      "size": 130
     },
     {
       "name": "minecraft_loading.png",
@@ -1240,6 +1254,13 @@
       "size": 67991
     },
     {
+      "name": "video_720p.mp4",
+      "path": "fancymenu/assets/video_720p.mp4",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/assets/video_720p.mp4",
+      "sha256": "231e777697a564bf08348fac6be5b96dfc8ee3bae87a6d06c70ebb6cf10445b0",
+      "size": 2066657
+    },
+    {
       "name": "drippy_loading_overlay_layout.txt",
       "path": "fancymenu/customization/drippy_loading_overlay_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/drippy_loading_overlay_layout.txt",
@@ -1251,7 +1272,7 @@
       "path": "fancymenu/customization/title_screen_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/title_screen_layout.txt",
       "sha256": "df7e3adf5306cb7285a587927d779e09b1527074d3fb091c7d002a6af8c76a18",
-      "size": 30426
+      "size": 31315
     },
     {
       "name": "element_layer_control.lewidget",
@@ -1364,6 +1385,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/konkrete/locals/pt_br.local",
       "sha256": "dca55a2792451b31424cd5c24037141ec57cdca51955d062dd908fa9ca6a3e9c",
       "size": 322
+    },
+    {
+      "name": "mcef.properties",
+      "path": "mcef/mcef.properties",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/mcef/mcef.properties",
+      "sha256": "718aa2b15cce0d84d0800cf46cc5b9f88f2bfe4d750cc9fd30fa0212009afb87",
+      "size": 140
     },
     {
       "name": "NCR-Client.json",
@@ -1529,7 +1557,14 @@
       "path": "buddy/buddy_save.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_save.json",
       "sha256": "a8863e0629fe4bac937e7202ab7d50856786f37984f65c527b91db7df3c46c48",
-      "size": 260
+      "size": 273
+    },
+    {
+      "name": "player.html",
+      "path": "fancymenu_temp/web/videoplayer/player.html",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/fancymenu_temp/web/videoplayer/player.html",
+      "sha256": "04b8966e4c085d002f303d5c221a06a1879966e85f040d5578ac771f50b8c2e6",
+      "size": 27576
     }
   ],
   "mods": [
