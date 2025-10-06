@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-06 11:05:12",
+  "last_updated": "2025-10-06 14:00:23",
   "root": [
     {
       "name": "options.txt",
@@ -1254,11 +1254,11 @@
       "size": 67991
     },
     {
-      "name": "video_720p.mp4",
-      "path": "fancymenu/assets/video_720p.mp4",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/assets/video_720p.mp4",
-      "sha256": "231e777697a564bf08348fac6be5b96dfc8ee3bae87a6d06c70ebb6cf10445b0",
-      "size": 2066657
+      "name": "output.gif",
+      "path": "fancymenu/assets/output.gif",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/assets/output.gif",
+      "sha256": "03ebcc7a93c45ce85aa0cac814c20c87ed87b13f14a104567f38d1a52d850647",
+      "size": 7083234
     },
     {
       "name": "drippy_loading_overlay_layout.txt",
