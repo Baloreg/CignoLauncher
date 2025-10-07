@@ -3,13 +3,13 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-06 14:00:23",
+  "last_updated": "2025-10-07 21:01:21",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "2cb267e22b733983a2e9e96c9920ab421d1c08a6b4358b071d678034eceb8732",
+      "sha256": "5dd4d697f153014b6e96187fc4afdaa786f8cf902ac82e5542f920a1029abe67",
       "size": 10589
     }
   ],
@@ -68,7 +68,7 @@
       "path": "bakery.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/bakery.toml",
       "sha256": "2be13ae4a1ca9b9183001e25081825805382379fd05b96891c647a8f1c3b03d8",
-      "size": 5420
+      "size": 5617
     },
     {
       "name": "beachparty.toml",
@@ -117,7 +117,7 @@
       "path": "connector.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/connector.json",
       "sha256": "060e296a5fddce603e50034e3cdb6059c3a0e122d0aae3d85a0523341c82ea22",
-      "size": 144
+      "size": 151
     },
     {
       "name": "continuity.json",
@@ -131,7 +131,7 @@
       "path": "cpm.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/cpm.json",
       "sha256": "29f895e5254d897174ee4e33bc26f03e0215add2dd8c60f9fa8fcf7a95c5921a",
-      "size": 113
+      "size": 118
     },
     {
       "name": "create-client.toml",
@@ -187,21 +187,21 @@
       "path": "dynamic_fps.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/dynamic_fps.json",
       "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
-      "size": 3
+      "size": 4
     },
     {
       "name": "emotecraft.json",
       "path": "emotecraft.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/emotecraft.json",
       "sha256": "2fa623d32f4875832b34c7464d53a9686701ba0457336e9b008fcf40bd9e3411",
-      "size": 647
+      "size": 674
     },
     {
       "name": "emotecraft_emote_map.json",
       "path": "emotecraft_emote_map.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/emotecraft_emote_map.json",
       "sha256": "0ce5a209870e0673c14f68d4581de2cefc67a3c37aa7071c943b711a69835775",
-      "size": 117
+      "size": 120
     },
     {
       "name": "entity_model_features.json",
@@ -222,7 +222,7 @@
       "path": "entityculling.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/entityculling.json",
       "sha256": "07ccfa8d4edc6928ec566ce42a16d234436ee678b5ddc258431abf265f4f46f7",
-      "size": 1829
+      "size": 1895
     },
     {
       "name": "etf_warnings.json",
@@ -313,7 +313,7 @@
       "path": "herbalbrews.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/herbalbrews.toml",
       "sha256": "d9d0b04f4dfd4d3ea40ac3ca7bf92386e11f0b6aef587eec015643927fd9c3fd",
-      "size": 715
+      "size": 742
     },
     {
       "name": "immersive_aircraft.json",
@@ -334,7 +334,7 @@
       "path": "immersive_melodies.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/immersive_melodies.json",
       "sha256": "72ba7262061fd04b913780cebb1e43983893f0fcbc62ba46cff8c1b8f4a70a85",
-      "size": 994
+      "size": 1035
     },
     {
       "name": "modernfix-common.toml",
@@ -375,7 +375,7 @@
       "name": "oculus.properties",
       "path": "oculus.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/oculus.properties",
-      "sha256": "143f3b3b22c919074645264c61e57234fc0283eb38a156ba0e92313feaa1e093",
+      "sha256": "1000e707f7fafdcbb5ad5e563b2bf75b37d2f53292d6ca9d252f5dccf16e8833",
       "size": 255
     },
     {
@@ -411,7 +411,7 @@
       "path": "resourceful-config-web.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/resourceful-config-web.json",
       "sha256": "d3c7d4cba5a1862a9b1b107459bb12dc5e5df3481e3255e4327f8a4f15f16a4f",
-      "size": 196
+      "size": 207
     },
     {
       "name": "sawmill-common.toml",
@@ -495,7 +495,7 @@
       "path": "voicechat-client.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat-client.toml",
       "sha256": "366f0ef6b5ef068aa1e5ef636fa2ec723803b8bcf1b200f958ac99ec21edde72",
-      "size": 91
+      "size": 94
     },
     {
       "name": "xaerominimap-common.txt",
@@ -515,7 +515,7 @@
       "name": "xaerominimap_entities.json",
       "path": "xaerominimap_entities.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap_entities.json",
-      "sha256": "b8ddf54611a9ab8c53177fc0d062321e9e731192b65b9e50d0fcb38a86a91696",
+      "sha256": "c63fa9862b71e4d7d39f0ba3c214ec8482c622d960574003eabe56dd021cbead",
       "size": 5531
     },
     {
@@ -544,630 +544,630 @@
       "path": "alexsmobs/alligator_snapping_turtle_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/alligator_snapping_turtle_spawns.json",
       "sha256": "df14afd6e1e96ace0dc8e4c71bc325e3baec8dbeaebf61f682561a70fc145f9d",
-      "size": 754
+      "size": 795
     },
     {
       "name": "anaconda_spawns.json",
       "path": "alexsmobs/anaconda_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/anaconda_spawns.json",
       "sha256": "ca961946a7b3c6e9abcb1bb82bbf36e1f9ce01d11769a06a7fbff6351293ff5d",
-      "size": 1036
+      "size": 1093
     },
     {
       "name": "anteater_spawns.json",
       "path": "alexsmobs/anteater_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/anteater_spawns.json",
       "sha256": "f65e31155b2f2e033bed66dc5ec2ce7f6962be3389369ff800b69dfdecb5d990",
-      "size": 1166
+      "size": 1228
     },
     {
       "name": "bald_eagle_spawns.json",
       "path": "alexsmobs/bald_eagle_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/bald_eagle_spawns.json",
       "sha256": "f8b51a798bfa4b51e0ee8fb78c860ca5b2677583db10584792a0e1548f17d396",
-      "size": 2723
+      "size": 2869
     },
     {
       "name": "banana_slug_spawns.json",
       "path": "alexsmobs/banana_slug_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/banana_slug_spawns.json",
       "sha256": "1d5d0ce4ef42e94f0361c41b4b2402b64e87f0b1b987e1f1b2f6b2ac377211a7",
-      "size": 1697
+      "size": 1787
     },
     {
       "name": "bison_spawns.json",
       "path": "alexsmobs/bison_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/bison_spawns.json",
       "sha256": "78e726ed002a31f5084a7b49fcce467c5623a046981d6c59d9ed7c4eb6cdbb1e",
-      "size": 1761
+      "size": 1856
     },
     {
       "name": "blobfish_spawns.json",
       "path": "alexsmobs/blobfish_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/blobfish_spawns.json",
       "sha256": "7e7b175c33aed22c3d2cd31e215c6243e3790b07a3664b42d130a8f3b897489f",
-      "size": 146
+      "size": 156
     },
     {
       "name": "blue_jay_spawns.json",
       "path": "alexsmobs/blue_jay_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/blue_jay_spawns.json",
       "sha256": "7d1f784ab378e1e851e73dbb6f81866420c1328d25f754546d82c417bf304644",
-      "size": 4020
+      "size": 4234
     },
     {
       "name": "bone_serpent_spawns.json",
       "path": "alexsmobs/bone_serpent_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/bone_serpent_spawns.json",
       "sha256": "47eef91378d3d6455a911d58cc3afdbfcdda7fd49968a7921b22620faa8ff672",
-      "size": 257
+      "size": 272
     },
     {
       "name": "bunfungus_spawns.json",
       "path": "alexsmobs/bunfungus_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/bunfungus_spawns.json",
       "sha256": "5d5a9d2039b6df546b788f62cb376cc29312a7115a5553541652aad7259436a6",
-      "size": 486
+      "size": 513
     },
     {
       "name": "cachalot_whale_beached_spawns.json",
       "path": "alexsmobs/cachalot_whale_beached_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cachalot_whale_beached_spawns.json",
       "sha256": "73b8f83ddfa936642b38af1003e3c47eab6f089ad61612ee5181137409038f57",
-      "size": 642
+      "size": 678
     },
     {
       "name": "cachalot_whale_spawns.json",
       "path": "alexsmobs/cachalot_whale_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cachalot_whale_spawns.json",
       "sha256": "fb901f1ea0bce7b9fb51dfaeb565539a3c1a9ee86bafb49caddac7ca1002e296",
-      "size": 893
+      "size": 941
     },
     {
       "name": "caiman_spawns.json",
       "path": "alexsmobs/caiman_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/caiman_spawns.json",
       "sha256": "542cca079ae671a6d928737b622b205deebfe2aed5864a01b5048f501aec2753",
-      "size": 291
+      "size": 308
     },
     {
       "name": "capuchin_monkey_spawns.json",
       "path": "alexsmobs/capuchin_monkey_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/capuchin_monkey_spawns.json",
       "sha256": "83b68d395236771ae9276f48b2988cfa9eb65e14dc41531b37a6b4e77c64859a",
-      "size": 1184
+      "size": 1248
     },
     {
       "name": "catfish_spawns.json",
       "path": "alexsmobs/catfish_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/catfish_spawns.json",
       "sha256": "3c097d29c1f74807815d4c13e3586a76528ac3c104670ce95852bd3b62f9e16e",
-      "size": 1097
+      "size": 1155
     },
     {
       "name": "cave_centipede_spawns.json",
       "path": "alexsmobs/cave_centipede_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cave_centipede_spawns.json",
       "sha256": "973b8ebc19fa04e02b050f28359ee6bffbae93367f49ecac10892f4a2c1dad7d",
-      "size": 2200
+      "size": 2314
     },
     {
       "name": "cockroach_spawns.json",
       "path": "alexsmobs/cockroach_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cockroach_spawns.json",
       "sha256": "97a67afb52f1398f2c55e2a74001e5b893394e28d3f0eb00695f049bdd19f204",
-      "size": 2085
+      "size": 2194
     },
     {
       "name": "comb_jelly_spawns.json",
       "path": "alexsmobs/comb_jelly_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/comb_jelly_spawns.json",
       "sha256": "cf9ba87b0d2001543fe09d8f6a4c602c03644643a9bd49d1e9ca0b041ab4dc02",
-      "size": 414
+      "size": 438
     },
     {
       "name": "cosmaw_spawns.json",
       "path": "alexsmobs/cosmaw_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cosmaw_spawns.json",
       "sha256": "8e1d05a9b4ab8b923ff4951ef391665f3bdd218d943152f6f1f57509786bc0f7",
-      "size": 371
+      "size": 391
     },
     {
       "name": "cosmic_cod_spawns.json",
       "path": "alexsmobs/cosmic_cod_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/cosmic_cod_spawns.json",
       "sha256": "aed14e990ed38ee78214b1ea4a15e06bca1b8d098e1e440596be9ab14e4403b8",
-      "size": 139
+      "size": 149
     },
     {
       "name": "crimson_mosquito_spawns.json",
       "path": "alexsmobs/crimson_mosquito_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/crimson_mosquito_spawns.json",
       "sha256": "104fa9ce71421c5023abba88ce382957828b22341b44c2d03b3300b760482c9d",
-      "size": 785
+      "size": 828
     },
     {
       "name": "crocodile_spawns.json",
       "path": "alexsmobs/crocodile_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/crocodile_spawns.json",
       "sha256": "a73d36d1b5dd75eb20f6143193b991e942f4ef4cef725835b66ec01197d7074f",
-      "size": 1007
+      "size": 1064
     },
     {
       "name": "crow_spawns.json",
       "path": "alexsmobs/crow_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/crow_spawns.json",
       "sha256": "cace87b5d504be10d1fff107ad14349066ae1c39d5200a7a29bdd5476167d9b8",
-      "size": 5146
+      "size": 5421
     },
     {
       "name": "devils_hole_pupfish_spawns.json",
       "path": "alexsmobs/devils_hole_pupfish_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/devils_hole_pupfish_spawns.json",
       "sha256": "e7855fa7d73f4d3af77f47ddd70b4fcbab7862302d004b4ddae9dddc75c4e402",
-      "size": 145
+      "size": 155
     },
     {
       "name": "dropbear_spawns.json",
       "path": "alexsmobs/dropbear_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/dropbear_spawns.json",
       "sha256": "0fa8f72e4c73805727577a343758cfd39377cbdadebb88b6b2343183053e16cb",
-      "size": 403
+      "size": 425
     },
     {
       "name": "elephant_spawns.json",
       "path": "alexsmobs/elephant_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/elephant_spawns.json",
       "sha256": "cac271d780a6ed65db7b22e6944b6d456805d72b309865d6293ad6aa4f60c3e2",
-      "size": 1163
+      "size": 1227
     },
     {
       "name": "emu_spawns.json",
       "path": "alexsmobs/emu_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/emu_spawns.json",
       "sha256": "70e30e058709266e665eb6642df126eeee744d05e63d77344501e78cb4a37851",
-      "size": 1661
+      "size": 1751
     },
     {
       "name": "endergrade_spawns.json",
       "path": "alexsmobs/endergrade_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/endergrade_spawns.json",
       "sha256": "ca6e68bd3e74eb9cedcdbae4c82f594c4e85bdd54e1d0e35344a3febb9672980",
-      "size": 250
+      "size": 265
     },
     {
       "name": "enderiophage_spawns.json",
       "path": "alexsmobs/enderiophage_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/enderiophage_spawns.json",
       "sha256": "846748f4f352dead7fae39221d653713b7cbd775eaf10f80e0dea86f4e9ccb9a",
-      "size": 603
+      "size": 633
     },
     {
       "name": "farseer.json",
       "path": "alexsmobs/farseer.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/farseer.json",
       "sha256": "c245528d844458d8ac416572ee0df7575bb23d58beb07367d4cd55c66fec9000",
-      "size": 266
+      "size": 281
     },
     {
       "name": "flutter_spawns.json",
       "path": "alexsmobs/flutter_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/flutter_spawns.json",
       "sha256": "f729be2a0bc7bccc88cde40464f990d6074bfcf52a0d1d6719d8ebcd63c496ff",
-      "size": 147
+      "size": 157
     },
     {
       "name": "fly_spawns.json",
       "path": "alexsmobs/fly_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/fly_spawns.json",
       "sha256": "e7855fa7d73f4d3af77f47ddd70b4fcbab7862302d004b4ddae9dddc75c4e402",
-      "size": 145
+      "size": 155
     },
     {
       "name": "flying_fish_spawns.json",
       "path": "alexsmobs/flying_fish_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/flying_fish_spawns.json",
       "sha256": "69904b309696b6081cdec1ea87bdb62f84886cf6dac600a8bca231860c3a3f2f",
-      "size": 716
+      "size": 751
     },
     {
       "name": "frilled_shark_spawns.json",
       "path": "alexsmobs/frilled_shark_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/frilled_shark_spawns.json",
       "sha256": "7e7b175c33aed22c3d2cd31e215c6243e3790b07a3664b42d130a8f3b897489f",
-      "size": 146
+      "size": 156
     },
     {
       "name": "froststalker_spawns.json",
       "path": "alexsmobs/froststalker_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/froststalker_spawns.json",
       "sha256": "2cc43cdc9df3b20cc2eeb75a3c11736558f544571640607d08dec5c0a939c02d",
-      "size": 934
+      "size": 986
     },
     {
       "name": "gazelle_spawns.json",
       "path": "alexsmobs/gazelle_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/gazelle_spawns.json",
       "sha256": "17a5c3263942410596f91fb0aece138e5115bfabfa2a5913a63406fcb64b42d0",
-      "size": 1050
+      "size": 1109
     },
     {
       "name": "gelada_monkey_spawns.json",
       "path": "alexsmobs/gelada_monkey_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/gelada_monkey_spawns.json",
       "sha256": "cdd0380bfa9b754856150966a042f807ac48d2f9409f4f2b543be19e87f4c41f",
-      "size": 1001
+      "size": 1056
     },
     {
       "name": "giant_squid_spawns.json",
       "path": "alexsmobs/giant_squid_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/giant_squid_spawns.json",
       "sha256": "7e7b175c33aed22c3d2cd31e215c6243e3790b07a3664b42d130a8f3b897489f",
-      "size": 146
+      "size": 156
     },
     {
       "name": "gorilla_spawns.json",
       "path": "alexsmobs/gorilla_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/gorilla_spawns.json",
       "sha256": "8c90151f66a632b01e7b8f6998f72618720aae5362c1df0bdd7fefdb13cc20c8",
-      "size": 1053
+      "size": 1110
     },
     {
       "name": "grizzly_bear_spawns.json",
       "path": "alexsmobs/grizzly_bear_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/grizzly_bear_spawns.json",
       "sha256": "7d1f784ab378e1e851e73dbb6f81866420c1328d25f754546d82c417bf304644",
-      "size": 4020
+      "size": 4234
     },
     {
       "name": "guster_spawns.json",
       "path": "alexsmobs/guster_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/guster_spawns.json",
       "sha256": "263974f58a4b48df633648246820681745da9f9e16f30fefe6e07f576251dfb1",
-      "size": 1132
+      "size": 1192
     },
     {
       "name": "hammerhead_shark_spawns.json",
       "path": "alexsmobs/hammerhead_shark_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/hammerhead_shark_spawns.json",
       "sha256": "a5eeb1a3843a12ef4fde1d8a3a5f13161034457c0901d3f938aa71a20e6712f3",
-      "size": 254
+      "size": 269
     },
     {
       "name": "hummingbird_spawns.json",
       "path": "alexsmobs/hummingbird_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/hummingbird_spawns.json",
       "sha256": "6aa305d47ca32364d445c04c8a20da36a7ccef97955c27e834d4114604d2785d",
-      "size": 3029
+      "size": 3193
     },
     {
       "name": "jerboa_spawns.json",
       "path": "alexsmobs/jerboa_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/jerboa_spawns.json",
       "sha256": "c4b2ef89d9ad5c4dffcebb51209837da430b166c5767c1a38d90911c4445b124",
-      "size": 1252
+      "size": 1319
     },
     {
       "name": "kangaroo_spawns.json",
       "path": "alexsmobs/kangaroo_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/kangaroo_spawns.json",
       "sha256": "70e30e058709266e665eb6642df126eeee744d05e63d77344501e78cb4a37851",
-      "size": 1661
+      "size": 1751
     },
     {
       "name": "komodo_dragon_spawns.json",
       "path": "alexsmobs/komodo_dragon_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/komodo_dragon_spawns.json",
       "sha256": "695a3eb4d61a8208cc634871c237b0e6efc980ac668793f4686848e32cda0907",
-      "size": 775
+      "size": 818
     },
     {
       "name": "laviathan_spawns.json",
       "path": "alexsmobs/laviathan_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/laviathan_spawns.json",
       "sha256": "07d0215377f12f1299ec46b6277426c3cf957aa1d310c97fa943cdf5ace8d260",
-      "size": 142
+      "size": 152
     },
     {
       "name": "leafcutter_anthill_spawns.json",
       "path": "alexsmobs/leafcutter_anthill_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/leafcutter_anthill_spawns.json",
       "sha256": "f65e31155b2f2e033bed66dc5ec2ce7f6962be3389369ff800b69dfdecb5d990",
-      "size": 1166
+      "size": 1228
     },
     {
       "name": "lobster_spawns.json",
       "path": "alexsmobs/lobster_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/lobster_spawns.json",
       "sha256": "bb0c918e8dbd4d003417a1bcabb38b8433d1f9be95fe6f8feef95d30616b49a7",
-      "size": 398
+      "size": 422
     },
     {
       "name": "maned_wolf_spawns.json",
       "path": "alexsmobs/maned_wolf_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/maned_wolf_spawns.json",
       "sha256": "8483d96341369b430ff2ebfebd7562b0c58c40b96be541cc88189fc696606a0d",
-      "size": 1037
+      "size": 1094
     },
     {
       "name": "mantis_shrimp_spawns.json",
       "path": "alexsmobs/mantis_shrimp_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/mantis_shrimp_spawns.json",
       "sha256": "4f6099fe4d9f99530f9f0f9bae7e55c0713506efdc47da69d227ae62137647e4",
-      "size": 385
+      "size": 407
     },
     {
       "name": "mimic_octopus_spawns.json",
       "path": "alexsmobs/mimic_octopus_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/mimic_octopus_spawns.json",
       "sha256": "9c68a433ab6f75ff9e8d46868480158e4c1f46949779cb0b0d973f7759dbfc2d",
-      "size": 373
+      "size": 393
     },
     {
       "name": "mimicube_spawns.json",
       "path": "alexsmobs/mimicube_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/mimicube_spawns.json",
       "sha256": "fcace6e8c558df6eb13827f7a2b4a7f43c9fdfd3015331bd7e277329ca034c34",
-      "size": 365
+      "size": 385
     },
     {
       "name": "moose_spawns.json",
       "path": "alexsmobs/moose_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/moose_spawns.json",
       "sha256": "abac051da2458ec848604b66a6d7889f7c715060bb9706c1d1822155127d096c",
-      "size": 2291
+      "size": 2412
     },
     {
       "name": "mudskipper_spawns.json",
       "path": "alexsmobs/mudskipper_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/mudskipper_spawns.json",
       "sha256": "542cca079ae671a6d928737b622b205deebfe2aed5864a01b5048f501aec2753",
-      "size": 291
+      "size": 308
     },
     {
       "name": "mungus_spawns.json",
       "path": "alexsmobs/mungus_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/mungus_spawns.json",
       "sha256": "5d5a9d2039b6df546b788f62cb376cc29312a7115a5553541652aad7259436a6",
-      "size": 486
+      "size": 513
     },
     {
       "name": "murmur.json",
       "path": "alexsmobs/murmur.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/murmur.json",
       "sha256": "973b8ebc19fa04e02b050f28359ee6bffbae93367f49ecac10892f4a2c1dad7d",
-      "size": 2200
+      "size": 2314
     },
     {
       "name": "orca_spawns.json",
       "path": "alexsmobs/orca_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/orca_spawns.json",
       "sha256": "2e62ae273c3488a294068e5ed737dbf08791f4758cd3659308824d7bf4ece377",
-      "size": 255
+      "size": 270
     },
     {
       "name": "platypus_spawns.json",
       "path": "alexsmobs/platypus_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/platypus_spawns.json",
       "sha256": "b96f9e44f59f54b67460784fb1fdfa06d053f9ca9abb4fc3b04f222fd65ee958",
-      "size": 625
+      "size": 659
     },
     {
       "name": "potoo_spawns.json",
       "path": "alexsmobs/potoo_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/potoo_spawns.json",
       "sha256": "59c5832a40ef0e7212a4d499862f931a5dfcd3ff6d68598153f1274191b0939d",
-      "size": 148
+      "size": 158
     },
     {
       "name": "raccoon_spawns.json",
       "path": "alexsmobs/raccoon_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/raccoon_spawns.json",
       "sha256": "2f353aa8720d03fbdef9d9e4932ecc4435b7923bbc72191fab6f46acb66d3a12",
-      "size": 3712
+      "size": 3910
     },
     {
       "name": "rain_frog_spawns.json",
       "path": "alexsmobs/rain_frog_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/rain_frog_spawns.json",
       "sha256": "c4b2ef89d9ad5c4dffcebb51209837da430b166c5767c1a38d90911c4445b124",
-      "size": 1252
+      "size": 1319
     },
     {
       "name": "rattlesnake_spawns.json",
       "path": "alexsmobs/rattlesnake_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/rattlesnake_spawns.json",
       "sha256": "b8662bb3de9e2e5cc4af3773700fe6446c389980a80f6350f99d51f3fa2cef39",
-      "size": 1646
+      "size": 1736
     },
     {
       "name": "rhinoceros_spawns.json",
       "path": "alexsmobs/rhinoceros_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/rhinoceros_spawns.json",
       "sha256": "17a5c3263942410596f91fb0aece138e5115bfabfa2a5913a63406fcb64b42d0",
-      "size": 1050
+      "size": 1109
     },
     {
       "name": "roadrunner_spawns.json",
       "path": "alexsmobs/roadrunner_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/roadrunner_spawns.json",
       "sha256": "b8662bb3de9e2e5cc4af3773700fe6446c389980a80f6350f99d51f3fa2cef39",
-      "size": 1646
+      "size": 1736
     },
     {
       "name": "rocky_roller_spawns.json",
       "path": "alexsmobs/rocky_roller_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/rocky_roller_spawns.json",
       "sha256": "98dc351abc061685560adc82bd3ffa6e4c87d4faab81e9bb6a9e2a6f07cdb177",
-      "size": 673
+      "size": 709
     },
     {
       "name": "seagull_spawns.json",
       "path": "alexsmobs/seagull_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/seagull_spawns.json",
       "sha256": "4dca182ebef46ea0076b8e8066add18f69527cf2f81da83e77e0409127c92dc4",
-      "size": 1296
+      "size": 1367
     },
     {
       "name": "seal_spawns.json",
       "path": "alexsmobs/seal_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/seal_spawns.json",
       "sha256": "ef706c1e2ba0b9356523f8aeb3679303ab98d85c9b761d0e55962e930be4d8e6",
-      "size": 877
+      "size": 925
     },
     {
       "name": "shoebill_spawns.json",
       "path": "alexsmobs/shoebill_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/shoebill_spawns.json",
       "sha256": "0d8683c0a1b8176d4e89f88c4f3b1e6fbf6b269781497a190749904c7323eeec",
-      "size": 623
+      "size": 657
     },
     {
       "name": "skelewag_spawns.json",
       "path": "alexsmobs/skelewag_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/skelewag_spawns.json",
       "sha256": "86aad88d05c283679e85900cab1bf3977d496849005ac068a14e40b93db35aa2",
-      "size": 374
+      "size": 394
     },
     {
       "name": "skreecher.json",
       "path": "alexsmobs/skreecher.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/skreecher.json",
       "sha256": "f812e719afb24421c6853dacf4d1f66864305e335cfdf6193613d7c408ecab30",
-      "size": 276
+      "size": 291
     },
     {
       "name": "skunk_spawns.json",
       "path": "alexsmobs/skunk_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/skunk_spawns.json",
       "sha256": "01cc2eb4d92ba30b7301b9325a353cd96c5c7ff263c348795bfb34698cf8f11b",
-      "size": 2037
+      "size": 2144
     },
     {
       "name": "snow_leopard_spawns.json",
       "path": "alexsmobs/snow_leopard_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/snow_leopard_spawns.json",
       "sha256": "fdf546af7c7ff2307d0862c0802450eef1e99554af3a340e7a6af69fa5785ea5",
-      "size": 1808
+      "size": 1905
     },
     {
       "name": "soul_vulture_spawns.json",
       "path": "alexsmobs/soul_vulture_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/soul_vulture_spawns.json",
       "sha256": "45407796e49769550eef92fd3953daa191c85aaf032fb2be32fe591b0199a172",
-      "size": 523
+      "size": 552
     },
     {
       "name": "spectre_spawns.json",
       "path": "alexsmobs/spectre_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/spectre_spawns.json",
       "sha256": "ca6e68bd3e74eb9cedcdbae4c82f594c4e85bdd54e1d0e35344a3febb9672980",
-      "size": 250
+      "size": 265
     },
     {
       "name": "straddler_spawns.json",
       "path": "alexsmobs/straddler_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/straddler_spawns.json",
       "sha256": "5ee746cf50b358048a0243e4c45997285cf4a9b736758d388ad730d4ed493900",
-      "size": 664
+      "size": 700
     },
     {
       "name": "stradpole_spawns.json",
       "path": "alexsmobs/stradpole_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/stradpole_spawns.json",
       "sha256": "5ee746cf50b358048a0243e4c45997285cf4a9b736758d388ad730d4ed493900",
-      "size": 664
+      "size": 700
     },
     {
       "name": "sugar_glider_spawns.json",
       "path": "alexsmobs/sugar_glider_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/sugar_glider_spawns.json",
       "sha256": "cec5208e2e9f12aa8ce13d0f6d34a18500a77d143441c9b511df21c623fe368f",
-      "size": 418
+      "size": 442
     },
     {
       "name": "sunbird_spawns.json",
       "path": "alexsmobs/sunbird_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/sunbird_spawns.json",
       "sha256": "7b82ff39e191bd213cd8ecf06ff9a78c4658e6f6b9d8b48a4fcc4017e7268cb5",
-      "size": 3925
+      "size": 4136
     },
     {
       "name": "tarantula_hawk_spawns.json",
       "path": "alexsmobs/tarantula_hawk_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/tarantula_hawk_spawns.json",
       "sha256": "c4b2ef89d9ad5c4dffcebb51209837da430b166c5767c1a38d90911c4445b124",
-      "size": 1252
+      "size": 1319
     },
     {
       "name": "tasmanian_devil_spawns.json",
       "path": "alexsmobs/tasmanian_devil_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/tasmanian_devil_spawns.json",
       "sha256": "40c769365424d492a4c17700bb8cfac4c8ce7fac2bc16728f0c4287e3a043130",
-      "size": 1908
+      "size": 2008
     },
     {
       "name": "terrapin_spawns.json",
       "path": "alexsmobs/terrapin_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/terrapin_spawns.json",
       "sha256": "b96f9e44f59f54b67460784fb1fdfa06d053f9ca9abb4fc3b04f222fd65ee958",
-      "size": 625
+      "size": 659
     },
     {
       "name": "tiger_spawns.json",
       "path": "alexsmobs/tiger_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/tiger_spawns.json",
       "sha256": "f88fc1b519759fe41347afca59030619365e173c577e8c1adfcb88777078d066",
-      "size": 1209
+      "size": 1275
     },
     {
       "name": "toucan_spawns.json",
       "path": "alexsmobs/toucan_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/toucan_spawns.json",
       "sha256": "f65e31155b2f2e033bed66dc5ec2ce7f6962be3389369ff800b69dfdecb5d990",
-      "size": 1166
+      "size": 1228
     },
     {
       "name": "triops_spawns.json",
       "path": "alexsmobs/triops_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/triops_spawns.json",
       "sha256": "c4b2ef89d9ad5c4dffcebb51209837da430b166c5767c1a38d90911c4445b124",
-      "size": 1252
+      "size": 1319
     },
     {
       "name": "tusklin_spawns.json",
       "path": "alexsmobs/tusklin_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/tusklin_spawns.json",
       "sha256": "9ab4772704660c679ea30dff2db2c1272843e00675e2a7e610adcc6486120c3c",
-      "size": 882
+      "size": 930
     },
     {
       "name": "underminer.json",
       "path": "alexsmobs/underminer.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/underminer.json",
       "sha256": "97a67afb52f1398f2c55e2a74001e5b893394e28d3f0eb00695f049bdd19f204",
-      "size": 2085
+      "size": 2194
     },
     {
       "name": "void_worm_spawns.json",
       "path": "alexsmobs/void_worm_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/void_worm_spawns.json",
       "sha256": "6712a2d6165ed52b7d251a8fc4cbfb6c1f834210a8bda82b55440402fd2d3273",
-      "size": 18
+      "size": 20
     },
     {
       "name": "warped_mosco_spawns.json",
       "path": "alexsmobs/warped_mosco_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/warped_mosco_spawns.json",
       "sha256": "6712a2d6165ed52b7d251a8fc4cbfb6c1f834210a8bda82b55440402fd2d3273",
-      "size": 18
+      "size": 20
     },
     {
       "name": "warped_toad_spawns.json",
       "path": "alexsmobs/warped_toad_spawns.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/alexsmobs/warped_toad_spawns.json",
       "sha256": "72126b26d7f3ae03b80df97dd103e0cec87d10829e86ac8b08da23abc7b318d8",
-      "size": 661
+      "size": 699
     },
     {
       "name": "client.json5",
@@ -1194,7 +1194,7 @@
       "name": "indigo-renderer.properties",
       "path": "fabric/indigo-renderer.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fabric/indigo-renderer.properties",
-      "sha256": "914b7cbe393f12e33b05299ed7db7f959d5988e3dcf281495b11e84bb258a063",
+      "sha256": "61790c79a91a4b62b270f5932b6b9d11c4cfe70abe3564968e1c764d56d0577c",
       "size": 291
     },
     {
@@ -1202,14 +1202,14 @@
       "path": "fancymenu/custom_gui_screens.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/custom_gui_screens.txt",
       "sha256": "ff492043eaf454c46e949d5eef32ece90cc5a19feb50a161dd29a43b5732c880",
-      "size": 51
+      "size": 56
     },
     {
       "name": "customizablemenus.txt",
       "path": "fancymenu/customizablemenus.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customizablemenus.txt",
       "sha256": "8e15b8fdd11e054e25d49c37ce6a448807a7e6e34f9c3b46dc4d222aa0aca44b",
-      "size": 149
+      "size": 157
     },
     {
       "name": "legacy_checklist.txt",
@@ -1222,8 +1222,8 @@
       "name": "options.txt",
       "path": "fancymenu/options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/options.txt",
-      "sha256": "31f009be5d7659a31316a47212836dc227f038b76d2d0cd05acfbd0228b76dba",
-      "size": 2114
+      "sha256": "9bc27761dfeb63bc2f0ba34f6ef766fc754b5473aadccca6dd738cb692aa8b4e",
+      "size": 2111
     },
     {
       "name": "user_variables.db",
@@ -1237,7 +1237,14 @@
       "path": "fancymenu/video_element_controller_metas.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/video_element_controller_metas.json",
       "sha256": "43fcc4771b9bc73c0b3e1ad1a16236e483b3af3081e9822e68efbb002fe13bab",
-      "size": 258
+      "size": 269
+    },
+    {
+      "name": "green.gif",
+      "path": "fancymenu/assets/green.gif",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/assets/green.gif",
+      "sha256": "dd617ff0bbbe9ece40fe2afe331204cf5ae89bf91701015836dada945fd60c70",
+      "size": 3220
     },
     {
       "name": "minecraft_loading.png",
@@ -1261,18 +1268,25 @@
       "size": 7083234
     },
     {
+      "name": "red.gif",
+      "path": "fancymenu/assets/red.gif",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/assets/red.gif",
+      "sha256": "4f7dd96de9e2c0772f635378840145b710644e68fefe60a7835aaaabf8a8aee9",
+      "size": 3234
+    },
+    {
       "name": "drippy_loading_overlay_layout.txt",
       "path": "fancymenu/customization/drippy_loading_overlay_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/drippy_loading_overlay_layout.txt",
       "sha256": "9581c31205b3d771f035a3a8fa0cd45ab0f88b3318161483f0ab2581e663e2a4",
-      "size": 6293
+      "size": 6487
     },
     {
       "name": "title_screen_layout.txt",
       "path": "fancymenu/customization/title_screen_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/title_screen_layout.txt",
-      "sha256": "44cd119c02dff89d46f31b68a1bb19f2a32ca06e119a993d866c9c2c776f4dc3",
-      "size": 30743
+      "sha256": "258d58f2e4112256b9ee4d8d7b8af29f0e99698afc558198aeac9dc64c9e95e6",
+      "size": 36068
     },
     {
       "name": "element_layer_control.lewidget",
@@ -1300,35 +1314,35 @@
       "path": "jade/hide-blocks.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jade/hide-blocks.json",
       "sha256": "247df2699ebb5a0d4c9585aeeb267ef9388cd5bee2b13ca340f35124a135b35b",
-      "size": 191
+      "size": 196
     },
     {
       "name": "hide-entities.json",
       "path": "jade/hide-entities.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jade/hide-entities.json",
       "sha256": "22b4560c3dc05da35a70bb6611da0ce04cff295ab8c663afd58e725c396a24b3",
-      "size": 325
+      "size": 334
     },
     {
       "name": "jade.json",
       "path": "jade/jade.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jade/jade.json",
       "sha256": "8a9c0403b385ca106d0c0b541ea2f2128bf39e3f9b05b342b176ca11834857a4",
-      "size": 974
+      "size": 1014
     },
     {
       "name": "plugins.json",
       "path": "jade/plugins.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jade/plugins.json",
       "sha256": "1a84718495e9dcc5562ddfb333b098a723189ce27409ed734935401dfb5ff95f",
-      "size": 1963
+      "size": 2040
     },
     {
       "name": "sort-order.json",
       "path": "jade/sort-order.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jade/sort-order.json",
       "sha256": "8cb0a6cb59d499212166c59a1008b71aa3f9c07a672c65a7501d35038a596717",
-      "size": 1746
+      "size": 1800
     },
     {
       "name": "jei-client.ini",
@@ -1468,28 +1482,28 @@
       "path": "visuality/particle_emitters/block_ambient.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/visuality/particle_emitters/block_ambient.json",
       "sha256": "734a10c828571b65d71d2f27ff2d3350603d097e96c5d0dd5f49319fe21b803b",
-      "size": 1293
+      "size": 1362
     },
     {
       "name": "block_step.json",
       "path": "visuality/particle_emitters/block_step.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/visuality/particle_emitters/block_step.json",
       "sha256": "54d4448f6c45ba1ad311f6c35b55b9b800ad4ae664f075707e05cd798b6eab7b",
-      "size": 219
+      "size": 233
     },
     {
       "name": "entity_armor.json",
       "path": "visuality/particle_emitters/entity_armor.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/visuality/particle_emitters/entity_armor.json",
       "sha256": "4fea5a33cd09a91423bf58e9404ded2edd4ba3faff2d41543c5366adab92a73a",
-      "size": 737
+      "size": 774
     },
     {
       "name": "entity_hit.json",
       "path": "visuality/particle_emitters/entity_hit.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/visuality/particle_emitters/entity_hit.json",
       "sha256": "db1fe2d772c0ed136c2d1da0c315bc50ba9760032a60253be6f37ce1d7e38ead",
-      "size": 683
+      "size": 720
     },
     {
       "name": "category-volumes.properties",
@@ -1556,7 +1570,7 @@
       "name": "buddy_save.json",
       "path": "buddy/buddy_save.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_save.json",
-      "sha256": "15ad08c343e91575ad64dfc153e6ff4aaddb560b8a4b2bea571badcad882ede9",
+      "sha256": "6f6bcad22e76017312fde541eece994d2feb50e9787eab3fa9347f222e00bc5d",
       "size": 260
     },
     {
