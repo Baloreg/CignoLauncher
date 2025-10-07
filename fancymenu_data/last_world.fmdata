@@ -1,7 +1,7 @@
 type = last_world
 
 last_world {
-  is_server = false
-  world = 
+  is_server = true
+  world = 194.163.186.7:25569
 }
 

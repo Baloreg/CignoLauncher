@@ -3,14 +3,14 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-07 21:01:21",
+  "last_updated": "2025-10-07 21:44:50",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "5dd4d697f153014b6e96187fc4afdaa786f8cf902ac82e5542f920a1029abe67",
-      "size": 10589
+      "sha256": "c4cb81b13008da4765899587fec13ea9fbae4943181b209b18b1fb835ee11fb1",
+      "size": 10584
     }
   ],
   "config": [
@@ -334,7 +334,7 @@
       "path": "immersive_melodies.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/immersive_melodies.json",
       "sha256": "72ba7262061fd04b913780cebb1e43983893f0fcbc62ba46cff8c1b8f4a70a85",
-      "size": 1035
+      "size": 994
     },
     {
       "name": "modernfix-common.toml",
@@ -375,7 +375,7 @@
       "name": "oculus.properties",
       "path": "oculus.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/oculus.properties",
-      "sha256": "1000e707f7fafdcbb5ad5e563b2bf75b37d2f53292d6ca9d252f5dccf16e8833",
+      "sha256": "1529f7d3ed3770bb5c952af13aaeff01a12ace5115a65e56885f51606578adfd",
       "size": 255
     },
     {
@@ -466,8 +466,8 @@
       "name": "sophisticatedcore-common.toml",
       "path": "sophisticatedcore-common.toml",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/sophisticatedcore-common.toml",
-      "sha256": "fd5dfc4ae058c89fcc94df8dbb11bed73dd8b08d4985776670b2b69df39ee8cf",
-      "size": 112
+      "sha256": "c4b270797a0337e0574614fb38b7dffdcb331d52f53b18a3f16e37bce2d1abe3",
+      "size": 3084
     },
     {
       "name": "supplementaries-client.toml",
@@ -515,7 +515,7 @@
       "name": "xaerominimap_entities.json",
       "path": "xaerominimap_entities.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/xaerominimap_entities.json",
-      "sha256": "c63fa9862b71e4d7d39f0ba3c214ec8482c622d960574003eabe56dd021cbead",
+      "sha256": "d44155ad6524baf93af689dcc2f7bab16d1989475f4c91a88ee526687e4957ec",
       "size": 5531
     },
     {
@@ -1194,7 +1194,7 @@
       "name": "indigo-renderer.properties",
       "path": "fabric/indigo-renderer.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fabric/indigo-renderer.properties",
-      "sha256": "61790c79a91a4b62b270f5932b6b9d11c4cfe70abe3564968e1c764d56d0577c",
+      "sha256": "e193df64417e71e8fc3910ed7e163653d7043bf2e2d3f17442d307863da3ce41",
       "size": 291
     },
     {
@@ -1208,8 +1208,8 @@
       "name": "customizablemenus.txt",
       "path": "fancymenu/customizablemenus.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customizablemenus.txt",
-      "sha256": "8e15b8fdd11e054e25d49c37ce6a448807a7e6e34f9c3b46dc4d222aa0aca44b",
-      "size": 157
+      "sha256": "8b8d63ecc8fdd9e5a755644c2532acad534b6f4a41144b2ea977857d625f6a72",
+      "size": 199
     },
     {
       "name": "legacy_checklist.txt",
@@ -1222,8 +1222,8 @@
       "name": "options.txt",
       "path": "fancymenu/options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/options.txt",
-      "sha256": "9bc27761dfeb63bc2f0ba34f6ef766fc754b5473aadccca6dd738cb692aa8b4e",
-      "size": 2111
+      "sha256": "0537d39c86b14fdbbf1894046c850dd8b23712ff78c7a7f06f895d4b7d8073b4",
+      "size": 2110
     },
     {
       "name": "user_variables.db",
@@ -1282,11 +1282,18 @@
       "size": 6487
     },
     {
+      "name": "pause_screen_layout.txt",
+      "path": "fancymenu/customization/pause_screen_layout.txt",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/pause_screen_layout.txt",
+      "sha256": "44b999078a3c3a9dd56585e2b1bc0c74677ad2f0e0699b69015a7a3dad71aec9",
+      "size": 24956
+    },
+    {
       "name": "title_screen_layout.txt",
       "path": "fancymenu/customization/title_screen_layout.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/fancymenu/customization/title_screen_layout.txt",
       "sha256": "258d58f2e4112256b9ee4d8d7b8af29f0e99698afc558198aeac9dc64c9e95e6",
-      "size": 36068
+      "size": 37113
     },
     {
       "name": "element_layer_control.lewidget",
@@ -1345,6 +1352,27 @@
       "size": 1800
     },
     {
+      "name": "blacklist.cfg",
+      "path": "jei/blacklist.cfg",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/blacklist.cfg",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "name": "ingredient-list-mod-sort-order.ini",
+      "path": "jei/ingredient-list-mod-sort-order.ini",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/ingredient-list-mod-sort-order.ini",
+      "sha256": "4f571addeb6f9f9e987de6754b8feb71900df6783c8c62df21306a11699e12a3",
+      "size": 643
+    },
+    {
+      "name": "ingredient-list-type-sort-order.ini",
+      "path": "jei/ingredient-list-type-sort-order.ini",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/ingredient-list-type-sort-order.ini",
+      "sha256": "ca6f0515891afed86c30c9d3d8ad1496a7d03de9ea532ab431f2ec1d3968826b",
+      "size": 74
+    },
+    {
       "name": "jei-client.ini",
       "path": "jei/jei-client.ini",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-client.ini",
@@ -1371,6 +1399,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/jei-mod-id-format.ini",
       "sha256": "07052785400b48d3757dbbcfff0b50899fbaed1ac54ea09bc9024ea7f73b7644",
       "size": 463
+    },
+    {
+      "name": "recipe-category-sort-order.ini",
+      "path": "jei/recipe-category-sort-order.ini",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/jei/recipe-category-sort-order.ini",
+      "sha256": "54745a2c2965fb81e77a7f5b3bc068304a88846bc11f321339ab37c4cf2b24d8",
+      "size": 1639
     },
     {
       "name": "de_de.local",
@@ -1527,6 +1562,13 @@
       "size": 1182
     },
     {
+      "name": "username-cache.json",
+      "path": "voicechat/username-cache.json",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/username-cache.json",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "size": 2
+    },
+    {
       "name": "voicechat-client.properties",
       "path": "voicechat/voicechat-client.properties",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/voicechat/voicechat-client.properties",
@@ -1556,8 +1598,8 @@
       "name": "last_world.fmdata",
       "path": "last_world.fmdata",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/last_world.fmdata",
-      "sha256": "21b9907f842fec38df4b19c8e3de5e27887512ca30f022b9f0f0849dde0542c3",
-      "size": 66
+      "sha256": "3459e4f21d9ce997204b1837353437a9dfb4f575f509baa2305bdd9426ed7b75",
+      "size": 84
     },
     {
       "name": "buddy_leveling.json",
@@ -1570,7 +1612,7 @@
       "name": "buddy_save.json",
       "path": "buddy/buddy_save.json",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_save.json",
-      "sha256": "6f6bcad22e76017312fde541eece994d2feb50e9787eab3fa9347f222e00bc5d",
+      "sha256": "86cfab2ea419c38745fc4956c0e348a89becfba7df2d061f280b2a6017b64bf0",
       "size": 260
     },
     {
