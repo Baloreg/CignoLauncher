@@ -1,0 +1,84 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Minecraft/Modpack configuration files - force LF
+*.txt text eol=lf
+*.properties text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.md text eol=lf
+*.jsonc text eol=lf
+*.json5 text eol=lf
+*.local text eol=lf
+*.lewidget text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.xml text eol=lf
+
+# Python files
+*.py text eol=lf
+*.pyw text eol=lf
+*.pyi text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Documentation
+*.rst text eol=lf
+*.markdown text eol=lf
+LICENSE text eol=lf
+README text eol=lf
+
+# Binary files - do not modify
+*.jar binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.class binary
+*.pyc binary
+*.pyo binary
+*.pyd binary
+*.db binary
+*.sqlite binary
+*.dat binary
+
+# Archives
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.7z binary
+*.rar binary
+
+# Git attributes for special Minecraft files
+*.mcmeta text eol=lf
+*.mcfunction text eol=lf
+*.nbt binary
+*.mca binary
+*.mcr binary
+
+# Exclude certain files from exports
+.gitignore export-ignore
+.gitattributes export-ignore
+__pycache__/ export-ignore
+*.pyc export-ignore
+.DS_Store export-ignore
+Thumbs.db export-ignore
