@@ -41,16 +41,16 @@ class ManifestGenerator:
         
     def calculate_sha256(self, file_path):
         """Calcola l'hash SHA256 di un file"""
-        # --- MODIFICA: Aggiungi .html e altri formati di testo per coerenza con il launcher ---
         is_text_file = str(file_path).endswith(('.txt', '.properties', '.json', '.toml',
                                                 '.ini', '.cfg', '.conf', '.md', '.jsonc',
                                                 '.json5', '.local', '.lewidget', '.html', 
                                                 '.css', '.js', '.xml'))
-
         try:
             if is_text_file:
-                # Leggi come testo per normalizzare i line endings. newline='' è importante.
-                with open(file_path, 'r', encoding='utf-8', errors='ignore', newline='') as f:
+                # MODIFICA: Rimosso newline='' per permettere a Python di normalizzare
+                # i fine riga a LF (\n) in automatico durante la lettura.
+                # Questo garantisce che l'hash sia consistente con quello del repository Git.
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                     content = f.read()
                 return hashlib.sha256(content.encode('utf-8')).hexdigest()
             else:
