@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-08 12:32:26",
+  "last_updated": "2025-10-10 12:47:58",
   "root": [
     {
       "name": "options.txt",
@@ -1593,36 +1593,6 @@
     }
   ],
   "emotes": [],
-  "fancymenu_data": [
-    {
-      "name": "last_world.fmdata",
-      "path": "last_world.fmdata",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/last_world.fmdata",
-      "sha256": "3459e4f21d9ce997204b1837353437a9dfb4f575f509baa2305bdd9426ed7b75",
-      "size": 84
-    },
-    {
-      "name": "buddy_leveling.json",
-      "path": "buddy/buddy_leveling.json",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_leveling.json",
-      "sha256": "c79892b2e4d4e3d88bf708dd43000ede9759728a1f612d58acc26b7d984f8b50",
-      "size": 1619
-    },
-    {
-      "name": "buddy_save.json",
-      "path": "buddy/buddy_save.json",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/buddy/buddy_save.json",
-      "sha256": "86cfab2ea419c38745fc4956c0e348a89becfba7df2d061f280b2a6017b64bf0",
-      "size": 260
-    },
-    {
-      "name": "player.html",
-      "path": "fancymenu_temp/web/videoplayer/player.html",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/fancymenu_data/fancymenu_temp/web/videoplayer/player.html",
-      "sha256": "203cf2e3b2b0da319a3049d11f5b812d65793eab265ae7205db277933798596b",
-      "size": 26954
-    }
-  ],
   "mods": [
     {
       "name": "AttributeFix-Forge-1.20.1-21.0.4.jar",

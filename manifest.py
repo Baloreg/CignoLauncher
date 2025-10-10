@@ -18,7 +18,7 @@ class ManifestGenerator:
         self.ignore_patterns = {
             '.git', '.gitignore', '.DS_Store', 'Thumbs.db',
             '__pycache__', '*.pyc', '*.pyo', '*.tmp', '*.bak',
-            'manifest.json', '.gitkeep', 'desktop.ini'
+            'manifest.json', '.gitkeep', 'desktop.ini','fancymenu_data'
         }
         
     def should_ignore(self, path):
