@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-10 12:47:58",
+  "last_updated": "2025-10-12 11:37:03",
   "root": [
     {
       "name": "options.txt",
@@ -1859,6 +1859,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/dynamic-fps-3.9.5+minecraft-1.20.0-forge.jar",
       "sha256": "181cb447aeceeab8908a31bb3b43d880134c94a8ca6d2723090bd4f5bd4f01a3",
       "size": 376061
+    },
+    {
+      "name": "embeddium-0.3.31+mc1.20.1.jar",
+      "path": "embeddium-0.3.31+mc1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/embeddium-0.3.31+mc1.20.1.jar",
+      "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+      "size": 1320675
     },
     {
       "name": "emotecraft-for-MC1.20.1-2.2.7-b.build.50-forge.jar",
