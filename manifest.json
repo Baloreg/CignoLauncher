@@ -3,14 +3,14 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 16:55:37",
+  "last_updated": "2025-10-17 17:51:14",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "1281da8d46af603c2169721d469cf770c6531bbe615a72a8d3affa22427745e2",
-      "size": 10585
+      "sha256": "64bc60e4a9b5e5c4958871fb5f6d309ebd023987207661008ac3c050ee9a0731",
+      "size": 10748
     }
   ],
   "config": [
@@ -1623,6 +1623,13 @@
       "size": 19471
     },
     {
+      "name": "ChatImpressiveAnimation-forge-1.4.0+mc1.20.4.jar",
+      "path": "ChatImpressiveAnimation-forge-1.4.0+mc1.20.4.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/ChatImpressiveAnimation-forge-1.4.0+mc1.20.4.jar",
+      "sha256": "d14908a744555eecb385e44b7904231650efc29b7205b0eed3dd3cf2304afa54",
+      "size": 254241
+    },
+    {
       "name": "Clumps-forge-1.20.1-12.0.0.4.jar",
       "path": "Clumps-forge-1.20.1-12.0.0.4.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Clumps-forge-1.20.1-12.0.0.4.jar",
@@ -1677,6 +1684,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Jade-1.20.1-Forge-11.13.2.jar",
       "sha256": "31949971a7a8d5a5bc95ad9d400cbedfd2d65ffbfb3cea7c0b2fa3b47431a0a5",
       "size": 552486
+    },
+    {
+      "name": "Loot Journal-forge-1.20.1-5.0.1.jar",
+      "path": "Loot Journal-forge-1.20.1-5.0.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Loot Journal-forge-1.20.1-5.0.1.jar",
+      "sha256": "8db800d1bc890dc5f8d3a3fd671e6c103cd063ba46902eae4b4e0ced9992d6ee",
+      "size": 42433
     },
     {
       "name": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
