@@ -1,5 +1,5 @@
 {
-  "fullscreenMode": "ON",
+  "fullscreenMode": "OFF",
   "preferredFullscreenMode": "ON",
   "fullscreenType": "minecraft:default",
   "borderlessFullscreenType": "windows:windowed",
