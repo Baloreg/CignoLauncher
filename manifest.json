@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 18:17:35",
+  "last_updated": "2025-10-17 18:21:22",
   "root": [
     {
       "name": "options.txt",
@@ -2062,6 +2062,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/immersive_melodies-0.6.0+1.20.1-forge.jar",
       "sha256": "7625e0cf725b4316a61a30bc2fd3a50c80f29001502e3fd90852e573263d937a",
       "size": 5517578
+    },
+    {
+      "name": "jamlib-forge-1.3.5+1.20.1.jar",
+      "path": "jamlib-forge-1.3.5+1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/jamlib-forge-1.3.5+1.20.1.jar",
+      "sha256": "7d49149af05bb07b0f1bde319eedce1c83cee2fb2067b4faa5bbd0f6131e44d1",
+      "size": 190604
     },
     {
       "name": "jei-1.20.1-forge-15.20.0.116.jar",
