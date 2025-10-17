@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 19:15:51",
+  "last_updated": "2025-10-17 19:21:05",
   "root": [
     {
       "name": "options.txt",
@@ -2202,6 +2202,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/letsdo-vinery-forge-1.4.41.jar",
       "sha256": "5d7e11f6e2218562ce75d60788fdcfc9ccf59e4532757c18bf37759d5fc739ee",
       "size": 2041283
+    },
+    {
+      "name": "lithostitched-forge-1.20.1-1.4.11.jar",
+      "path": "lithostitched-forge-1.20.1-1.4.11.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/lithostitched-forge-1.20.1-1.4.11.jar",
+      "sha256": "c19a5a36c0e6cb3782cf7ca5b9648fb1bce5fc41fd737bed423a1f4971bccf75",
+      "size": 476347
     },
     {
       "name": "mcef-forge-2.1.6-1.20.1.jar",
