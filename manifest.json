@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 18:33:44",
+  "last_updated": "2025-10-17 18:59:16",
   "root": [
     {
       "name": "options.txt",
@@ -1796,6 +1796,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/architectury-9.2.14-forge.jar",
       "sha256": "218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af",
       "size": 580602
+    },
+    {
+      "name": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "path": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/ars_nouveau-1.20.1-4.12.7-all.jar",
+      "sha256": "1f1debc282a0c379c1141f2840ea294eede6f6b544c589663f40bbe17b59a1af",
+      "size": 12430237
     },
     {
       "name": "artifacts-forge-9.5.16.jar",
