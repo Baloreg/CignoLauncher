@@ -3,13 +3,13 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 17:51:14",
+  "last_updated": "2025-10-17 18:17:35",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "64bc60e4a9b5e5c4958871fb5f6d309ebd023987207661008ac3c050ee9a0731",
+      "sha256": "606539fae5b9c817f59fd2691575556562c08ae6f6d0ce1eb4d78cceed3bdcc1",
       "size": 10748
     }
   ],
@@ -2316,6 +2316,13 @@
       "size": 1438972
     },
     {
+      "name": "sort_it_out-forge-1.1.4+1.20.1.jar",
+      "path": "sort_it_out-forge-1.1.4+1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sort_it_out-forge-1.1.4+1.20.1.jar",
+      "sha256": "5b88a380289621bf02166c1332f8370e3d1cef3fc92d91bed385e90a96877f7a",
+      "size": 108672
+    },
+    {
       "name": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "path": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sound-physics-remastered-forge-1.20.1-1.5.1.jar",
@@ -2393,13 +2400,6 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/§8§lDarkmode §f§lColourful Containers§8.zip",
       "sha256": "9bc897a8fedf01f44352ce9fd6cc6def4f22042988e5655cf48ad77e3e41bca1",
       "size": 1048245
-    },
-    {
-      "name": "§9Bray's Zombie Overhaul FA v1.3.zip",
-      "path": "§9Bray's Zombie Overhaul FA v1.3.zip",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/§9Bray's Zombie Overhaul FA v1.3.zip",
-      "sha256": "204c032e7975c44a3299d0f6ddfda915c84bdf08655301600494248f0eeeeb7a",
-      "size": 281818
     }
   ],
   "shaderpacks": [
