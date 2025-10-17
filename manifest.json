@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 18:21:22",
+  "last_updated": "2025-10-17 18:33:44",
   "root": [
     {
       "name": "options.txt",
@@ -1775,6 +1775,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/amendments-1.20-2.2.2.jar",
       "sha256": "564f709a72cb3ada3cc66a838bda1f73c7012231542351be64b8ee086c4cf5ab",
       "size": 1293224
+    },
+    {
+      "name": "animated-doors-1.0.jar",
+      "path": "animated-doors-1.0.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/animated-doors-1.0.jar",
+      "sha256": "459dfc3dda4d1b5887aad54f78934034010cf6c0d9bbb9615e9edacf17c30c69",
+      "size": 592225
     },
     {
       "name": "appleskin-forge-mc1.20.1-2.5.1.jar",
