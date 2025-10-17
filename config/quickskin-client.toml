@@ -1,0 +1,62 @@
+
+[general]
+	#The active skin to be applied, format: 'username:model;capeUsername'.
+	activeSkin = "local_skin:db584ba79891961edb2263d6599cabd7bccf5a34|skin_royal_medieval_99453f5e3acb4634e18b39e10e543af2:default"
+	#The active animation to be used for the player preview.
+	activeAnimation = "animation.player.idle"
+	#A list of saved skins for quick access, with each in the format: 'username:model;capeUsername'.
+	savedSkins = ["Baloreg:slim", "local_skin:db584ba79891961edb2263d6599cabd7bccf5a34|skin_royal_medieval_99453f5e3acb4634e18b39e10e543af2:default"]
+
+[caching]
+	#How long to keep skin profiles in the local disk cache, in hours.
+	#The cache is stored in '.minecraft/quickskin_cache/'.
+	#Set to 0 to disable disk cache.
+	#Set to -1 for infinite cache time.
+	#Range: -1 ~ 8760
+	diskCacheDurationHours = 24
+
+[hd_skins]
+	#Enable support for HD (high resolution) skin textures.
+	enableHDSkins = true
+	#Quality setting for HD skin preview and rendering.
+	#LOW: Thumbnail quality for performance
+	#MEDIUM: Preview quality for balance
+	#HIGH: Full resolution for quality
+	#Allowed Values: LOW, MEDIUM, HIGH
+	hdSkinQuality = "MEDIUM"
+	#Maximum memory size for HD texture cache in MB.
+	#Range: 64 ~ 2048
+	maxHDCacheSizeMB = 256
+	#Automatically downsample HD skins for better performance.
+	autoDownsampleHD = true
+
+[animated_capes]
+	#Enable support for animated GIF capes.
+	enableAnimatedCapes = true
+	#Maximum number of frames allowed in animated capes.
+	#Range: 1 ~ 200
+	maxGifFrames = 60
+	#Maximum file size for animated capes in KB.
+	#Range: 256 ~ 8192
+	maxGifSizeKB = 2048
+	#Distance in blocks at which animated capes stop animating for performance.
+	#Range: 8 ~ 128
+	animationRenderDistance = 32
+	#Maximum FPS for animated capes to prevent performance issues.
+	#Range: 5 ~ 60
+	maxAnimationFPS = 20
+	#Speed multiplier for animated capes. 1.0 is default, 2.0 is double speed, 0.001.
+	#Range: 0.001 ~ 4.0
+	animationSpeedMultiplier = 1.0
+	#Maximum number of animated capes that can run simultaneously.
+	#Range: 1 ~ 16
+	maxConcurrentAnimations = 4
+	#Memory limit for animation frame cache in MB.
+	#Range: 16 ~ 512
+	animationMemoryLimitMB = 64
+	#Enable Level of Detail system for animated capes based on distance.
+	enableAnimationLOD = true
+	#Number of threads to use for GIF processing.
+	#Range: 1 ~ 8
+	gifProcessingThreads = 2
+

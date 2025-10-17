@@ -1,0 +1,9 @@
+{
+  "allowMovement": {
+    "net.minecraft.client.gui.screens.PauseScreen": true,
+    "com.quickskin.mod.gui.PlayerSkinMenuScreen": true,
+    "net.minecraft.client.gui.screens.OptionsScreen": true,
+    "net.minecraft.client.gui.screens.packs.PackSelectionScreen": true
+  },
+  "hideBackground": {}
+}
