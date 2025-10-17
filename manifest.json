@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 18:59:16",
+  "last_updated": "2025-10-17 19:15:51",
   "root": [
     {
       "name": "options.txt",
@@ -1754,6 +1754,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/[1.20.1] SecurityCraft v1.10.0.1.jar",
       "sha256": "db2f56d0b37006e0de24d53fe94a38d9fd1d10eadf384a719a37c8d15bbb88dc",
       "size": 4648724
+    },
+    {
+      "name": "[forge]ctov-3.4.14.jar",
+      "path": "[forge]ctov-3.4.14.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/[forge]ctov-3.4.14.jar",
+      "sha256": "c4b0326efa655b180cc2b9d87994ca639ee4415debbf45788f665e9f4f864d3c",
+      "size": 6772753
     },
     {
       "name": "ad_astra-forge-1.20.1-1.15.20.jar",
