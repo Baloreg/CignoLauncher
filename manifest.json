@@ -3,14 +3,14 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-18 16:20:59",
+  "last_updated": "2025-10-18 17:38:12",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "606539fae5b9c817f59fd2691575556562c08ae6f6d0ce1eb4d78cceed3bdcc1",
-      "size": 10748
+      "sha256": "6ce5f28d406212393d779c71087361492858ff7c9d95458c6161d5d85a97e013",
+      "size": 13087
     }
   ],
   "config": [
@@ -1910,6 +1910,13 @@
       "size": 7508861
     },
     {
+      "name": "advancedbook-2.0.2.jar",
+      "path": "advancedbook-2.0.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/advancedbook-2.0.2.jar",
+      "sha256": "ef4bd9559249407b30a8698643df82a4aacc119de1c4dc6845a7fe4334de8cf3",
+      "size": 226718
+    },
+    {
       "name": "alexsmobs-1.22.9.jar",
       "path": "alexsmobs-1.22.9.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/alexsmobs-1.22.9.jar",
@@ -1922,13 +1929,6 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/amendments-1.20-2.2.2.jar",
       "sha256": "564f709a72cb3ada3cc66a838bda1f73c7012231542351be64b8ee086c4cf5ab",
       "size": 1293224
-    },
-    {
-      "name": "animated-doors-1.0.jar",
-      "path": "animated-doors-1.0.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/animated-doors-1.0.jar",
-      "sha256": "459dfc3dda4d1b5887aad54f78934034010cf6c0d9bbb9615e9edacf17c30c69",
-      "size": 592225
     },
     {
       "name": "appleskin-forge-mc1.20.1-2.5.1.jar",
@@ -2456,6 +2456,13 @@
       "size": 644298
     },
     {
+      "name": "scholar-1.20.1-1.1.6-forge.jar",
+      "path": "scholar-1.20.1-1.1.6-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/scholar-1.20.1-1.1.6-forge.jar",
+      "sha256": "a7bfd7014665056cefb43e0c37c936924e91fdd0011fd397c4b06ea0b7f0efda",
+      "size": 682405
+    },
+    {
       "name": "skinlayers3d-forge-1.9.2-mc1.20.1.jar",
       "path": "skinlayers3d-forge-1.9.2-mc1.20.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/skinlayers3d-forge-1.9.2-mc1.20.1.jar",
@@ -2561,13 +2568,6 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/-1.21.2 Fresh Moves v3.1 (No Animated Eyes).zip",
       "sha256": "91c2549cb3a462ca3d493a72a0ab478dc5fa74b047ac1b2a664d86a0f6f51f2d",
       "size": 251791
-    },
-    {
-      "name": "FA+All_Extensions-v1.6.zip",
-      "path": "FA+All_Extensions-v1.6.zip",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FA+All_Extensions-v1.6.zip",
-      "sha256": "63186dc000c0e10c890e8826ac2c058964f56304c4655be0d286ec2b87c3ff2e",
-      "size": 591615
     },
     {
       "name": "FreshAnimations_v1.10.1.zip",
