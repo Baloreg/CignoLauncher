@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-18 17:38:12",
+  "last_updated": "2025-10-18 17:45:25",
   "root": [
     {
       "name": "options.txt",
@@ -2022,6 +2022,13 @@
       "size": 1181413
     },
     {
+      "name": "collective-1.20.1-8.10.jar",
+      "path": "collective-1.20.1-8.10.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/collective-1.20.1-8.10.jar",
+      "sha256": "f9dd2afc19ca905757b64ed673f784300a1d0d398c0cd10cf3d102b34fd2303b",
+      "size": 661764
+    },
+    {
       "name": "comforts-forge-6.4.0+1.20.1.jar",
       "path": "comforts-forge-6.4.0+1.20.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/comforts-forge-6.4.0+1.20.1.jar",
@@ -2069,6 +2076,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/cwb-forge-3.0.0+mc1.20.jar",
       "sha256": "97b0827f20b6213c97d2244f7da205d85ffa72e51fa167d69466b49018532478",
       "size": 258613
+    },
+    {
+      "name": "doubledoors-1.20.1-7.1.jar",
+      "path": "doubledoors-1.20.1-7.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/doubledoors-1.20.1-7.1.jar",
+      "sha256": "19277090b1f09717dcf044b6595dfbb63320ecd50b13f0318f91d889a57eb7dd",
+      "size": 54093
     },
     {
       "name": "drippyloadingscreen_forge_3.0.12_MC_1.20.1.jar",
