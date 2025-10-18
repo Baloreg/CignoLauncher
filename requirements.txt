@@ -1,0 +1,13 @@
+# CignoLauncher Dependencies
+
+# Core Minecraft launcher functionality
+minecraft-launcher-lib>=6.0.0
+
+# HTTP requests for downloading files and checking updates
+requests>=2.31.0
+
+# Image processing for icons and UI elements
+Pillow>=10.0.0
+
+# Optional: For building executable
+# pyinstaller>=6.0.0
