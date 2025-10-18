@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-17 19:52:28",
+  "last_updated": "2025-10-18 15:27:53",
   "root": [
     {
       "name": "options.txt",
@@ -1840,6 +1840,13 @@
       "size": 399214
     },
     {
+      "name": "Quark-4.0-462.jar",
+      "path": "Quark-4.0-462.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Quark-4.0-462.jar",
+      "sha256": "c90b96f049d92825c4a103721988c80d72e5ad380d17be46a0f53e114874c478",
+      "size": 14935230
+    },
+    {
       "name": "Steam_Rails-1.6.13-alpha+forge-mc1.20.1.jar",
       "path": "Steam_Rails-1.6.13-alpha+forge-mc1.20.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Steam_Rails-1.6.13-alpha+forge-mc1.20.1.jar",
@@ -1873,6 +1880,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/YungsApi-1.20-Forge-4.0.6.jar",
       "sha256": "101c30d01d0cf9d86190f578eb1e43bd06b64092e95662a00ef52946f472c7b1",
       "size": 370524
+    },
+    {
+      "name": "Zeta-1.0-30.jar",
+      "path": "Zeta-1.0-30.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/Zeta-1.0-30.jar",
+      "sha256": "7b68e166061c6ea0a8ac1585b0ae222f12bdd350728f3d797b520c1e915a310b",
+      "size": 1006574
     },
     {
       "name": "[1.20.1] SecurityCraft v1.10.0.1.jar",
