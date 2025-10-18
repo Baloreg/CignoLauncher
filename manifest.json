@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-18 15:27:53",
+  "last_updated": "2025-10-18 16:20:59",
   "root": [
     {
       "name": "options.txt",
@@ -2349,6 +2349,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/lithostitched-forge-1.20.1-1.4.11.jar",
       "sha256": "c19a5a36c0e6cb3782cf7ca5b9648fb1bce5fc41fd737bed423a1f4971bccf75",
       "size": 476347
+    },
+    {
+      "name": "lootr-forge-1.20-0.7.35.93.jar",
+      "path": "lootr-forge-1.20-0.7.35.93.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/lootr-forge-1.20-0.7.35.93.jar",
+      "sha256": "f4a58b77ced2641260e20de6a45aa9d866b68a7bb82d830abcc8d58537701083",
+      "size": 460882
     },
     {
       "name": "mcef-forge-2.1.6-1.20.1.jar",
