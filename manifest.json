@@ -3,14 +3,14 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-19 11:08:55",
+  "last_updated": "2025-10-19 11:28:30",
   "root": [
     {
       "name": "options.txt",
       "path": "options.txt",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/options.txt",
-      "sha256": "6ce5f28d406212393d779c71087361492858ff7c9d95458c6161d5d85a97e013",
-      "size": 13087
+      "sha256": "0d5d42986c6bc9d42e303e1a4f36dd7642343dff0ed3bce2e4e4bfcad66539d3",
+      "size": 13451
     }
   ],
   "config": [
@@ -2591,11 +2591,46 @@
       "size": 251791
     },
     {
+      "name": "FA+All_Extensions-v1.6.zip",
+      "path": "FA+All_Extensions-v1.6.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FA+All_Extensions-v1.6.zip",
+      "sha256": "63186dc000c0e10c890e8826ac2c058964f56304c4655be0d286ec2b87c3ff2e",
+      "size": 591615
+    },
+    {
       "name": "FreshAnimations_v1.10.1.zip",
       "path": "FreshAnimations_v1.10.1.zip",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FreshAnimations_v1.10.1.zip",
       "sha256": "2e2f0152469fcaac19c46f2959e0232f9b2c12a255e0481d85f845ecba003692",
       "size": 815824
+    },
+    {
+      "name": "FreshCompats_v1.6.zip",
+      "path": "FreshCompats_v1.6.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/FreshCompats_v1.6.zip",
+      "sha256": "0fe5e8edb0d7806fe8aa703ce61a6f2f2ec6ed0dd2e1afbf7ee617a33321445f",
+      "size": 514819
+    },
+    {
+      "name": "MMV+FA+Details-v2.0.0.zip",
+      "path": "MMV+FA+Details-v2.0.0.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/MMV+FA+Details-v2.0.0.zip",
+      "sha256": "32e455df2e33581802c4235231a5d0fcabdadec05286e29e67c39df976715123",
+      "size": 334922
+    },
+    {
+      "name": "MoreMobVariants_FreshAnimations FOR FA 1.10.1 V2.zip",
+      "path": "MoreMobVariants_FreshAnimations FOR FA 1.10.1 V2.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/MoreMobVariants_FreshAnimations FOR FA 1.10.1 V2.zip",
+      "sha256": "5a588e3170d4b151bfd42b6606e5fb999282ecc2f1e04ba1fd3efadbf19c0ff9",
+      "size": 186225
+    },
+    {
+      "name": "Quark Programmer Art.zip",
+      "path": "Quark Programmer Art.zip",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/resourcepacks/Quark Programmer Art.zip",
+      "sha256": "41cb720cf256a12ea247b2f38068b363aa5b1675470c4b5aa66850701a78bc4d",
+      "size": 266434
     },
     {
       "name": "§8§lDarkmode §f§lColourful Containers§8.zip",
