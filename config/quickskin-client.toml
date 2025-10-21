@@ -1,11 +1,11 @@
 
 [general]
 	#The active skin to be applied, format: 'username:model;capeUsername'.
-	activeSkin = "local_skin:db584ba79891961edb2263d6599cabd7bccf5a34|skin_royal_medieval_99453f5e3acb4634e18b39e10e543af2:default"
+	activeSkin = "Baloreg:default"
 	#The active animation to be used for the player preview.
 	activeAnimation = "animation.player.idle"
 	#A list of saved skins for quick access, with each in the format: 'username:model;capeUsername'.
-	savedSkins = ["Baloreg:slim", "local_skin:db584ba79891961edb2263d6599cabd7bccf5a34|skin_royal_medieval_99453f5e3acb4634e18b39e10e543af2:default"]
+	savedSkins = ["Baloreg:default", "local_skin:db584ba79891961edb2263d6599cabd7bccf5a34|skin_royal_medieval_99453f5e3acb4634e18b39e10e543af2:default"]
 
 [caching]
 	#How long to keep skin profiles in the local disk cache, in hours.

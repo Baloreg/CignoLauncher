@@ -1,0 +1,9 @@
+#Enable accumulating dust for illustrations
+dustAccumulation = true
+#Chance of dust appearing every random tick in %
+#Range: 0 ~ 100
+dustChance = 3
+#Maximum illustration size in blocks
+#Range: 2 ~ 16
+illustrationMaxSize = 8
+

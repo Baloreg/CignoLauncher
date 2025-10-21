@@ -3,7 +3,15 @@
     "net.minecraft.client.gui.screens.PauseScreen": true,
     "com.quickskin.mod.gui.PlayerSkinMenuScreen": true,
     "net.minecraft.client.gui.screens.OptionsScreen": true,
-    "net.minecraft.client.gui.screens.packs.PackSelectionScreen": true
+    "net.minecraft.client.gui.screens.packs.PackSelectionScreen": true,
+    "org.embeddedt.embeddium.gui.EmbeddiumVideoOptionsScreen": true,
+    "net.irisshaders.iris.gui.screen.ShaderPackScreen": true,
+    "net.minecraftforge.client.gui.ModListScreen": true,
+    "dev.shwg.smoothswapping.config.ConfigScreen": true,
+    "top.theillusivec4.curios.client.gui.CuriosScreenV2": true,
+    "net.createmod.ponder.foundation.ui.PonderUI": true
   },
-  "hideBackground": {}
+  "hideBackground": {
+    "top.theillusivec4.curios.client.gui.CuriosScreenV2": true
+  }
 }
