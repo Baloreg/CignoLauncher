@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-21 22:21:39",
+  "last_updated": "2025-10-22 22:56:04",
   "root": [
     {
       "name": "options.txt",
@@ -524,13 +524,6 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/quark-common.toml",
       "sha256": "057dec5398a51f7103cd83d40720f4b0ddfb56cae622d8dddf93ce3469012a39",
       "size": 82279
-    },
-    {
-      "name": "quickskin-client.toml",
-      "path": "quickskin-client.toml",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/config/quickskin-client.toml",
-      "sha256": "1c73f2be8df91222a732a6af522ee59a8512f62fd8fc9a68c2873d0451429325",
-      "size": 2295
     },
     {
       "name": "railways-client.toml",
