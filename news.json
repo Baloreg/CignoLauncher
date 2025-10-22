@@ -1,14 +1,18 @@
 [
     {
-        "title": "Benvenuti nel CignoPack!",
-        "content": "Siamo entusiasti di lanciare la prima versione del nostro launcher. Speriamo che l'esperienza sia di vostro gradimento. Per qualsiasi problema, non esitate a contattarci sul nostro server Discord!"
+        "title": "<img src='https://raw.githubusercontent.com/Baloreg/Cignopack/main/assets/welcome.gif' width='350' />",
+        "content": "Siamo entusiasti di lanciare la prima versione del nostro launcher. Speriamo che l'esperienza sia di vostro gradimento. Per qualsiasi problema, non esitate a contattarci sul nostro <a href='https://discord.com' style='color: #7289DA; text-decoration: none;'>server Discord</a>!"
     },
     {
-        "title": "Aggiornamento v1.1",
-        "content": "Abbiamo aggiunto <b>5 nuove mod</b> focalizzate sulla magia e corretto alcuni bug di compatibilità. L'aggiornamento è obbligatorio per giocare online. Clicca su 'Installa/Aggiorna' per scaricare i nuovi file."
+        "title": "<span style='color: #66bb6a;'>Aggiornamento v1.1 - Magia e Correzioni!</span>",
+        "content": "Abbiamo aggiunto <b>5 nuove mod</b> focalizzate sulla magia e corretto alcuni bug di compatibilità. L'aggiornamento è obbligatorio per giocare online.<br><br><i>Clicca su 'Installa/Aggiorna' per scaricare i nuovi file.</i>"
     },
     {
-        "title": "Manutenzione Programmata",
+        "title": "<span style='color: #ffa726;'>Consiglio del Giorno</span>",
+        "content": "<blockquote style='border-left: 3px solid #ffa726; padding-left: 10px; margin: 0; color: #b0b0b0;'>Ricorda di assegnare almeno <b>4GB di RAM</b> dalle impostazioni per un'esperienza di gioco fluida. Se hai un PC potente, 6GB o 8GB sono ancora meglio!</blockquote>"
+    },
+    {
+        "title": "<span style='color: #ef5350;'>Manutenzione Programmata</span>",
         "content": "Il server principale sarà offline per manutenzione il <b>25 Ottobre dalle 9:00 alle 10:00</b>. Ci scusiamo per il disagio."
     }
 ]
