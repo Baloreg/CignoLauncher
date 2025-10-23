@@ -63,7 +63,7 @@ class AccountManager:
             "uuid": auth_data["id"],
             "access_token": auth_data["access_token"],
             "refresh_token": auth_data.get("refresh_token"),
-            "expires_at": (datetime.now() + timedelta(seconds=auth_data["expires_in"])).isoformat(),
+            "expires_at": (datetime.now() + timedelta(seconds=auth_data.get("expires_in", 3600))).isoformat(),
             "added_at": datetime.now().isoformat()
         }
         
