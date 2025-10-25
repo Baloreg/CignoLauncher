@@ -1,6 +1,5 @@
 {
   "version": "1.0.2",
-  "changelog": "- Aggiunto controllo automatico aggiornamenti\n- Migliorata gestione hash file\n- Correzioni bug minori",
-  "release_date": "2025-10-25",
-  "download_url": "https://github.com/Baloreg/Cignopack/releases/latest"
+  "download_url_zip": "https://github.com/Baloreg/CignoLauncher/releases/download/1.0.2/CignoLauncher.zip",
+  "sha256_zip": "89fd84fd25b061865b2ed3f9e39bfc23f7262ff225264a4339c3f6d513da95e2"
 }
