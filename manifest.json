@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-22 22:56:04",
+  "last_updated": "2025-10-29 09:07:18",
   "root": [
     {
       "name": "options.txt",
@@ -1945,11 +1945,11 @@
       "size": 1006574
     },
     {
-      "name": "[1.20.1] SecurityCraft v1.10.0.1.jar",
-      "path": "[1.20.1] SecurityCraft v1.10.0.1.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/[1.20.1] SecurityCraft v1.10.0.1.jar",
-      "sha256": "db2f56d0b37006e0de24d53fe94a38d9fd1d10eadf384a719a37c8d15bbb88dc",
-      "size": 4648724
+      "name": "[1.20.1] SecurityCraft v1.10.1.jar",
+      "path": "[1.20.1] SecurityCraft v1.10.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/[1.20.1] SecurityCraft v1.10.1.jar",
+      "sha256": "ec601ba570c5351c353fc1ee0eb2f4823d1c026d265a96d3ec802070a50b6ebd",
+      "size": 4769715
     },
     {
       "name": "[forge]ctov-3.4.14.jar",
@@ -1992,6 +1992,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/appleskin-forge-mc1.20.1-2.5.1.jar",
       "sha256": "e12419e43e3babc810af289403c5cd96bd7f09809b389acc6bb2f122b4b2a426",
       "size": 47428
+    },
+    {
+      "name": "arc-1.7.2-1.20.1-forge.jar",
+      "path": "arc-1.7.2-1.20.1-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/arc-1.7.2-1.20.1-forge.jar",
+      "sha256": "2b887d31c8ac947369433369c1c5a830c03dddcd34af973366c9f9c40a626ff3",
+      "size": 431730
     },
     {
       "name": "architectury-9.2.14-forge.jar",
@@ -2078,11 +2085,11 @@
       "size": 1181413
     },
     {
-      "name": "collective-1.20.1-8.10.jar",
-      "path": "collective-1.20.1-8.10.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/collective-1.20.1-8.10.jar",
-      "sha256": "f9dd2afc19ca905757b64ed673f784300a1d0d398c0cd10cf3d102b34fd2303b",
-      "size": 661764
+      "name": "collective-1.20.1-8.13.jar",
+      "path": "collective-1.20.1-8.13.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/collective-1.20.1-8.13.jar",
+      "sha256": "80dd754b75c530768904e912ace11e0cf4deac7d1784b883dbeaead082469cd2",
+      "size": 665169
     },
     {
       "name": "comforts-forge-6.4.0+1.20.1.jar",
@@ -2099,11 +2106,11 @@
       "size": 1016666
     },
     {
-      "name": "create-1.20.1-6.0.6.jar",
-      "path": "create-1.20.1-6.0.6.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/create-1.20.1-6.0.6.jar",
-      "sha256": "6cb1e5b25e7d5fb670ef0713ca6da17525a1b9658e2a523fd76c2a32bbc0b2ed",
-      "size": 18764522
+      "name": "create-1.20.1-6.0.7.jar",
+      "path": "create-1.20.1-6.0.7.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/create-1.20.1-6.0.7.jar",
+      "sha256": "b8b77f9539025f126a0adb286cead2a5c69eafd7906c97135ad3ca2ca66b9219",
+      "size": 19171989
     },
     {
       "name": "createaddition-1.20.1-1.3.1.jar",
@@ -2113,11 +2120,11 @@
       "size": 1547196
     },
     {
-      "name": "crittersandcompanions-forge-1.20.1-2.3.3.jar",
-      "path": "crittersandcompanions-forge-1.20.1-2.3.3.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/crittersandcompanions-forge-1.20.1-2.3.3.jar",
-      "sha256": "6a2d0c8f63e152b826a347f90ae829534640aa6939fe2559632124f3cdd1b181",
-      "size": 1594266
+      "name": "crittersandcompanions-forge-1.20.1-2.3.5.jar",
+      "path": "crittersandcompanions-forge-1.20.1-2.3.5.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/crittersandcompanions-forge-1.20.1-2.3.5.jar",
+      "sha256": "d7be3f0ed78eb4d0f8f607c969a600f45644da5b3cf5bf4e89c977c4af452701",
+      "size": 1594359
     },
     {
       "name": "curios-forge-5.14.1+1.20.1.jar",
@@ -2134,11 +2141,11 @@
       "size": 258613
     },
     {
-      "name": "doubledoors-1.20.1-7.1.jar",
-      "path": "doubledoors-1.20.1-7.1.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/doubledoors-1.20.1-7.1.jar",
-      "sha256": "19277090b1f09717dcf044b6595dfbb63320ecd50b13f0318f91d889a57eb7dd",
-      "size": 54093
+      "name": "doubledoors-1.20.1-7.2.jar",
+      "path": "doubledoors-1.20.1-7.2.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/doubledoors-1.20.1-7.2.jar",
+      "sha256": "1847baf0f97a3ebc07735743b0e226c45dd7c289cd03214bcfc7f49ed44ccb1e",
+      "size": 54300
     },
     {
       "name": "drippyloadingscreen_forge_3.0.12_MC_1.20.1.jar",
@@ -2197,11 +2204,11 @@
       "size": 894117
     },
     {
-      "name": "entityculling-forge-1.9.1-mc1.20.1.jar",
-      "path": "entityculling-forge-1.9.1-mc1.20.1.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/entityculling-forge-1.9.1-mc1.20.1.jar",
-      "sha256": "4da22ae4c9a2977745e4736c12126802fd151240589776f770b225a408a8e7b7",
-      "size": 477585
+      "name": "entityculling-forge-1.9.2-mc1.20.1.jar",
+      "path": "entityculling-forge-1.9.2-mc1.20.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/entityculling-forge-1.9.2-mc1.20.1.jar",
+      "sha256": "4f2ecbb77d97d67b0fe64b31c7949369ede380f5726ec0546b1d34ba48895a16",
+      "size": 477372
     },
     {
       "name": "exposure-1.20.1-1.7.16-forge.jar",
@@ -2295,6 +2302,13 @@
       "size": 5517578
     },
     {
+      "name": "itemrestrictions-1.2.1-forge.jar",
+      "path": "itemrestrictions-1.2.1-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/itemrestrictions-1.2.1-forge.jar",
+      "sha256": "0dcc3517c552e25168c2b61111e51e15858ff376c9e940f1fdcdae6bfdd111bc",
+      "size": 63999
+    },
+    {
       "name": "jamlib-forge-1.3.5+1.20.1.jar",
       "path": "jamlib-forge-1.3.5+1.20.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/jamlib-forge-1.3.5+1.20.1.jar",
@@ -2307,6 +2321,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/jei-1.20.1-forge-15.20.0.116.jar",
       "sha256": "c6596939e9b47d1a212a6e2761dbe274971a9b5ea39ee274d778c854b5bfead4",
       "size": 1387236
+    },
+    {
+      "name": "jobsplus-1.3.9-forge.jar",
+      "path": "jobsplus-1.3.9-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/jobsplus-1.3.9-forge.jar",
+      "sha256": "53e6bccd33e690b02d5c4ba61a7f5a4f27311efc86e5b634eae929dfc453ba64",
+      "size": 407054
     },
     {
       "name": "konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
@@ -2456,11 +2477,11 @@
       "size": 880557
     },
     {
-      "name": "moonlight-1.20-2.16.14-forge.jar",
-      "path": "moonlight-1.20-2.16.14-forge.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/moonlight-1.20-2.16.14-forge.jar",
-      "sha256": "9cb836b2fd138460e35d890eb448b07cb04b18f9ffe04cd0036cf894350c38b9",
-      "size": 1333892
+      "name": "moonlight-1.20-2.16.15-forge.jar",
+      "path": "moonlight-1.20-2.16.15-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/moonlight-1.20-2.16.15-forge.jar",
+      "sha256": "97fbf25762183b969198f288957f74cb10f59d546ad81631626bdba1c08f88c0",
+      "size": 1333278
     },
     {
       "name": "moremobvariants-forge+1.20.1-1.3.0.1.jar",
@@ -2498,11 +2519,11 @@
       "size": 299601
     },
     {
-      "name": "quickskin-2.2.1.jar",
-      "path": "quickskin-2.2.1.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/quickskin-2.2.1.jar",
-      "sha256": "e553a55a2034532adcf2e865a0e154bf6e15762311ef45d778d273cf28d69998",
-      "size": 2427199
+      "name": "quickskin-2.3.0.jar",
+      "path": "quickskin-2.3.0.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/quickskin-2.3.0.jar",
+      "sha256": "c4355ff891e93e0cd3d45f4ade9a2128f0fd4cbb81f2d1cb068b13cbad3e2010",
+      "size": 2587563
     },
     {
       "name": "rechiseled-1.1.6-forge-mc1.20.jar",
@@ -2533,11 +2554,11 @@
       "size": 644298
     },
     {
-      "name": "scholar-1.20.1-1.1.6-forge.jar",
-      "path": "scholar-1.20.1-1.1.6-forge.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/scholar-1.20.1-1.1.6-forge.jar",
-      "sha256": "a7bfd7014665056cefb43e0c37c936924e91fdd0011fd397c4b06ea0b7f0efda",
-      "size": 682405
+      "name": "scholar-1.20.1-1.1.9-forge.jar",
+      "path": "scholar-1.20.1-1.1.9-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/scholar-1.20.1-1.1.9-forge.jar",
+      "sha256": "687e66b8f6d79e973da2781020384afcab6fb4b869eac20f8acac86a44aec7dd",
+      "size": 692365
     },
     {
       "name": "skinlayers3d-forge-1.9.2-mc1.20.1.jar",
@@ -2596,13 +2617,6 @@
       "size": 1438972
     },
     {
-      "name": "sort_it_out-forge-1.1.4+1.20.1.jar",
-      "path": "sort_it_out-forge-1.1.4+1.20.1.jar",
-      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sort_it_out-forge-1.1.4+1.20.1.jar",
-      "sha256": "5b88a380289621bf02166c1332f8370e3d1cef3fc92d91bed385e90a96877f7a",
-      "size": 108672
-    },
-    {
       "name": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "path": "sound-physics-remastered-forge-1.20.1-1.5.1.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/sound-physics-remastered-forge-1.20.1-1.5.1.jar",
@@ -2636,6 +2650,13 @@
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/supplementaries-1.20-3.1.41.jar",
       "sha256": "592eaac4d90b4d75516749db6bcc1303866af6007be3ce24b9a85f19afeef70a",
       "size": 13650491
+    },
+    {
+      "name": "uilib-0.3.6-forge.jar",
+      "path": "uilib-0.3.6-forge.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/uilib-0.3.6-forge.jar",
+      "sha256": "30c909bee218458756ec8fe54d66eae2862d2735900b9d10c3c443f973f098ce",
+      "size": 204649
     },
     {
       "name": "visuality-forge-2.0.2.jar",
