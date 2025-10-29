@@ -3,7 +3,7 @@
   "minecraft_version": "1.20.1",
   "forge_version": "1.20.1-47.3.0",
   "modpack_name": "Cignopack",
-  "last_updated": "2025-10-29 09:07:18",
+  "last_updated": "2025-10-29 09:29:29",
   "root": [
     {
       "name": "options.txt",
@@ -2652,11 +2652,25 @@
       "size": 13650491
     },
     {
+      "name": "treeharvester-1.20.1-9.1.jar",
+      "path": "treeharvester-1.20.1-9.1.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/treeharvester-1.20.1-9.1.jar",
+      "sha256": "97632ffc055a41970ad3d3390ea726d6629636abe7c07321a0eb94cfea21d186",
+      "size": 82743
+    },
+    {
       "name": "uilib-0.3.6-forge.jar",
       "path": "uilib-0.3.6-forge.jar",
       "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/uilib-0.3.6-forge.jar",
       "sha256": "30c909bee218458756ec8fe54d66eae2862d2735900b9d10c3c443f973f098ce",
       "size": 204649
+    },
+    {
+      "name": "veinminer-1.1.0.jar",
+      "path": "veinminer-1.1.0.jar",
+      "url": "https://raw.githubusercontent.com/Baloreg/Cignopack/main/mods/veinminer-1.1.0.jar",
+      "sha256": "df32efdf0b1b963a04fd4503997049d0b2d645099d0156f7dfd65d0c61266cde",
+      "size": 46917
     },
     {
       "name": "visuality-forge-2.0.2.jar",
