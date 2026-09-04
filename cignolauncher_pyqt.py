@@ -1417,15 +1417,6 @@ class MinecraftLauncher(QMainWindow):
         self.all_versions = versions
         if self.first_run_wizard is not None:
             self.first_run_wizard.set_available_versions(versions, preferred_version=latest_release)
-        if self.first_run and latest_release:
-            self.selected_version = latest_release
-            active_instance = self.instance_manager.get_current_instance()
-            if active_instance and self.first_run_wizard is None:
-                self.instance_manager.update_instance(active_instance["id"], version=latest_release)
-            if self.first_run_wizard is None:
-                self.settings["last_version"] = latest_release
-                self.save_settings()
-                self.first_run = False
         self.update_installed_versions_cache()
         self.populate_version_dropdown()
         self.action_status_label.setText("Pronto per il lancio")
@@ -1447,7 +1438,10 @@ class MinecraftLauncher(QMainWindow):
 
         # Identifica l'ultima versione ufficiale release
         latest_official = self.get_latest_official_release()
-        target_version = self.selected_version or latest_official
+        active_instance = self.instance_manager.get_current_instance()
+        target_version = (
+            active_instance.get("version") if active_instance else None
+        ) or self.selected_version or latest_official
 
         idx_to_select = 0
         added_count = 0
@@ -1506,18 +1500,19 @@ class MinecraftLauncher(QMainWindow):
 
     def update_version_status_ui(self):
         """Aggiorna il pill di stato e il bottone GIOCA / INSTALLA."""
-        if not self.selected_version:
+        active_inst = self.instance_manager.get_current_instance()
+        active_version = active_inst.get("version") if active_inst else self.selected_version
+        if not active_version:
             self.version_status_pill.setText("Nessuna versione selezionata")
             self.version_status_pill.setStyleSheet("background-color: #1f232d; color: #94a3b8;")
             self.main_action_btn.setEnabled(False)
             return
 
-        is_installed = self.selected_version in self.installed_version_ids
-        active_inst = self.instance_manager.get_current_instance()
+        is_installed = active_version in self.installed_version_ids
         inst_label = f" ({active_inst.get('name')})" if active_inst else ""
 
         if is_installed:
-            self.version_status_pill.setText(f"{self.selected_version} è installata e pronta")
+            self.version_status_pill.setText(f"{active_version} è installata e pronta")
             self.version_status_pill.setStyleSheet("background-color: #064e3b; color: #34d399; border: 1px solid #059669;")
             self.main_action_btn.setText(f"GIOCA{inst_label}")
             self.main_action_btn.setStyleSheet("""
@@ -1531,7 +1526,7 @@ class MinecraftLauncher(QMainWindow):
             """)
             self.main_action_btn.setEnabled(self.game_process is None)
         else:
-            self.version_status_pill.setText(f"{self.selected_version} non è ancora installata")
+            self.version_status_pill.setText(f"{active_version} non è ancora installata")
             self.version_status_pill.setStyleSheet("background-color: #1e3a8a; color: #93c5fd; border: 1px solid #2563eb;")
             self.main_action_btn.setText("INSTALLA")
             self.main_action_btn.setStyleSheet("""
@@ -1548,10 +1543,12 @@ class MinecraftLauncher(QMainWindow):
     # --- INSTALLAZIONE E LANCIO GIOCO ---
 
     def handle_main_action(self):
-        if not self.selected_version:
+        active_inst = self.instance_manager.get_current_instance()
+        version_id = active_inst.get("version") if active_inst else self.selected_version
+        if not version_id:
             return
 
-        is_installed = self.selected_version in self.installed_version_ids
+        is_installed = version_id in self.installed_version_ids
         if is_installed:
             self.launch_game()
         else:
@@ -1559,7 +1556,10 @@ class MinecraftLauncher(QMainWindow):
 
     def install_selected_version(self):
         """Scarica e installa la versione Minecraft selezionata."""
-        version_id = self.selected_version
+        active_inst = self.instance_manager.get_current_instance()
+        version_id = active_inst.get("version") if active_inst else self.selected_version
+        if not version_id:
+            return
         self.log(f"Avvio installazione di Minecraft {version_id}...", "INFO")
         self.action_status_label.setText(f"Installazione di {version_id} in corso...")
         self.progress_bar.setValue(0)
