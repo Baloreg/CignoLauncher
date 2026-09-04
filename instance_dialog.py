@@ -7,8 +7,15 @@ from PyQt6.QtWidgets import (
     QListWidget, QListWidgetItem, QStackedWidget, QWidget, QSizePolicy
 )
 from PyQt6.QtGui import QIcon, QFont, QColor
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QSize
 from ui_controls import MaterialComboBox
+
+
+def set_svg_icon(button, asset_name, size=18):
+    icon_path = os.path.join(os.path.dirname(__file__), "assets", asset_name)
+    if os.path.exists(icon_path):
+        button.setIcon(QIcon(icon_path))
+        button.setIconSize(QSize(size, size))
 
 class InstanceEditDialog(QDialog):
     """Dialogo per creare o modificare una singola istanza di Minecraft."""
@@ -298,7 +305,8 @@ class InstanceManagerDialog(QDialog):
         self.instances_list.itemSelectionChanged.connect(self.on_selection_changed)
         left_col.addWidget(self.instances_list, 1)
 
-        new_btn = QPushButton("➕  Crea Nuova Istanza")
+        new_btn = QPushButton("Crea Nuova Istanza")
+        set_svg_icon(new_btn, "action_add.svg")
         new_btn.setObjectName("NewInstanceButton")
         new_btn.setFixedHeight(40)
         new_btn.clicked.connect(self.create_instance)
@@ -336,19 +344,23 @@ class InstanceManagerDialog(QDialog):
         btn_actions_layout = QVBoxLayout()
         btn_actions_layout.setSpacing(8)
 
-        self.select_active_btn = QPushButton("✓  Imposta come Attiva")
+        self.select_active_btn = QPushButton("Imposta come Attiva")
+        set_svg_icon(self.select_active_btn, "action_check.svg")
         self.select_active_btn.setObjectName("PrimaryActionButton")
         self.select_active_btn.clicked.connect(self.set_active_instance)
 
-        self.edit_btn = QPushButton("✏️  Modifica Istanza")
+        self.edit_btn = QPushButton("Modifica Istanza")
+        set_svg_icon(self.edit_btn, "action_edit.svg")
         self.edit_btn.setObjectName("ActionBtn")
         self.edit_btn.clicked.connect(self.edit_instance)
 
-        self.open_folder_btn = QPushButton("📁  Apri Cartella Salvataggi")
+        self.open_folder_btn = QPushButton("Apri Cartella Salvataggi")
+        set_svg_icon(self.open_folder_btn, "action_folder.svg")
         self.open_folder_btn.setObjectName("ActionBtn")
         self.open_folder_btn.clicked.connect(self.open_instance_folder)
 
-        self.delete_btn = QPushButton("🗑️  Elimina Istanza")
+        self.delete_btn = QPushButton("Elimina Istanza")
+        set_svg_icon(self.delete_btn, "action_delete.svg")
         self.delete_btn.setObjectName("DeleteBtn")
         self.delete_btn.clicked.connect(self.delete_instance)
 
@@ -467,7 +479,7 @@ class InstanceManagerDialog(QDialog):
             is_active = (inst_id == curr_id)
 
             tag = " [ATTIVA]" if is_active else ""
-            item = QListWidgetItem(f"📦  {name}  •  {ver}{tag}")
+            item = QListWidgetItem(f"{name}  •  {ver}{tag}")
             item.setData(Qt.ItemDataRole.UserRole, inst_id)
             self.instances_list.addItem(item)
 

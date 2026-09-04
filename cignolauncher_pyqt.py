@@ -51,6 +51,13 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+
+def set_svg_icon(button, asset_name, size=18):
+    icon_path = resource_path(f"assets/{asset_name}")
+    if os.path.exists(icon_path):
+        button.setIcon(QIcon(icon_path))
+        button.setIconSize(QSize(size, size))
+
 if sys.platform == 'win32':
     _original_Popen = subprocess.Popen
     def _new_Popen(*args, **kwargs):
@@ -437,17 +444,19 @@ class MinecraftLauncher(QMainWindow):
         inst_layout.setSpacing(12)
 
         inst_top_row = QHBoxLayout()
-        inst_card_header = QLabel("📦  Istanza Attiva")
+        inst_card_header = QLabel("Istanza Attiva")
         inst_card_header.setObjectName("SectionHeader")
         inst_top_row.addWidget(inst_card_header)
         inst_top_row.addStretch()
 
-        manage_inst_btn = QPushButton("⚙️ Gestisci Istanze")
+        manage_inst_btn = QPushButton("Gestisci Istanze")
+        set_svg_icon(manage_inst_btn, "nav_settings.svg")
         manage_inst_btn.setObjectName("SecondaryButton")
         manage_inst_btn.clicked.connect(self.open_instances_dialog)
         inst_top_row.addWidget(manage_inst_btn)
 
-        new_inst_btn = QPushButton("➕ Nuova Istanza")
+        new_inst_btn = QPushButton("Nuova Istanza")
+        set_svg_icon(new_inst_btn, "action_add.svg")
         new_inst_btn.setObjectName("SecondaryButton")
         new_inst_btn.clicked.connect(self.create_new_instance_dialog)
         inst_top_row.addWidget(new_inst_btn)
@@ -462,7 +471,8 @@ class MinecraftLauncher(QMainWindow):
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         inst_select_row.addWidget(self.instance_combo, 1)
 
-        open_dir_btn = QPushButton("📁 Cartella Salvataggi")
+        open_dir_btn = QPushButton("Cartella Salvataggi")
+        set_svg_icon(open_dir_btn, "action_folder.svg")
         open_dir_btn.setObjectName("SecondaryButton")
         open_dir_btn.setFixedHeight(34)
         open_dir_btn.clicked.connect(self.open_active_instance_folder)
@@ -504,7 +514,8 @@ class MinecraftLauncher(QMainWindow):
         self.version_combo.currentIndexChanged.connect(self.on_version_selected)
         select_row.addWidget(self.version_combo, 1)
 
-        self.refresh_ver_btn = QPushButton("🔄 Aggiorna Lista")
+        self.refresh_ver_btn = QPushButton("Aggiorna Lista")
+        set_svg_icon(self.refresh_ver_btn, "action_refresh.svg")
         self.refresh_ver_btn.setObjectName("SecondaryButton")
         self.refresh_ver_btn.setFixedHeight(34)
         self.refresh_ver_btn.clicked.connect(lambda: self.refresh_version_list(force_network=True))
@@ -554,7 +565,8 @@ class MinecraftLauncher(QMainWindow):
         btn_row = QHBoxLayout()
         btn_row.addStretch()
 
-        self.main_action_btn = QPushButton("▶  GIOCA")
+        self.main_action_btn = QPushButton("GIOCA")
+        set_svg_icon(self.main_action_btn, "action_play.svg", 20)
         self.main_action_btn.setObjectName("PlayButton")
         self.main_action_btn.setFixedSize(220, 50)
         self.main_action_btn.clicked.connect(self.handle_main_action)
@@ -577,7 +589,8 @@ class MinecraftLauncher(QMainWindow):
         top_row.addWidget(header)
         top_row.addStretch()
 
-        new_inst_btn = QPushButton("➕  Crea Nuova Istanza")
+        new_inst_btn = QPushButton("Crea Nuova Istanza")
+        set_svg_icon(new_inst_btn, "action_add.svg")
         new_inst_btn.setObjectName("PrimaryActionButton")
         new_inst_btn.clicked.connect(self.create_new_instance_dialog)
         top_row.addWidget(new_inst_btn)
@@ -613,19 +626,23 @@ class MinecraftLauncher(QMainWindow):
         panel_layout.addWidget(self.inst_page_path)
         panel_layout.addStretch()
 
-        self.btn_page_activate = QPushButton("✓  Imposta come Attiva")
+        self.btn_page_activate = QPushButton("Imposta come Attiva")
+        set_svg_icon(self.btn_page_activate, "action_check.svg")
         self.btn_page_activate.setObjectName("PrimaryActionButton")
         self.btn_page_activate.clicked.connect(self.activate_selected_instance_from_page)
 
-        self.btn_page_edit = QPushButton("✏️  Modifica Istanza")
+        self.btn_page_edit = QPushButton("Modifica Istanza")
+        set_svg_icon(self.btn_page_edit, "action_edit.svg")
         self.btn_page_edit.setObjectName("SecondaryButton")
         self.btn_page_edit.clicked.connect(self.edit_selected_instance_from_page)
 
-        self.btn_page_folder = QPushButton("📁  Apri Cartella Salvataggi")
+        self.btn_page_folder = QPushButton("Apri Cartella Salvataggi")
+        set_svg_icon(self.btn_page_folder, "action_folder.svg")
         self.btn_page_folder.setObjectName("SecondaryButton")
         self.btn_page_folder.clicked.connect(self.open_selected_instance_folder_from_page)
 
-        self.btn_page_delete = QPushButton("🗑️  Elimina Istanza")
+        self.btn_page_delete = QPushButton("Elimina Istanza")
+        set_svg_icon(self.btn_page_delete, "action_delete.svg")
         self.btn_page_delete.setObjectName("DeleteButton")
         self.btn_page_delete.clicked.connect(self.delete_selected_instance_from_page)
 
@@ -676,7 +693,8 @@ class MinecraftLauncher(QMainWindow):
 
         card_layout.addWidget(self.acc_display_widget)
 
-        manage_btn = QPushButton("🔑  Gestisci o Aggiungi Account")
+        manage_btn = QPushButton("Gestisci o Aggiungi Account")
+        set_svg_icon(manage_btn, "nav_account.svg")
         manage_btn.setObjectName("SecondaryButton")
         manage_btn.setFixedHeight(44)
         manage_btn.clicked.connect(self.show_account_dialog)
@@ -769,7 +787,8 @@ class MinecraftLauncher(QMainWindow):
         dir_path_display.setObjectName("DirPathLabel")
         dir_path_display.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
 
-        open_folder_btn = QPushButton("📁  Apri Cartella")
+        open_folder_btn = QPushButton("Apri Cartella")
+        set_svg_icon(open_folder_btn, "action_folder.svg")
         open_folder_btn.setObjectName("SecondaryButton")
         open_folder_btn.clicked.connect(self.open_minecraft_folder)
 
@@ -792,11 +811,13 @@ class MinecraftLauncher(QMainWindow):
         header_row.addWidget(title)
         header_row.addStretch()
 
-        copy_btn = QPushButton("📋  Copia Log")
+        copy_btn = QPushButton("Copia Log")
+        set_svg_icon(copy_btn, "action_copy.svg")
         copy_btn.setObjectName("SecondaryButton")
         copy_btn.clicked.connect(self.copy_log_to_clipboard)
 
-        clear_btn = QPushButton("🗑️  Pulisci")
+        clear_btn = QPushButton("Pulisci")
+        set_svg_icon(clear_btn, "action_delete.svg")
         clear_btn.setObjectName("SecondaryButton")
         clear_btn.clicked.connect(self.clear_log)
 
@@ -1280,7 +1301,7 @@ class MinecraftLauncher(QMainWindow):
             ver = inst.get("version", "Vanilla")
             is_active = (inst_id == curr_id)
             tag = "  [ATTIVA]" if is_active else ""
-            item = QListWidgetItem(f"📦  {name}  •  {ver}{tag}")
+            item = QListWidgetItem(f"{name}  •  {ver}{tag}")
             item.setData(Qt.ItemDataRole.UserRole, inst_id)
             self.instances_page_list.addItem(item)
             if is_active:
@@ -1534,9 +1555,9 @@ class MinecraftLauncher(QMainWindow):
         inst_label = f" ({active_inst.get('name')})" if active_inst else ""
 
         if is_installed:
-            self.version_status_pill.setText(f"✓ {self.selected_version} è installata e pronta")
+            self.version_status_pill.setText(f"{self.selected_version} è installata e pronta")
             self.version_status_pill.setStyleSheet("background-color: #064e3b; color: #34d399; border: 1px solid #059669;")
-            self.main_action_btn.setText(f"▶  GIOCA{inst_label}")
+            self.main_action_btn.setText(f"GIOCA{inst_label}")
             self.main_action_btn.setStyleSheet("""
                 QPushButton#PlayButton {
                     background-color: #10b981;
@@ -1548,9 +1569,9 @@ class MinecraftLauncher(QMainWindow):
             """)
             self.main_action_btn.setEnabled(self.game_process is None)
         else:
-            self.version_status_pill.setText(f"⬇ {self.selected_version} non è ancora installata")
+            self.version_status_pill.setText(f"{self.selected_version} non è ancora installata")
             self.version_status_pill.setStyleSheet("background-color: #1e3a8a; color: #93c5fd; border: 1px solid #2563eb;")
-            self.main_action_btn.setText("⬇  INSTALLA")
+            self.main_action_btn.setText("INSTALLA")
             self.main_action_btn.setStyleSheet("""
                 QPushButton#PlayButton {
                     background-color: #3b82f6;
@@ -1687,7 +1708,7 @@ class MinecraftLauncher(QMainWindow):
             self.log("Comando di avvio generato con successo. Esecuzione del processo...", "SUCCESS")
             self.action_status_label.setText(f"{active_inst.get('name')} in esecuzione")
             self.main_action_btn.setEnabled(False)
-            self.main_action_btn.setText("■ IN ESECUZIONE")
+            self.main_action_btn.setText("IN ESECUZIONE")
 
             self.instance_manager.mark_played(active_inst["id"])
 
