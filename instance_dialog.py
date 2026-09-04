@@ -3,7 +3,7 @@ import sys
 import subprocess
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,
-    QLineEdit, QComboBox, QSpinBox, QSlider, QFrame, QMessageBox,
+    QLineEdit, QComboBox, QSpinBox, QSlider, QFrame, QMessageBox, QCheckBox,
     QListWidget, QListWidgetItem, QStackedWidget, QWidget, QSizePolicy
 )
 from PyQt6.QtGui import QIcon, QFont, QColor
@@ -63,24 +63,15 @@ class InstanceEditDialog(QDialog):
         self.version_combo = MaterialComboBox()
         self.version_combo.setObjectName("VersionSelector")
 
-        current_ver = self.instance.get("version", "") if is_edit else ""
-        selected_idx = 0
-        added = 0
-
-        for v in self.available_versions:
-            v_id = v.get("id") if isinstance(v, dict) else str(v)
-            v_type = v.get("type", "release") if isinstance(v, dict) else "release"
-            display_text = f"{v_id} ({v_type.capitalize()})"
-            self.version_combo.addItem(display_text, v_id)
-            if v_id == current_ver:
-                selected_idx = added
-            added += 1
-
-        if self.version_combo.count() > 0:
-            self.version_combo.setCurrentIndex(selected_idx)
-
         main_layout.addWidget(version_label)
         main_layout.addWidget(self.version_combo)
+
+        self.snapshot_checkbox = QCheckBox("Mostra Snapshot e versioni storiche")
+        self.snapshot_checkbox.setChecked(False)
+        self.snapshot_checkbox.toggled.connect(self.populate_versions)
+        main_layout.addWidget(self.snapshot_checkbox)
+        self.current_instance_version = self.instance.get("version", "") if is_edit else ""
+        self.populate_versions()
 
         # 3. RAM Allocata (GB)
         ram_label = QLabel("RAM Allocata per questa istanza:")
@@ -134,6 +125,24 @@ class InstanceEditDialog(QDialog):
         btn_row.addWidget(save_btn)
 
         main_layout.addLayout(btn_row)
+
+    def populate_versions(self):
+        current_version = self.version_combo.currentData() or self.current_instance_version
+        show_snapshots = self.snapshot_checkbox.isChecked()
+        self.version_combo.blockSignals(True)
+        self.version_combo.clear()
+        for version in self.available_versions:
+            version_id = version.get("id", "") if isinstance(version, dict) else str(version)
+            version_type = version.get("type", "release") if isinstance(version, dict) else "release"
+            if not show_snapshots and version_type != "release" and version_id != self.current_instance_version:
+                continue
+            label = f"{version_id}   •   {version_type.capitalize()}"
+            icon_path = os.path.join(os.path.dirname(__file__), "assets", "nav_versions.svg")
+            self.version_combo.addItem(QIcon(icon_path), label, version_id)
+        selected_index = self.version_combo.findData(current_version)
+        if selected_index >= 0:
+            self.version_combo.setCurrentIndex(selected_index)
+        self.version_combo.blockSignals(False)
 
     def apply_stylesheet(self):
         self.setStyleSheet("""
@@ -478,9 +487,10 @@ class InstanceManagerDialog(QDialog):
             ver = inst.get("version", "Vanilla")
             is_active = (inst_id == curr_id)
 
-            tag = " [ATTIVA]" if is_active else ""
-            item = QListWidgetItem(f"{name}  •  {ver}{tag}")
+            item = QListWidgetItem(f"{name}  •  {ver}")
             item.setData(Qt.ItemDataRole.UserRole, inst_id)
+            if is_active:
+                item.setIcon(QIcon(os.path.join(os.path.dirname(__file__), "assets", "action_check.svg")))
             self.instances_list.addItem(item)
 
             if is_active:

@@ -1262,9 +1262,10 @@ class MinecraftLauncher(QMainWindow):
             name = inst.get("name", "Istanza")
             ver = inst.get("version", "Vanilla")
             is_active = (inst_id == curr_id)
-            tag = "  [ATTIVA]" if is_active else ""
-            item = QListWidgetItem(f"{name}  •  {ver}{tag}")
+            item = QListWidgetItem(f"{name}  •  {ver}")
             item.setData(Qt.ItemDataRole.UserRole, inst_id)
+            if is_active:
+                item.setIcon(QIcon(resource_path("assets/action_check.svg")))
             self.instances_page_list.addItem(item)
             if is_active:
                 self.instances_page_list.setCurrentItem(item)

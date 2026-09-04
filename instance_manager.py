@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import uuid
 import shutil
 from datetime import datetime
@@ -80,7 +81,10 @@ class InstanceManager:
         """Crea una nuova istanza con directory dedicata."""
         clean_name = name.strip() or f"Minecraft {version}"
         instance_id = f"inst_{uuid.uuid4().hex[:8]}"
-        instance_dir = os.path.join(self.instances_folder, instance_id)
+        folder_name = re.sub(r"[^A-Za-z0-9._ -]+", "", clean_name).strip(" .") or "Minecraft"
+        instance_dir = os.path.join(self.instances_folder, folder_name)
+        if os.path.exists(instance_dir):
+            instance_dir = os.path.join(self.instances_folder, f"{folder_name} ({instance_id[-4:]})")
         
         # Crea le cartelle isolate dell'istanza (per saves, screenshots, options)
         os.makedirs(instance_dir, exist_ok=True)
