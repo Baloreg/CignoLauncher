@@ -55,7 +55,8 @@ Consente di selezionare, scaricare con un click e avviare qualunque versione uff
 
 3. **Installa le dipendenze richieste**:
    ```bash
-   pip install -r requirements.txt
+   .venv/bin/python -m pip install -r requirements.txt
+   # In alternativa, dopo `source .venv/bin/activate`: pip install -r requirements.txt
    ```
 
 ---
@@ -64,11 +65,12 @@ Consente di selezionare, scaricare con un click e avviare qualunque versione uff
 
 Puoi avviare il launcher eseguendo:
 ```bash
-python3 main.py
+.venv/bin/python main.py       # Linux/macOS
+# .venv\\Scripts\\python.exe main.py  # Windows PowerShell
 ```
 oppure:
 ```bash
-python3 cignolauncher_pyqt.py
+.venv/bin/python cignolauncher_pyqt.py
 ```
 
 ---
