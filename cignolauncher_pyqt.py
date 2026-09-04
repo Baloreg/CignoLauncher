@@ -441,7 +441,7 @@ class MinecraftLauncher(QMainWindow):
         inst_layout.addLayout(inst_top_row)
 
         inst_select_row = QHBoxLayout()
-        self.instance_combo = MaterialComboBox()
+        self.instance_combo = MaterialComboBox(fit_popup_to_field=True)
         self.instance_combo.setObjectName("InstanceComboBox")
         self.instance_combo.setMinimumHeight(32)
         self.instance_combo.setMaxVisibleItems(8)
