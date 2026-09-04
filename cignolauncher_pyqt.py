@@ -22,6 +22,7 @@ from PyQt6.QtCore import QObject, QThread, pyqtSignal, Qt, pyqtSlot, QEvent, QSi
 from account_manager import AccountManager
 from instance_manager import InstanceManager
 from instance_dialog import InstanceEditDialog, InstanceManagerDialog
+from first_run_wizard import FirstRunWizard
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
 from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap
 
@@ -106,6 +107,10 @@ class MinecraftLauncher(QMainWindow):
         self.setup_paths()
         self.load_settings()
         self.first_run = not bool(self.settings.get("last_version"))
+        self.onboarding_pending = (
+            not bool(self.settings.get("onboarding_completed"))
+            and not bool(self.settings.get("last_version"))
+        )
         self.account_manager = AccountManager(self.launcher_directory)
         self.instance_manager = InstanceManager(self.launcher_directory)
 
@@ -140,7 +145,29 @@ class MinecraftLauncher(QMainWindow):
         self.refresh_version_list(initial=True)
 
         # Se non c'è nessun account collegato, apri login dialog all'avvio
-        QTimer.singleShot(250, self.check_account_on_startup)
+        QTimer.singleShot(250, self.start_startup_flow)
+
+    def start_startup_flow(self):
+        if self.onboarding_pending:
+            active_instance = self.instance_manager.get_current_instance()
+            wizard = FirstRunWizard(
+                self,
+                self.get_latest_official_release(),
+                active_instance or {},
+                resource_path("assets/logo.png"),
+            )
+            if wizard.exec() == FirstRunWizard.DialogCode.Accepted and active_instance:
+                self.instance_manager.update_instance(
+                    active_instance["id"],
+                    name=wizard.instance_name,
+                    version=wizard.instance_version,
+                    ram_gb=wizard.instance_ram,
+                )
+                self.settings["onboarding_completed"] = True
+                self.save_settings()
+                self.refresh_instances_selector()
+            self.onboarding_pending = False
+        self.check_account_on_startup()
 
     def get_latest_official_release(self):
         """Identifica l'ultima versione Release ufficiale Mojang disponibile."""
@@ -181,7 +208,8 @@ class MinecraftLauncher(QMainWindow):
             "show_snapshots": False,
             "last_version": "",
             "custom_java": "",
-            "jvm_args": ""
+            "jvm_args": "",
+            "onboarding_completed": False
         }
         if os.path.exists(self.settings_file):
             try:
