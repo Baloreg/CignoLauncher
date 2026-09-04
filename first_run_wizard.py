@@ -87,7 +87,7 @@ class FirstRunWizard(QWizard):
         layout.addStretch()
         return page
 
-    def set_available_versions(self, versions):
+    def set_available_versions(self, versions, preferred_version=None):
         current_version = self.version_combo.currentData() if self.version_combo.count() else self.default_version
         self.version_combo.blockSignals(True)
         self.version_combo.clear()
@@ -103,7 +103,9 @@ class FirstRunWizard(QWizard):
             entries.insert(0, self.default_version)
         for version_id in entries:
             self.version_combo.addItem(version_id, version_id)
-        target = current_version if current_version in entries else self.default_version
+        target = preferred_version or current_version
+        if target not in entries:
+            target = self.default_version
         self.version_combo.setCurrentIndex(max(0, self.version_combo.findData(target)))
         self.version_combo.blockSignals(False)
 
@@ -168,14 +170,14 @@ class FirstRunWizard(QWizard):
                 border: 2px solid #4f8cff;
             }
             QComboBox::drop-down {
-                width: 30px;
+                width: 22px;
                 border: none;
-                border-left: 1px solid #354052;
+                background: transparent;
             }
             QComboBox::down-arrow {
                 image: url(__DOWN_ARROW__);
-                width: 12px;
-                height: 8px;
+                width: 10px;
+                height: 6px;
             }
             QSpinBox::up-button, QSpinBox::down-button {
                 width: 20px;

@@ -2,6 +2,11 @@ from PyQt6.QtCore import QPoint, Qt
 from PyQt6.QtWidgets import QApplication, QComboBox, QListView
 
 
+class NoWheelListView(QListView):
+    def wheelEvent(self, event):
+        event.ignore()
+
+
 class MaterialComboBox(QComboBox):
     """Combo box with a compact popup anchored below the field."""
 
@@ -10,11 +15,15 @@ class MaterialComboBox(QComboBox):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setMinimumHeight(32)
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
-        view = QListView()
+        view = NoWheelListView()
         view.setUniformItemSizes(True)
         view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setView(view)
+
+    def wheelEvent(self, event):
+        event.ignore()
 
     def showPopup(self):
         super().showPopup()

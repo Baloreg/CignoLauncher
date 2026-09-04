@@ -155,8 +155,18 @@ class InstanceEditDialog(QDialog):
                 color: #ffffff;
                 border: 1px solid #334155;
                 border-radius: 6px;
-                padding: 8px 12px;
-                font-size: 10pt;
+                padding: 4px 26px 4px 10px;
+                font-size: 9pt;
+            }
+            QComboBox::drop-down {
+                width: 22px;
+                border: none;
+                background: transparent;
+            }
+            QComboBox::down-arrow {
+                image: url(assets/chevron_down.svg);
+                width: 10px;
+                height: 6px;
             }
             QComboBox QAbstractItemView {
                 min-width: 240px;

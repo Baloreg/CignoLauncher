@@ -121,7 +121,7 @@ class MinecraftLauncher(QMainWindow):
         self.first_run_wizard = None
 
         # Inizializzazione versioni con default
-        self.all_versions = list(DEFAULT_POPULAR_VERSIONS)
+        self.all_versions = self.load_cached_versions()
         self.installed_version_ids = set()
 
         # Al primo avvio la versione selezionata è SEMPRE l'ultima release ufficiale
@@ -169,8 +169,10 @@ class MinecraftLauncher(QMainWindow):
                     ram_gb=wizard.instance_ram,
                 )
                 self.settings["onboarding_completed"] = True
+                self.settings["last_version"] = wizard.instance_version
                 self.save_settings()
                 self.refresh_instances_selector()
+                self.first_run = False
             self.onboarding_pending = False
             self.first_run_wizard = None
             self.show()
@@ -184,6 +186,17 @@ class MinecraftLauncher(QMainWindow):
             elif isinstance(v, str) and not ("-" in v or "w" in v or "pre" in v or "rc" in v):
                 return v
         return "1.21.4"
+
+    def load_cached_versions(self):
+        if os.path.exists(self.versions_cache_file):
+            try:
+                with open(self.versions_cache_file, "r", encoding="utf-8") as handle:
+                    cached = json.load(handle)
+                if isinstance(cached, list) and cached:
+                    return cached
+            except Exception:
+                pass
+        return list(DEFAULT_POPULAR_VERSIONS)
 
     def setup_paths(self):
         """Inizializza i percorsi di gioco e configurazione."""
@@ -425,7 +438,7 @@ class MinecraftLauncher(QMainWindow):
         inst_select_row = QHBoxLayout()
         self.instance_combo = MaterialComboBox()
         self.instance_combo.setObjectName("InstanceComboBox")
-        self.instance_combo.setMinimumHeight(34)
+        self.instance_combo.setMinimumHeight(32)
         self.instance_combo.setMaxVisibleItems(8)
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         inst_select_row.addWidget(self.instance_combo, 1)
@@ -464,7 +477,7 @@ class MinecraftLauncher(QMainWindow):
 
         self.version_combo = MaterialComboBox()
         self.version_combo.setObjectName("VersionComboBox")
-        self.version_combo.setMinimumHeight(34)
+        self.version_combo.setMinimumHeight(32)
         self.version_combo.setMaxVisibleItems(8)
         self.version_combo.setMinimumContentsLength(24)
         self.version_combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
@@ -896,20 +909,19 @@ class MinecraftLauncher(QMainWindow):
                 color: #ffffff;
                 border: 1px solid #334155;
                 border-radius: 8px;
-                padding: 6px 34px 6px 12px;
-                font-size: 10pt;
+                padding: 3px 26px 3px 10px;
+                font-size: 9pt;
                 font-weight: 600;
             }
             QComboBox::drop-down {
-                width: 28px;
+                width: 22px;
                 border: none;
-                border-left: 1px solid #334155;
-                background-color: #1a1d26;
+                background-color: transparent;
             }
             QComboBox::down-arrow {
                 image: url(__DOWN_ARROW__);
-                width: 12px;
-                height: 8px;
+                width: 10px;
+                height: 6px;
             }
             QComboBox:focus {
                 border: 1px solid #3b82f6;
@@ -1402,15 +1414,16 @@ class MinecraftLauncher(QMainWindow):
     def on_versions_loaded(self, versions, latest_release):
         self.all_versions = versions
         if self.first_run_wizard is not None:
-            self.first_run_wizard.set_available_versions(versions)
+            self.first_run_wizard.set_available_versions(versions, preferred_version=latest_release)
         if self.first_run and latest_release:
             self.selected_version = latest_release
             active_instance = self.instance_manager.get_current_instance()
-            if active_instance:
+            if active_instance and self.first_run_wizard is None:
                 self.instance_manager.update_instance(active_instance["id"], version=latest_release)
-            self.settings["last_version"] = latest_release
-            self.save_settings()
-            self.first_run = False
+            if self.first_run_wizard is None:
+                self.settings["last_version"] = latest_release
+                self.save_settings()
+                self.first_run = False
         self.update_installed_versions_cache()
         self.populate_version_dropdown()
         self.action_status_label.setText("Pronto per il lancio")
