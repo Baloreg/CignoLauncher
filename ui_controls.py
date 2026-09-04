@@ -9,9 +9,10 @@ class MaterialComboBox(QComboBox):
     POPUP_HEIGHT = 220
     MAX_VISIBLE_ITEMS = 8
 
-    def __init__(self, parent=None, fit_popup_to_field=False):
+    def __init__(self, parent=None, fit_popup_to_field=False, popup_row_height=28):
         super().__init__(parent)
         self.fit_popup_to_field = fit_popup_to_field
+        self.popup_row_height = popup_row_height
         self.popup = None
         self.popup_list = None
         self.setMinimumHeight(32)
@@ -50,7 +51,7 @@ class MaterialComboBox(QComboBox):
             self.popup_list.addItem(item)
         self.popup_list.setCurrentRow(self.currentIndex())
 
-        row_height = max(self.popup_list.sizeHintForRow(0), 28)
+        row_height = max(self.popup_list.sizeHintForRow(0), self.popup_row_height)
         visible_rows = min(max(self.count(), 1), self.MAX_VISIBLE_ITEMS)
         popup_height = min(self.POPUP_HEIGHT, visible_rows * row_height + 2)
         if self.fit_popup_to_field:
