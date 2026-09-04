@@ -246,6 +246,7 @@ class FirstRunWizard(QWizard):
                 selection-background-color: #3578e5;
                 selection-color: white;
                 outline: none;
+                show-decoration-selected: 1;
             }
             QTabWidget#OnboardingTabs::pane {
                 background: #1b202a;

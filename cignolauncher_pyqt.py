@@ -940,6 +940,7 @@ class MinecraftLauncher(QMainWindow):
                 padding: 4px;
                 outline: none;
                 min-width: 260px;
+                show-decoration-selected: 1;
             }
             QComboBox QAbstractItemView::item {
                 min-height: 30px;

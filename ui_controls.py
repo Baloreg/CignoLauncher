@@ -21,6 +21,8 @@ class MaterialComboBox(QComboBox):
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
         view = PopupListView()
         view.setUniformItemSizes(True)
+        view.setTextElideMode(Qt.TextElideMode.ElideRight)
+        view.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setView(view)
 
