@@ -5,6 +5,8 @@ from PyQt6.QtWidgets import (
     QLabel,
     QLineEdit,
     QSpinBox,
+    QTabWidget,
+    QWidget,
     QVBoxLayout,
     QWizard,
     QWizardPage,
@@ -34,6 +36,7 @@ class FirstRunWizard(QWizard):
 
         self.addPage(self.create_welcome_page())
         self.addPage(self.create_instance_page())
+        self.addPage(self.create_account_page())
         self.addPage(self.create_ready_page())
         self.setStyleSheet(self.stylesheet(self.arrow_path, self.up_arrow_path))
 
@@ -77,11 +80,6 @@ class FirstRunWizard(QWizard):
         self.set_available_versions(self.available_versions)
         form.addRow("Versione", self.version_combo)
 
-        self.profile_combo = MaterialComboBox()
-        self.profile_combo.addItem("Online", "online")
-        self.profile_combo.addItem("Offline", "offline")
-        form.addRow("Profilo", self.profile_combo)
-
         self.ram_spinbox = QSpinBox()
         self.ram_spinbox.setRange(2, 24)
         self.ram_spinbox.setValue(int(self.instance.get("ram_gb", 4)))
@@ -89,6 +87,43 @@ class FirstRunWizard(QWizard):
         form.addRow("Memoria dedicata", self.ram_spinbox)
 
         layout.addLayout(form)
+        layout.addStretch()
+        return page
+
+    def create_account_page(self):
+        page = QWizardPage()
+        page.setTitle("Configura il tuo account")
+        page.setSubTitle("Scegli come vuoi accedere a Minecraft.")
+        layout = QVBoxLayout(page)
+        layout.setSpacing(10)
+
+        self.account_tabs = QTabWidget()
+        self.account_tabs.setObjectName("OnboardingTabs")
+
+        microsoft_tab = QWidget()
+        microsoft_layout = QVBoxLayout(microsoft_tab)
+        microsoft_text = QLabel(
+            "Accedi con Microsoft per utilizzare i server autenticati e sincronizzare "
+            "il tuo profilo Xbox. L'accesso verrà completato dopo la guida."
+        )
+        microsoft_text.setWordWrap(True)
+        microsoft_text.setObjectName("WizardBody")
+        microsoft_layout.addWidget(microsoft_text)
+        microsoft_layout.addStretch()
+
+        offline_tab = QWidget()
+        offline_layout = QVBoxLayout(offline_tab)
+        offline_text = QLabel("Gioca subito senza autenticazione Microsoft.")
+        offline_text.setObjectName("WizardBody")
+        offline_layout.addWidget(offline_text)
+        self.offline_username = QLineEdit()
+        self.offline_username.setPlaceholderText("Nome giocatore")
+        offline_layout.addWidget(self.offline_username)
+        offline_layout.addStretch()
+
+        self.account_tabs.addTab(microsoft_tab, "Microsoft")
+        self.account_tabs.addTab(offline_tab, "Offline")
+        layout.addWidget(self.account_tabs)
         layout.addStretch()
         return page
 
@@ -136,7 +171,8 @@ class FirstRunWizard(QWizard):
         self.instance_name = name
         self.instance_version = self.version_combo.currentData() or self.default_version
         self.instance_ram = self.ram_spinbox.value()
-        self.profile_mode = self.profile_combo.currentData() or "online"
+        self.profile_mode = "offline" if self.account_tabs.currentIndex() == 1 else "online"
+        self.offline_username_value = self.offline_username.text().strip()
         super().accept()
 
     @staticmethod
@@ -210,6 +246,25 @@ class FirstRunWizard(QWizard):
                 selection-background-color: #3578e5;
                 selection-color: white;
                 outline: none;
+            }
+            QTabWidget#OnboardingTabs::pane {
+                background: #1b202a;
+                border: 1px solid #354052;
+                border-radius: 7px;
+                padding: 8px;
+            }
+            QTabWidget#OnboardingTabs QTabBar::tab {
+                min-width: 92px;
+                padding: 6px 12px;
+                background: #151a22;
+                color: #8e9aae;
+                border: 1px solid #354052;
+                border-bottom: none;
+            }
+            QTabWidget#OnboardingTabs QTabBar::tab:selected {
+                background: #3578e5;
+                color: white;
+                border-color: #3578e5;
             }
             QWizard QPushButton {
                 min-height: 30px;

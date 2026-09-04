@@ -174,6 +174,9 @@ class MinecraftLauncher(QMainWindow):
                 self.save_settings()
                 self.refresh_instances_selector()
                 self.first_run = False
+                if wizard.profile_mode == "offline" and wizard.offline_username_value:
+                    self.account_manager.add_offline_account(wizard.offline_username_value)
+                    self.update_account_badge()
             self.onboarding_pending = False
             self.first_run_wizard = None
             self.show()
