@@ -1,25 +1,6 @@
 from PyQt6.QtCore import QPoint, Qt
-from PyQt6.QtWidgets import (
-    QApplication,
-    QComboBox,
-    QMenu,
-)
-
-
-class ScrollablePopupMenu(QMenu):
-    def wheelEvent(self, event):
-        actions = [action for action in self.actions() if action.isVisible() and action.isEnabled()]
-        if not actions:
-            event.accept()
-            return
-
-        current = self.activeAction()
-        current_index = actions.index(current) if current in actions else 0
-        steps = max(1, abs(event.angleDelta().y()) // 120)
-        direction = -1 if event.angleDelta().y() > 0 else 1
-        next_index = max(0, min(len(actions) - 1, current_index + direction * steps))
-        self.setActiveAction(actions[next_index])
-        event.accept()
+from PyQt6 import sip
+from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QListWidget, QListWidgetItem, QVBoxLayout
 
 
 class MaterialComboBox(QComboBox):
@@ -31,7 +12,8 @@ class MaterialComboBox(QComboBox):
     def __init__(self, parent=None, fit_popup_to_field=False):
         super().__init__(parent)
         self.fit_popup_to_field = fit_popup_to_field
-        self.popup_menu = None
+        self.popup = None
+        self.popup_list = None
         self.setMinimumHeight(32)
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
 
@@ -39,21 +21,36 @@ class MaterialComboBox(QComboBox):
         event.ignore()
 
     def showPopup(self):
-        if self.popup_menu is not None:
+        if self.popup is not None:
             self.hidePopup()
 
-        popup = ScrollablePopupMenu(self)
-        popup.setObjectName("MaterialComboPopup")
-        popup.setStyleSheet(self._popup_stylesheet())
+        if self.popup is None:
+            popup = QFrame(None, Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
+            popup.setObjectName("MaterialComboPopup")
+            popup.destroyed.connect(self._popup_destroyed)
+            layout = QVBoxLayout(popup)
+            layout.setContentsMargins(1, 1, 1, 1)
+            self.popup_list = QListWidget(popup)
+            self.popup_list.setObjectName("MaterialComboPopupList")
+            self.popup_list.setUniformItemSizes(True)
+            self.popup_list.setTextElideMode(Qt.TextElideMode.ElideRight)
+            self.popup_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.popup_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+            self.popup_list.setAutoScroll(False)
+            self.popup_list.itemClicked.connect(self._popup_item_clicked)
+            layout.addWidget(self.popup_list)
+            popup.setStyleSheet(self._popup_stylesheet())
+            self.popup = popup
+        else:
+            popup = self.popup
+        self.popup_list.clear()
         for index in range(self.count()):
-            action = popup.addAction(self.itemText(index))
-            action.setData(index)
-            action.setCheckable(True)
-            action.setChecked(index == self.currentIndex())
-        popup.triggered.connect(self._menu_action_triggered)
-        self.popup_menu = popup
+            item = QListWidgetItem(self.itemText(index))
+            item.setData(Qt.ItemDataRole.UserRole, index)
+            self.popup_list.addItem(item)
+        self.popup_list.setCurrentRow(self.currentIndex())
 
-        row_height = 30
+        row_height = max(self.popup_list.sizeHintForRow(0), 28)
         visible_rows = min(max(self.count(), 1), self.MAX_VISIBLE_ITEMS)
         popup_height = min(self.POPUP_HEIGHT, visible_rows * row_height + 2)
         if self.fit_popup_to_field:
@@ -76,33 +73,49 @@ class MaterialComboBox(QComboBox):
         popup.move(popup_position)
         popup.show()
 
-    def _menu_action_triggered(self, action):
-        index = action.data()
+    def _popup_item_clicked(self, item):
+        index = item.data(Qt.ItemDataRole.UserRole)
         self.hidePopup()
         self.setCurrentIndex(index)
 
     def hidePopup(self):
-        if self.popup_menu is not None:
-            self.popup_menu.hide()
-            self.popup_menu = None
+        popup = self.popup
+        if popup is not None and not sip.isdeleted(popup):
+            popup.hide()
+        elif popup is not None:
+            self.popup = None
+
+    def _popup_destroyed(self):
+        self.popup = None
 
     @staticmethod
     def _popup_stylesheet():
         return """
-            QMenu#MaterialComboPopup {
+            QFrame#MaterialComboPopup {
                 background: #1f232d;
                 color: #f4f7fb;
                 border: 1px solid #4a5a72;
                 border-radius: 7px;
                 padding: 4px;
             }
-            QMenu#MaterialComboPopup::item {
+            QListWidget#MaterialComboPopupList {
+                background: #1f232d;
+                color: #f4f7fb;
+                border: none;
+                outline: none;
+                padding: 3px;
+            }
+            QListWidget#MaterialComboPopupList::item {
                 min-height: 28px;
                 padding: 5px 8px;
                 border-radius: 4px;
             }
-            QMenu#MaterialComboPopup::item:selected {
+            QListWidget#MaterialComboPopupList::item:hover {
                 background: #2e405c;
+            }
+            QListWidget#MaterialComboPopupList::item:selected {
+                background: #3578e5;
+                color: white;
             }
             QScrollBar:vertical {
                 width: 8px;
