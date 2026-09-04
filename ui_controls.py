@@ -1,12 +1,8 @@
 from PyQt6.QtCore import QPoint, Qt
-from PyQt6 import sip
 from PyQt6.QtWidgets import (
     QApplication,
     QComboBox,
-    QFrame,
-    QListWidget,
-    QListWidgetItem,
-    QVBoxLayout,
+    QMenu,
 )
 
 
@@ -19,8 +15,7 @@ class MaterialComboBox(QComboBox):
     def __init__(self, parent=None, fit_popup_to_field=False):
         super().__init__(parent)
         self.fit_popup_to_field = fit_popup_to_field
-        self.popup = None
-        self.popup_list = None
+        self.popup_menu = None
         self.setMinimumHeight(32)
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
 
@@ -28,95 +23,69 @@ class MaterialComboBox(QComboBox):
         event.ignore()
 
     def showPopup(self):
-        if self.popup is not None:
+        if self.popup_menu is not None:
             self.hidePopup()
 
-        if self.popup is None:
-            popup = QFrame(None, Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
-            popup.setObjectName("MaterialComboPopup")
-            layout = QVBoxLayout(popup)
-            layout.setContentsMargins(1, 1, 1, 1)
-            layout.setSpacing(0)
-
-            self.popup_list = QListWidget(popup)
-            self.popup_list.setObjectName("MaterialComboPopupList")
-            self.popup_list.setUniformItemSizes(True)
-            self.popup_list.setTextElideMode(Qt.TextElideMode.ElideRight)
-            self.popup_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-            self.popup_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-            self.popup_list.setAutoScroll(False)
-            self.popup_list.itemClicked.connect(self._popup_item_clicked)
-            layout.addWidget(self.popup_list)
-            popup.setStyleSheet(self._popup_stylesheet())
-            self.popup = popup
-        else:
-            popup = self.popup
-
-        self.popup_list.clear()
+        popup = QMenu(self)
+        popup.setObjectName("MaterialComboPopup")
+        popup.setStyleSheet(self._popup_stylesheet())
         for index in range(self.count()):
-            item = QListWidgetItem(self.itemText(index))
-            item.setData(Qt.ItemDataRole.UserRole, index)
-            self.popup_list.addItem(item)
-        self.popup_list.setCurrentRow(self.currentIndex())
+            action = popup.addAction(self.itemText(index))
+            action.setData(index)
+            action.setCheckable(True)
+            action.setChecked(index == self.currentIndex())
+        popup.triggered.connect(self._menu_action_triggered)
+        self.popup_menu = popup
 
-        row_height = max(self.popup_list.sizeHintForRow(0), 28)
+        row_height = 30
         visible_rows = min(max(self.count(), 1), self.MAX_VISIBLE_ITEMS)
         popup_height = min(self.POPUP_HEIGHT, visible_rows * row_height + 2)
         if self.fit_popup_to_field:
             popup_width = self.width()
         else:
-            popup_width = max(self.width(), self.popup_list.sizeHintForColumn(0) + 28)
-        popup.setFixedSize(popup_width, popup_height)
+            popup_width = max(self.width(), min(self.width() + 120, 360))
+        popup.setFixedWidth(popup_width)
+        popup.setMaximumHeight(popup_height)
 
         global_below = self.mapToGlobal(QPoint(0, self.height()))
         screen = QApplication.screenAt(global_below)
         if screen is None:
             popup.move(global_below)
-            popup.show()
+            popup.popup(global_below)
             return
         bounds = screen.availableGeometry()
         popup_x = min(global_below.x(), bounds.right() - popup_width)
         popup_y = min(global_below.y(), bounds.bottom() - popup_height)
         popup.move(max(bounds.left(), popup_x), max(bounds.top(), popup_y))
-        popup.show()
+        popup.popup(QPoint(max(bounds.left(), popup_x), max(bounds.top(), popup_y)))
 
-    def _popup_item_clicked(self, item):
-        index = item.data(Qt.ItemDataRole.UserRole)
+    def _menu_action_triggered(self, action):
+        index = action.data()
         self.hidePopup()
         self.setCurrentIndex(index)
 
     def hidePopup(self):
-        popup = self.popup
-        self.popup = None
-        if popup is not None and not sip.isdeleted(popup):
-            popup.hide()
+        if self.popup_menu is not None:
+            self.popup_menu.hide()
+            self.popup_menu = None
 
     @staticmethod
     def _popup_stylesheet():
         return """
-            QFrame#MaterialComboPopup {
-                background: #1f232d;
-                border: 1px solid #4a5a72;
-                border-radius: 7px;
-            }
-            QListWidget#MaterialComboPopupList {
+            QMenu#MaterialComboPopup {
                 background: #1f232d;
                 color: #f4f7fb;
-                border: none;
-                outline: none;
-                padding: 3px;
+                border: 1px solid #4a5a72;
+                border-radius: 7px;
+                padding: 4px;
             }
-            QListWidget#MaterialComboPopupList::item {
+            QMenu#MaterialComboPopup::item {
                 min-height: 28px;
                 padding: 5px 8px;
                 border-radius: 4px;
             }
-            QListWidget#MaterialComboPopupList::item:hover {
+            QMenu#MaterialComboPopup::item:selected {
                 background: #2e405c;
-            }
-            QListWidget#MaterialComboPopupList::item:selected {
-                background: #3578e5;
-                color: white;
             }
             QScrollBar:vertical {
                 width: 8px;
