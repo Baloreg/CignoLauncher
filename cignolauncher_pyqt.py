@@ -413,8 +413,18 @@ class MinecraftLauncher(QMainWindow):
         hero_layout.addLayout(hero_text_box)
         hero_layout.addStretch()
 
-        hero_badge = QLabel("Minecraft Edition")
+        hero_badge = QLabel()
         hero_badge.setObjectName("HeroBadge")
+        hero_badge.setFixedSize(52, 52)
+        hero_badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        launcher_icon = QPixmap(resource_path("assets/window_icon.ico"))
+        if not launcher_icon.isNull():
+            hero_badge.setPixmap(launcher_icon.scaled(
+                32,
+                32,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            ))
         hero_layout.addWidget(hero_badge)
 
         layout.addWidget(hero_card)
@@ -891,11 +901,8 @@ class MinecraftLauncher(QMainWindow):
             }
             QLabel#HeroBadge {
                 background-color: #0284c7;
-                color: white;
-                font-size: 8pt;
-                font-weight: 700;
-                padding: 4px 10px;
-                border-radius: 12px;
+                border-radius: 14px;
+                padding: 0;
             }
             QFrame#ModernCard {
                 background-color: #16181f;
