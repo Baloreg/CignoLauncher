@@ -1509,12 +1509,11 @@ class MinecraftLauncher(QMainWindow):
             return
 
         is_installed = active_version in self.installed_version_ids
-        inst_label = f" ({active_inst.get('name')})" if active_inst else ""
 
         if is_installed:
             self.version_status_pill.setText(f"{active_version} è installata e pronta")
             self.version_status_pill.setStyleSheet("background-color: #064e3b; color: #34d399; border: 1px solid #059669;")
-            self.main_action_btn.setText(f"GIOCA{inst_label}")
+            self.main_action_btn.setText("GIOCA")
             self.main_action_btn.setStyleSheet("""
                 QPushButton#PlayButton {
                     background-color: #10b981;
