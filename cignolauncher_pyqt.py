@@ -17,11 +17,28 @@ from PyQt6.QtWidgets import (
     QButtonGroup
 )
 from PyQt6.QtGui import QIcon, QFont, QTextCursor, QPixmap, QColor
-from PyQt6.QtCore import QObject, QThread, pyqtSignal, Qt, pyqtSlot, QEvent, QSize
+from PyQt6.QtCore import QObject, QThread, pyqtSignal, Qt, pyqtSlot, QEvent, QSize, QTimer
 
 from account_manager import AccountManager
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
 from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap
+
+DEFAULT_POPULAR_VERSIONS = [
+    {"id": "1.21.4", "type": "release"},
+    {"id": "1.21.3", "type": "release"},
+    {"id": "1.21.1", "type": "release"},
+    {"id": "1.20.6", "type": "release"},
+    {"id": "1.20.4", "type": "release"},
+    {"id": "1.20.2", "type": "release"},
+    {"id": "1.20.1", "type": "release"},
+    {"id": "1.19.4", "type": "release"},
+    {"id": "1.18.2", "type": "release"},
+    {"id": "1.17.1", "type": "release"},
+    {"id": "1.16.5", "type": "release"},
+    {"id": "1.12.2", "type": "release"},
+    {"id": "1.8.9", "type": "release"},
+    {"id": "1.7.10", "type": "release"}
+]
 
 # Helper per percorsi asset
 def resource_path(relative_path):
@@ -104,9 +121,17 @@ class MinecraftLauncher(QMainWindow):
         self.setupUi()
         self.apply_modern_stylesheet()
         
-        # Carica versioni in background
+        # Popola subito il selettore con le versioni note e installate
+        self.all_versions = list(DEFAULT_POPULAR_VERSIONS)
+        self.update_installed_versions_cache()
+        self.populate_version_dropdown()
+
+        # Carica elenco completo versioni da cache o Mojang in background
         self.refresh_version_list(initial=True)
         self.update_account_badge()
+        
+        # Apri login dialog all'avvio se non c'è nessun account collegato
+        QTimer.singleShot(250, self.check_account_on_startup)
 
     def setup_paths(self):
         """Inizializza i percorsi di gioco e configurazione."""
@@ -864,30 +889,48 @@ class MinecraftLauncher(QMainWindow):
             if not force_network and os.path.exists(self.versions_cache_file):
                 try:
                     with open(self.versions_cache_file, "r", encoding="utf-8") as f:
-                        cached_data = json.load(f)
+                        data = json.load(f)
+                        if isinstance(data, list) and len(data) > 0:
+                            cached_data = data
                 except Exception:
                     pass
 
-            if cached_data and isinstance(cached_data, list) and len(cached_data) > 0:
+            versions = []
+            if cached_data:
                 versions = cached_data
+                self.worker.log_message.emit(f"Caricate {len(versions)} versioni dalla cache locale.", "INFO")
             else:
                 try:
                     self.worker.log_message.emit("Connessione a Mojang per recuperare l'elenco versioni...", "INFO")
-                    version_manifest = minecraft_launcher_lib.utils.get_version_list()
-                    versions = version_manifest.get("versions", [])
-                    # Salva in cache
-                    try:
-                        with open(self.versions_cache_file, "w", encoding="utf-8") as f:
-                            json.dump(versions, f)
-                    except Exception:
-                        pass
+                    raw_data = minecraft_launcher_lib.utils.get_version_list()
+                    if isinstance(raw_data, list):
+                        versions = raw_data
+                    elif isinstance(raw_data, dict) and "versions" in raw_data:
+                        versions = raw_data["versions"]
+                    elif isinstance(raw_data, dict):
+                        versions = list(raw_data.values())
+                    
+                    if versions:
+                        self.worker.log_message.emit(f"Scaricato elenco con {len(versions)} versioni da Mojang.", "SUCCESS")
+                        try:
+                            with open(self.versions_cache_file, "w", encoding="utf-8") as f:
+                                json.dump(versions, f)
+                        except Exception:
+                            pass
                 except Exception as e:
                     self.worker.log_message.emit(f"Impossibile contattare Mojang: {e}", "ERROR")
-                    versions = cached_data if cached_data else []
+
+            # Fallback predefinito se la rete o la libreria non restituiscono versioni
+            if not versions:
+                if cached_data:
+                    versions = cached_data
+                else:
+                    self.worker.log_message.emit("Utilizzo elenco versioni di fallback.", "INFO")
+                    versions = DEFAULT_POPULAR_VERSIONS
 
             latest_release = ""
             for v in versions:
-                if v.get("type") == "release":
+                if isinstance(v, dict) and v.get("type") == "release":
                     latest_release = v.get("id")
                     break
             
@@ -906,8 +949,8 @@ class MinecraftLauncher(QMainWindow):
         """Rileva quali versioni sono attualmente installate nella cartella locale."""
         try:
             installed = minecraft_launcher_lib.utils.get_installed_versions(self.minecraft_directory)
-            self.installed_version_ids = {v["id"] for v in installed if "id" in v}
-        except Exception as e:
+            self.installed_version_ids = {v["id"] for v in installed if isinstance(v, dict) and "id" in v}
+        except Exception:
             self.installed_version_ids = set()
 
     def populate_version_dropdown(self):
@@ -921,21 +964,29 @@ class MinecraftLauncher(QMainWindow):
         # Se non c'è una versione selezionata, cerca l'ultima installata o l'ultima release
         if not target_version:
             for v in self.all_versions:
-                if v.get("id") in self.installed_version_ids:
-                    target_version = v.get("id")
+                v_id = v.get("id") if isinstance(v, dict) else str(v)
+                if v_id in self.installed_version_ids:
+                    target_version = v_id
                     break
             if not target_version:
                 for v in self.all_versions:
-                    if v.get("type") == "release":
+                    if isinstance(v, dict) and v.get("type") == "release":
                         target_version = v.get("id")
+                        break
+                    elif isinstance(v, str):
+                        target_version = v
                         break
 
         idx_to_select = 0
         added_count = 0
 
         for v in self.all_versions:
-            v_id = v.get("id")
-            v_type = v.get("type", "release")
+            if isinstance(v, dict):
+                v_id = v.get("id", "")
+                v_type = v.get("type", "release")
+            else:
+                v_id = str(v)
+                v_type = "release"
             
             # Se show_all è False, mostra solo release o versioni già installate localmente
             if not show_all and v_type != "release" and v_id not in self.installed_version_ids:
@@ -1178,6 +1229,11 @@ class MinecraftLauncher(QMainWindow):
         self.pages.setCurrentIndex(0)
 
     # --- GESTIONE ACCOUNT & REFRESH ---
+
+    def check_account_on_startup(self):
+        """Apre la finestra di login all'avvio se non è configurato alcun account."""
+        if not self.account_manager.current_account:
+            self.show_account_dialog()
 
     def show_account_dialog(self):
         dialog = LoginDialog(self, self.account_manager, client_id=self.AZURE_CLIENT_ID, client_secret=self.AZURE_CLIENT_SECRET)
