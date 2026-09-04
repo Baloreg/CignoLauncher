@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDE & editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Minecraft Launcher local runtime data & cache
+minecraft/
+.cignolauncher/
+heads/
+news_assets/
+versions_cache.json
+accounts.json
+install_state.json
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
