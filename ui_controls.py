@@ -44,20 +44,21 @@ class MaterialComboBox(QComboBox):
             popup_width = self.width()
         else:
             popup_width = max(self.width(), min(self.width() + 120, 360))
-        popup.setFixedWidth(popup_width)
-        popup.setMaximumHeight(popup_height)
 
         global_below = self.mapToGlobal(QPoint(0, self.height()))
         screen = QApplication.screenAt(global_below)
         if screen is None:
+            popup.setFixedSize(popup_width, popup_height)
             popup.move(global_below)
-            popup.popup(global_below)
+            popup.show()
             return
         bounds = screen.availableGeometry()
-        popup_x = min(global_below.x(), bounds.right() - popup_width)
-        popup_y = min(global_below.y(), bounds.bottom() - popup_height)
-        popup.move(max(bounds.left(), popup_x), max(bounds.top(), popup_y))
-        popup.popup(QPoint(max(bounds.left(), popup_x), max(bounds.top(), popup_y)))
+        popup_height = min(popup_height, max(1, bounds.bottom() - global_below.y()))
+        popup_x = min(max(bounds.left(), global_below.x()), bounds.right() - popup_width)
+        popup_position = QPoint(popup_x, global_below.y())
+        popup.setFixedSize(popup_width, popup_height)
+        popup.move(popup_position)
+        popup.show()
 
     def _menu_action_triggered(self, action):
         index = action.data()
