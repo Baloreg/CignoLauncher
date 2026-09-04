@@ -69,13 +69,18 @@ class FirstRunWizard(QWizard):
         form = QFormLayout()
         form.setSpacing(14)
 
-        self.name_input = QLineEdit(self.instance.get("name", "Vanilla Principale"))
+        self.name_input = QLineEdit("")
         self.name_input.setPlaceholderText("Es. Survival, Modpack, Creative")
         form.addRow("Nome istanza", self.name_input)
 
         self.version_combo = MaterialComboBox()
         self.set_available_versions(self.available_versions)
-        form.addRow("Versione iniziale", self.version_combo)
+        form.addRow("Versione", self.version_combo)
+
+        self.profile_combo = MaterialComboBox()
+        self.profile_combo.addItem("Online", "online")
+        self.profile_combo.addItem("Offline", "offline")
+        form.addRow("Profilo", self.profile_combo)
 
         self.ram_spinbox = QSpinBox()
         self.ram_spinbox.setRange(2, 24)
@@ -127,10 +132,11 @@ class FirstRunWizard(QWizard):
         return page
 
     def accept(self):
-        name = self.name_input.text().strip() or "Vanilla Principale"
+        name = self.name_input.text().strip() or "Minecraft"
         self.instance_name = name
         self.instance_version = self.version_combo.currentData() or self.default_version
         self.instance_ram = self.ram_spinbox.value()
+        self.profile_mode = self.profile_combo.currentData() or "online"
         super().accept()
 
     @staticmethod

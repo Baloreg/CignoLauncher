@@ -170,6 +170,7 @@ class MinecraftLauncher(QMainWindow):
                 )
                 self.settings["onboarding_completed"] = True
                 self.settings["last_version"] = wizard.instance_version
+                self.settings["profile_mode"] = wizard.profile_mode
                 self.save_settings()
                 self.refresh_instances_selector()
                 self.first_run = False
@@ -229,7 +230,8 @@ class MinecraftLauncher(QMainWindow):
             "last_version": "",
             "custom_java": "",
             "jvm_args": "",
-            "onboarding_completed": False
+            "onboarding_completed": False,
+            "profile_mode": ""
         }
         if os.path.exists(self.settings_file):
             try:
@@ -1731,7 +1733,13 @@ class MinecraftLauncher(QMainWindow):
             self.show_account_dialog()
 
     def show_account_dialog(self):
-        dialog = LoginDialog(self, self.account_manager, client_id=self.AZURE_CLIENT_ID, client_secret=self.AZURE_CLIENT_SECRET)
+        dialog = LoginDialog(
+            self,
+            self.account_manager,
+            client_id=self.AZURE_CLIENT_ID,
+            client_secret=self.AZURE_CLIENT_SECRET,
+            initial_mode=self.settings.get("profile_mode", ""),
+        )
         dialog.exec()
         self.update_account_badge()
 

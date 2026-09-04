@@ -104,11 +104,12 @@ class MicrosoftLoginWorker(QObject):
 
 class LoginDialog(QDialog):
     """Finestra di gestione e aggiunta account (Microsoft & Offline)"""
-    def __init__(self, parent, account_manager, client_id, client_secret):
+    def __init__(self, parent, account_manager, client_id, client_secret, initial_mode=""):
         super().__init__(parent)
         self.account_manager = account_manager
         self.client_id = client_id
         self.client_secret = client_secret
+        self.initial_mode = initial_mode
         self.head_labels = {}
 
         self.setupUi()
@@ -143,6 +144,10 @@ class LoginDialog(QDialog):
         self.refresh_accounts_tab()
         self.setup_offline_tab()
         self.setup_microsoft_tab()
+        if self.initial_mode == "offline":
+            self.notebook.setCurrentWidget(self.offline_tab)
+        elif self.initial_mode == "online":
+            self.notebook.setCurrentWidget(self.microsoft_tab)
 
         close_btn = QPushButton("Chiudi")
         close_btn.setObjectName("SecondaryButton")
