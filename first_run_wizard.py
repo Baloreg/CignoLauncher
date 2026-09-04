@@ -1,7 +1,6 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import (
-    QComboBox,
     QFormLayout,
     QLabel,
     QLineEdit,
@@ -10,6 +9,7 @@ from PyQt6.QtWidgets import (
     QWizard,
     QWizardPage,
 )
+from ui_controls import MaterialComboBox
 
 
 class FirstRunWizard(QWizard):
@@ -73,9 +73,7 @@ class FirstRunWizard(QWizard):
         self.name_input.setPlaceholderText("Es. Survival, Modpack, Creative")
         form.addRow("Nome istanza", self.name_input)
 
-        self.version_combo = QComboBox()
-        self.version_combo.setMaxVisibleItems(8)
-        self.version_combo.view().setMaximumHeight(220)
+        self.version_combo = MaterialComboBox()
         self.set_available_versions(self.available_versions)
         form.addRow("Versione iniziale", self.version_combo)
 
@@ -182,8 +180,7 @@ class FirstRunWizard(QWizard):
             QSpinBox::up-button, QSpinBox::down-button {
                 width: 20px;
                 border: none;
-                border-left: 1px solid #354052;
-                background: #202633;
+                background: transparent;
             }
             QSpinBox::up-button {
             }
@@ -205,7 +202,6 @@ class FirstRunWizard(QWizard):
                 selection-background-color: #3578e5;
                 selection-color: white;
                 outline: none;
-                max-height: 220px;
             }
             QWizard QPushButton {
                 min-height: 30px;

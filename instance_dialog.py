@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon, QFont, QColor
 from PyQt6.QtCore import Qt
+from ui_controls import MaterialComboBox
 
 class InstanceEditDialog(QDialog):
     """Dialogo per creare o modificare una singola istanza di Minecraft."""
@@ -52,7 +53,7 @@ class InstanceEditDialog(QDialog):
         # 2. Versione Minecraft
         version_label = QLabel("Versione di Minecraft:")
         version_label.setObjectName("FieldLabel")
-        self.version_combo = QComboBox()
+        self.version_combo = MaterialComboBox()
         self.version_combo.setObjectName("VersionSelector")
 
         current_ver = self.instance.get("version", "") if is_edit else ""

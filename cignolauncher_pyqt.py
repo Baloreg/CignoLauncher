@@ -23,6 +23,7 @@ from account_manager import AccountManager
 from instance_manager import InstanceManager
 from instance_dialog import InstanceEditDialog, InstanceManagerDialog
 from first_run_wizard import FirstRunWizard
+from ui_controls import MaterialComboBox
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
 from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap
 
@@ -422,11 +423,10 @@ class MinecraftLauncher(QMainWindow):
         inst_layout.addLayout(inst_top_row)
 
         inst_select_row = QHBoxLayout()
-        self.instance_combo = QComboBox()
+        self.instance_combo = MaterialComboBox()
         self.instance_combo.setObjectName("InstanceComboBox")
         self.instance_combo.setMinimumHeight(34)
         self.instance_combo.setMaxVisibleItems(8)
-        self.instance_combo.view().setMaximumHeight(220)
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         inst_select_row.addWidget(self.instance_combo, 1)
 
@@ -462,11 +462,10 @@ class MinecraftLauncher(QMainWindow):
         select_row = QHBoxLayout()
         select_row.setSpacing(12)
 
-        self.version_combo = QComboBox()
+        self.version_combo = MaterialComboBox()
         self.version_combo.setObjectName("VersionComboBox")
         self.version_combo.setMinimumHeight(34)
         self.version_combo.setMaxVisibleItems(8)
-        self.version_combo.view().setMaximumHeight(220)
         self.version_combo.setMinimumContentsLength(24)
         self.version_combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
         self.version_combo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -924,7 +923,6 @@ class MinecraftLauncher(QMainWindow):
                 padding: 4px;
                 outline: none;
                 min-width: 260px;
-                max-height: 220px;
             }
             QComboBox QAbstractItemView::item {
                 min-height: 30px;
@@ -936,8 +934,7 @@ class MinecraftLauncher(QMainWindow):
             QSpinBox::up-button, QSpinBox::down-button {
                 width: 20px;
                 border: none;
-                border-left: 1px solid #334155;
-                background-color: #1a1d26;
+                background-color: transparent;
             }
             QSpinBox::up-button {
                 subcontrol-position: top right;
