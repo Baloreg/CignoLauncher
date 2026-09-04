@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QPoint, Qt, QTimer
+from PyQt6.QtCore import QPoint, Qt
 from PyQt6 import sip
 from PyQt6.QtWidgets import (
     QApplication,
@@ -20,6 +20,7 @@ class MaterialComboBox(QComboBox):
         super().__init__(parent)
         self.fit_popup_to_field = fit_popup_to_field
         self.popup = None
+        self.popup_list = None
         self.setMinimumHeight(32)
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
 
@@ -30,38 +31,41 @@ class MaterialComboBox(QComboBox):
         if self.popup is not None:
             self.hidePopup()
 
-        popup = QFrame(None, Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
-        popup.setObjectName("MaterialComboPopup")
-        popup.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
-        popup.destroyed.connect(self._popup_destroyed)
-        layout = QVBoxLayout(popup)
-        layout.setContentsMargins(1, 1, 1, 1)
-        layout.setSpacing(0)
+        if self.popup is None:
+            popup = QFrame(None, Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
+            popup.setObjectName("MaterialComboPopup")
+            layout = QVBoxLayout(popup)
+            layout.setContentsMargins(1, 1, 1, 1)
+            layout.setSpacing(0)
 
-        list_widget = QListWidget(popup)
-        list_widget.setObjectName("MaterialComboPopupList")
-        list_widget.setUniformItemSizes(True)
-        list_widget.setTextElideMode(Qt.TextElideMode.ElideRight)
-        list_widget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        list_widget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        list_widget.setAutoScroll(False)
+            self.popup_list = QListWidget(popup)
+            self.popup_list.setObjectName("MaterialComboPopupList")
+            self.popup_list.setUniformItemSizes(True)
+            self.popup_list.setTextElideMode(Qt.TextElideMode.ElideRight)
+            self.popup_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.popup_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+            self.popup_list.setAutoScroll(False)
+            self.popup_list.itemClicked.connect(self._popup_item_clicked)
+            layout.addWidget(self.popup_list)
+            popup.setStyleSheet(self._popup_stylesheet())
+            self.popup = popup
+        else:
+            popup = self.popup
+
+        self.popup_list.clear()
         for index in range(self.count()):
             item = QListWidgetItem(self.itemText(index))
             item.setData(Qt.ItemDataRole.UserRole, index)
-            list_widget.addItem(item)
-        list_widget.setCurrentRow(self.currentIndex())
-        list_widget.itemClicked.connect(self._popup_item_clicked)
-        layout.addWidget(list_widget)
-        popup.setStyleSheet(self._popup_stylesheet())
-        self.popup = popup
+            self.popup_list.addItem(item)
+        self.popup_list.setCurrentRow(self.currentIndex())
 
-        row_height = max(list_widget.sizeHintForRow(0), 28)
+        row_height = max(self.popup_list.sizeHintForRow(0), 28)
         visible_rows = min(max(self.count(), 1), self.MAX_VISIBLE_ITEMS)
         popup_height = min(self.POPUP_HEIGHT, visible_rows * row_height + 2)
         if self.fit_popup_to_field:
             popup_width = self.width()
         else:
-            popup_width = max(self.width(), list_widget.sizeHintForColumn(0) + 28)
+            popup_width = max(self.width(), self.popup_list.sizeHintForColumn(0) + 28)
         popup.setFixedSize(popup_width, popup_height)
 
         global_below = self.mapToGlobal(QPoint(0, self.height()))
@@ -79,16 +83,13 @@ class MaterialComboBox(QComboBox):
     def _popup_item_clicked(self, item):
         index = item.data(Qt.ItemDataRole.UserRole)
         self.hidePopup()
-        QTimer.singleShot(0, lambda: self.setCurrentIndex(index))
+        self.setCurrentIndex(index)
 
     def hidePopup(self):
         popup = self.popup
         self.popup = None
         if popup is not None and not sip.isdeleted(popup):
-            popup.close()
-
-    def _popup_destroyed(self):
-        self.popup = None
+            popup.hide()
 
     @staticmethod
     def _popup_stylesheet():
