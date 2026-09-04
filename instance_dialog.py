@@ -197,6 +197,26 @@ class InstanceEditDialog(QDialog):
                 selection-background-color: #2563eb;
                 border: 1px solid #334155;
             }
+            QCheckBox {
+                color: #aebbd0;
+                spacing: 8px;
+                font-size: 9pt;
+            }
+            QCheckBox::indicator {
+                width: 18px;
+                height: 18px;
+                border: 1px solid #52627a;
+                border-radius: 5px;
+                background-color: #1a1d26;
+            }
+            QCheckBox::indicator:hover {
+                border-color: #60a5fa;
+            }
+            QCheckBox::indicator:checked {
+                image: url(assets/action_check.svg);
+                background-color: #3578e5;
+                border-color: #60a5fa;
+            }
             QSpinBox {
                 background-color: #1a1d26;
                 color: #ffffff;
