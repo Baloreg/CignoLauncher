@@ -1,4 +1,5 @@
 from PyQt6.QtCore import QPoint, Qt
+from PyQt6 import sip
 from PyQt6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -32,6 +33,7 @@ class MaterialComboBox(QComboBox):
         popup = QFrame(None, Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
         popup.setObjectName("MaterialComboPopup")
         popup.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
+        popup.destroyed.connect(self._popup_destroyed)
         layout = QVBoxLayout(popup)
         layout.setContentsMargins(1, 1, 1, 1)
         layout.setSpacing(0)
@@ -79,10 +81,13 @@ class MaterialComboBox(QComboBox):
         self.hidePopup()
 
     def hidePopup(self):
-        if self.popup is not None:
-            popup = self.popup
-            self.popup = None
+        popup = self.popup
+        self.popup = None
+        if popup is not None and not sip.isdeleted(popup):
             popup.close()
+
+    def _popup_destroyed(self):
+        self.popup = None
 
     @staticmethod
     def _popup_stylesheet():
