@@ -415,13 +415,13 @@ class MinecraftLauncher(QMainWindow):
 
         hero_badge = QLabel()
         hero_badge.setObjectName("HeroBadge")
-        hero_badge.setFixedSize(82, 82)
+        hero_badge.setFixedSize(104, 104)
         hero_badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
         launcher_icon = QPixmap(resource_path("assets/window_icon.ico"))
         if not launcher_icon.isNull():
             hero_badge.setPixmap(launcher_icon.scaled(
-                64,
-                64,
+                84,
+                84,
                 Qt.AspectRatioMode.KeepAspectRatio,
                 Qt.TransformationMode.SmoothTransformation,
             ))
