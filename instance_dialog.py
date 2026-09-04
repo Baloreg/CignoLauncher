@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtGui import QIcon, QFont, QColor
 from PyQt6.QtCore import Qt, QSize
 from ui_controls import MaterialComboBox
+from dialog_utils import ask_confirmation, show_warning
 
 
 def set_svg_icon(button, asset_name, size=18):
@@ -278,7 +279,7 @@ class InstanceEditDialog(QDialog):
     def save_instance(self):
         name = self.name_input.text().strip()
         if not name:
-            QMessageBox.warning(self, "Attenzione", "Inserisci un nome valido per l'istanza.")
+            show_warning(self, "Nome istanza", "Inserisci un nome valido per l'istanza.")
             return
 
         version = self.version_combo.currentData() or "1.21.4"
@@ -591,15 +592,15 @@ class InstanceManagerDialog(QDialog):
         if not inst:
             return
         if len(self.instance_manager.get_instances()) <= 1:
-            QMessageBox.warning(self, "Attenzione", "Non puoi eliminare l'unica istanza rimasta.")
+            show_warning(self, "Impossibile eliminare", "Non puoi eliminare l'unica istanza rimasta.")
             return
 
-        reply = QMessageBox.question(
-            self, "Elimina Istanza",
+        confirmed = ask_confirmation(
+            self,
+            "Elimina istanza",
             f"Sei sicuro di voler eliminare l'istanza '{inst.get('name')}'?\nI mondi e salvataggi in questa istanza verranno rimossi.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No
+            destructive=True,
         )
-        if reply == QMessageBox.StandardButton.Yes:
+        if confirmed:
             self.instance_manager.delete_instance(inst["id"], delete_files=True)
             self.refresh_list()

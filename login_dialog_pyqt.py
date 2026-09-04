@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLa
 from PyQt6.QtGui import QIcon, QFont, QPixmap
 from PyQt6.QtCore import Qt, QObject, pyqtSignal, QThread
 from utils import ImageDownloader, create_steve_avatar
+from dialog_utils import ask_confirmation, show_warning
 
 def resource_path(relative_path):
     try:
@@ -420,17 +421,14 @@ class LoginDialog(QDialog):
         self.accept()
 
     def remove_account(self, account_id):
-        reply = QMessageBox.question(self, "Conferma eliminazione", "Vuoi davvero rimuovere questo profilo?",
-                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                                     QMessageBox.StandardButton.No)
-        if reply == QMessageBox.StandardButton.Yes:
+        if ask_confirmation(self, "Rimuovi profilo", "Vuoi davvero rimuovere questo profilo?", destructive=True):
             self.account_manager.remove_account(account_id)
             self.refresh_accounts_tab()
 
     def offline_login(self):
         username = self.offline_username.text().strip()
         if not (3 <= len(username) <= 16):
-            QMessageBox.warning(self, "Nome non valido", "Il nome utente deve avere una lunghezza compresa tra 3 e 16 caratteri.")
+            show_warning(self, "Nome non valido", "Il nome utente deve avere una lunghezza compresa tra 3 e 16 caratteri.")
             return
         self.account_manager.add_offline_account(username)
         self.refresh_accounts_tab()

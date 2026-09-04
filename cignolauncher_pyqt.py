@@ -26,6 +26,7 @@ from first_run_wizard import FirstRunWizard
 from ui_controls import MaterialComboBox
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
 from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap
+from dialog_utils import ask_confirmation, show_warning
 
 DEFAULT_POPULAR_VERSIONS = [
     {"id": "1.21.4", "type": "release"},
@@ -1340,16 +1341,16 @@ class MinecraftLauncher(QMainWindow):
             return
 
         if len(self.instance_manager.get_instances()) <= 1:
-            QMessageBox.warning(self, "Attenzione", "Non puoi eliminare l'unica istanza rimasta.")
+            show_warning(self, "Impossibile eliminare", "Non puoi eliminare l'unica istanza rimasta.")
             return
 
-        reply = QMessageBox.question(
-            self, "Elimina Istanza",
+        confirmed = ask_confirmation(
+            self,
+            "Elimina istanza",
             f"Sei sicuro di voler eliminare l'istanza '{inst.get('name')}'?\nI mondi e salvataggi in questa istanza verranno rimossi.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No
+            destructive=True,
         )
-        if reply == QMessageBox.StandardButton.Yes:
+        if confirmed:
             self.instance_manager.delete_instance(inst_id, delete_files=True)
             self.refresh_instances_selector()
 
