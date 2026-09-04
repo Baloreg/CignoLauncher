@@ -110,7 +110,10 @@ class MinecraftLauncher(QMainWindow):
 
     def setup_paths(self):
         """Inizializza i percorsi di gioco e configurazione."""
-        if sys.platform == "win32":
+        custom_data_dir = os.getenv("CIGNO_DATA_DIR")
+        if custom_data_dir:
+            self.launcher_directory = os.path.abspath(custom_data_dir)
+        elif sys.platform == "win32":
             appdata = os.getenv('APPDATA')
             self.launcher_directory = os.path.join(appdata, "CignoLauncher")
         else:
@@ -123,7 +126,10 @@ class MinecraftLauncher(QMainWindow):
         self.versions_cache_file = os.path.join(self.launcher_directory, "versions_cache.json")
         
         for folder in [self.launcher_directory, self.minecraft_directory, self.heads_folder]:
-            os.makedirs(folder, exist_ok=True)
+            try:
+                os.makedirs(folder, exist_ok=True)
+            except Exception as e:
+                print(f"Avviso: impossibile creare cartella {folder}: {e}")
 
     def load_settings(self):
         """Carica le impostazioni da settings.json con valori di default."""
@@ -228,6 +234,7 @@ class MinecraftLauncher(QMainWindow):
         # Widget account in fondo alla sidebar
         self.sidebar_account_frame = QFrame()
         self.sidebar_account_frame.setObjectName("SidebarAccountCard")
+        self.sidebar_account_frame.setCursor(Qt.CursorShape.PointingHandCursor)
         acc_box = QHBoxLayout(self.sidebar_account_frame)
         acc_box.setContentsMargins(8, 8, 8, 8)
         acc_box.setSpacing(10)
@@ -631,7 +638,6 @@ class MinecraftLauncher(QMainWindow):
             QFrame#SidebarAccountCard:hover {
                 background-color: #222633;
                 border: 1px solid #3b82f6;
-                cursor: pointer;
             }
             QLabel#SidebarUsername {
                 font-weight: 700;
@@ -1319,30 +1325,49 @@ class MinecraftLauncher(QMainWindow):
         self.progress_bar.setValue(progress)
         self.progress_percentage_label.setText(f"{progress}%")
 
+    def is_task_running(self):
+        """Verifica in sicurezza se un task in background è in esecuzione."""
+        if self.worker_thread is not None:
+            try:
+                return self.worker_thread.isRunning()
+            except RuntimeError:
+                self.worker_thread = None
+                self.worker = None
+        return False
+
     def run_task(self, target, *args, on_finish=None, **kwargs):
-        """Avvia un task asincrono con gestione thread pulita."""
-        if self.worker_thread and self.worker_thread.isRunning():
-            self.log("Un task è già in esecuzione.", "ERROR")
+        """Avvia un task asincrono con gestione thread e memoria pulita e sicura."""
+        if self.is_task_running():
+            self.log("Un'operazione è già in corso.", "ERROR")
             return
 
-        self.worker_thread = QThread()
-        self.worker = Worker(target, *args, **kwargs)
-        self.worker.moveToThread(self.worker_thread)
+        thread = QThread(self)
+        worker = Worker(target, *args, **kwargs)
+        worker.moveToThread(thread)
 
-        self.worker.finished.connect(self.worker_thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.worker_thread.finished.connect(self.worker_thread.deleteLater)
+        self.worker_thread = thread
+        self.worker = worker
 
-        self.worker.progress.connect(self.update_progress)
-        self.worker.status_update.connect(self.update_status)
-        self.worker.log_message.connect(self.log)
-        self.worker.versions_loaded.connect(self.on_versions_loaded)
+        def cleanup():
+            if self.worker_thread is thread:
+                self.worker_thread = None
+                self.worker = None
+
+        worker.finished.connect(thread.quit)
+        worker.finished.connect(worker.deleteLater)
+        thread.finished.connect(thread.deleteLater)
+        thread.finished.connect(cleanup)
+
+        worker.progress.connect(self.update_progress)
+        worker.status_update.connect(self.update_status)
+        worker.log_message.connect(self.log)
+        worker.versions_loaded.connect(self.on_versions_loaded)
 
         if on_finish:
-            self.worker.finished.connect(on_finish)
+            worker.finished.connect(on_finish)
 
-        self.worker_thread.started.connect(self.worker.run)
-        self.worker_thread.start()
+        thread.started.connect(worker.run)
+        thread.start()
 
     def closeEvent(self, event):
         """Chiusura controllata dei processi attivi."""
@@ -1353,9 +1378,12 @@ class MinecraftLauncher(QMainWindow):
             except Exception:
                 pass
 
-        if self.worker_thread and self.worker_thread.isRunning():
-            self.worker_thread.quit()
-            self.worker_thread.wait()
+        if self.is_task_running():
+            try:
+                self.worker_thread.quit()
+                self.worker_thread.wait(2000)
+            except Exception:
+                pass
 
         event.accept()
 

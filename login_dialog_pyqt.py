@@ -343,15 +343,15 @@ class LoginDialog(QDialog):
         target_label.setPixmap(create_steve_avatar(36))
         
         # Download in background
-        self.downloader_thread = QThread()
-        self.image_worker = ImageDownloader(uuid_str, heads_folder)
-        self.image_worker.moveToThread(self.downloader_thread)
-        self.image_worker.image_ready.connect(lambda u, p: self.on_image_loaded_for_dialog(u, p))
-        self.downloader_thread.started.connect(self.image_worker.run)
-        self.image_worker.finished.connect(self.downloader_thread.quit)
-        self.image_worker.finished.connect(self.image_worker.deleteLater)
-        self.downloader_thread.finished.connect(self.downloader_thread.deleteLater)
-        self.downloader_thread.start()
+        dl_thread = QThread(self)
+        img_worker = ImageDownloader(uuid_str, heads_folder)
+        img_worker.moveToThread(dl_thread)
+        img_worker.image_ready.connect(lambda u, p: self.on_image_loaded_for_dialog(u, p))
+        dl_thread.started.connect(img_worker.run)
+        img_worker.finished.connect(dl_thread.quit)
+        img_worker.finished.connect(img_worker.deleteLater)
+        dl_thread.finished.connect(dl_thread.deleteLater)
+        dl_thread.start()
 
     def on_image_loaded_for_dialog(self, uuid_str, pixmap):
         target_label = self.head_labels.get(uuid_str)
@@ -439,16 +439,21 @@ class LoginDialog(QDialog):
         self.ms_login_btn.setEnabled(False)
         self.ms_status_label.setText("In attesa dell'autorizzazione nel browser...")
         
-        self.login_thread = QThread()
+        self.login_thread = QThread(self)
         self.login_worker = MicrosoftLoginWorker(self.client_id, self.client_secret)
         self.login_worker.moveToThread(self.login_thread)
         
+        def cleanup_login():
+            self.login_thread = None
+            self.login_worker = None
+
         self.login_worker.status_update.connect(lambda msg: self.ms_status_label.setText(msg))
         self.login_worker.success.connect(self.on_login_success)
         self.login_worker.error.connect(self.on_login_error)
         self.login_worker.finished.connect(self.login_thread.quit)
         self.login_worker.finished.connect(self.login_worker.deleteLater)
         self.login_thread.finished.connect(self.login_thread.deleteLater)
+        self.login_thread.finished.connect(cleanup_login)
         self.login_thread.started.connect(self.login_worker.run)
         
         self.login_thread.start()
