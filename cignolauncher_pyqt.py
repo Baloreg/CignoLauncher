@@ -1482,11 +1482,12 @@ class MinecraftLauncher(QMainWindow):
                 continue
 
             is_inst = v_id in self.installed_version_ids
-            status_tag = "✓ Installata" if is_inst else "Download"
+            status_tag = "Installata" if is_inst else "Disponibile"
             type_tag = "Release" if v_type == "release" else v_type.capitalize()
 
-            display_text = f"{v_id}   ({type_tag})  [{status_tag}]"
-            self.version_combo.addItem(display_text, v_id)
+            display_text = f"{v_id}   •   {type_tag}   •   {status_tag}"
+            version_icon = QIcon(resource_path("assets/nav_versions.svg"))
+            self.version_combo.addItem(version_icon, display_text, v_id)
 
             if v_id == target_version:
                 idx_to_select = added_count
