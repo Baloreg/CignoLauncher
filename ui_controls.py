@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QPoint, Qt
+from PyQt6.QtCore import QPoint, QSize, Qt
 from PyQt6 import sip
 from PyQt6.QtWidgets import QApplication, QComboBox, QFrame, QListWidget, QListWidgetItem, QVBoxLayout
 
@@ -34,6 +34,7 @@ class MaterialComboBox(QComboBox):
             self.popup_list = QListWidget(popup)
             self.popup_list.setObjectName("MaterialComboPopupList")
             self.popup_list.setUniformItemSizes(True)
+            self.popup_list.setIconSize(QSize(20, 20))
             self.popup_list.setTextElideMode(Qt.TextElideMode.ElideRight)
             self.popup_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
             self.popup_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
@@ -46,7 +47,7 @@ class MaterialComboBox(QComboBox):
             popup = self.popup
         self.popup_list.clear()
         for index in range(self.count()):
-            item = QListWidgetItem(self.itemText(index))
+            item = QListWidgetItem(self.itemIcon(index), self.itemText(index))
             item.setData(Qt.ItemDataRole.UserRole, index)
             self.popup_list.addItem(item)
         self.popup_list.setCurrentRow(self.currentIndex())

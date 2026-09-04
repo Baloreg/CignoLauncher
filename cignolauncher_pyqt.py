@@ -1209,7 +1209,9 @@ class MinecraftLauncher(QMainWindow):
             name = inst.get("name", "Istanza")
             ver = inst.get("version", "Vanilla")
             ram = inst.get("ram_gb", 4)
-            self.instance_combo.addItem(f"{name}  [{ver} - {ram}GB]", inst_id)
+            instance_icon = QIcon(resource_path("assets/nav_instances.svg"))
+            display_name = f"{name}   •   Versione {ver}   •   RAM {ram} GB"
+            self.instance_combo.addItem(instance_icon, display_name, inst_id)
             if inst_id == curr_id:
                 sel_idx = idx
             idx += 1
