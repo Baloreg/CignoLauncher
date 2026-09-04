@@ -426,6 +426,7 @@ class MinecraftLauncher(QMainWindow):
         self.instance_combo.setObjectName("InstanceComboBox")
         self.instance_combo.setMinimumHeight(34)
         self.instance_combo.setMaxVisibleItems(8)
+        self.instance_combo.view().setMaximumHeight(220)
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         inst_select_row.addWidget(self.instance_combo, 1)
 
@@ -465,6 +466,7 @@ class MinecraftLauncher(QMainWindow):
         self.version_combo.setObjectName("VersionComboBox")
         self.version_combo.setMinimumHeight(34)
         self.version_combo.setMaxVisibleItems(8)
+        self.version_combo.view().setMaximumHeight(220)
         self.version_combo.setMinimumContentsLength(24)
         self.version_combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
         self.version_combo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -922,6 +924,7 @@ class MinecraftLauncher(QMainWindow):
                 padding: 4px;
                 outline: none;
                 min-width: 260px;
+                max-height: 220px;
             }
             QComboBox QAbstractItemView::item {
                 min-height: 30px;
@@ -931,18 +934,26 @@ class MinecraftLauncher(QMainWindow):
                 padding: 5px 30px 5px 10px;
             }
             QSpinBox::up-button, QSpinBox::down-button {
-                width: 24px;
+                width: 20px;
                 border: none;
                 border-left: 1px solid #334155;
                 background-color: #1a1d26;
             }
             QSpinBox::up-button {
                 subcontrol-position: top right;
-                image: url(__UP_ARROW__);
             }
             QSpinBox::down-button {
                 subcontrol-position: bottom right;
+            }
+            QSpinBox::up-arrow {
+                image: url(__UP_ARROW__);
+                width: 10px;
+                height: 6px;
+            }
+            QSpinBox::down-arrow {
                 image: url(__DOWN_ARROW__);
+                width: 10px;
+                height: 6px;
             }
             QScrollArea {
                 background-color: #0f1115;

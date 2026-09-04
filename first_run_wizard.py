@@ -21,6 +21,7 @@ class FirstRunWizard(QWizard):
         self.available_versions = available_versions or []
         self.logo_path = logo_path
         self.arrow_path = arrow_path.replace("\\", "/")
+        self.up_arrow_path = self.arrow_path.replace("chevron_down", "chevron_up")
         self.setWindowTitle("Configura CignoLauncher")
         self.setMinimumSize(520, 430)
         self.resize(620, 480)
@@ -34,7 +35,7 @@ class FirstRunWizard(QWizard):
         self.addPage(self.create_welcome_page())
         self.addPage(self.create_instance_page())
         self.addPage(self.create_ready_page())
-        self.setStyleSheet(self.stylesheet(self.arrow_path))
+        self.setStyleSheet(self.stylesheet(self.arrow_path, self.up_arrow_path))
 
     def create_welcome_page(self):
         page = QWizardPage()
@@ -74,6 +75,7 @@ class FirstRunWizard(QWizard):
 
         self.version_combo = QComboBox()
         self.version_combo.setMaxVisibleItems(8)
+        self.version_combo.view().setMaximumHeight(220)
         self.set_available_versions(self.available_versions)
         form.addRow("Versione iniziale", self.version_combo)
 
@@ -132,7 +134,7 @@ class FirstRunWizard(QWizard):
         super().accept()
 
     @staticmethod
-    def stylesheet(arrow_path):
+    def stylesheet(arrow_path, up_arrow_path="assets/chevron_up.svg"):
         return """
             QWizard {
                 background: #101318;
@@ -178,16 +180,24 @@ class FirstRunWizard(QWizard):
                 height: 8px;
             }
             QSpinBox::up-button, QSpinBox::down-button {
-                width: 18px;
+                width: 20px;
                 border: none;
                 border-left: 1px solid #354052;
                 background: #202633;
             }
             QSpinBox::up-button {
-                image: url(assets/chevron_up.svg);
             }
             QSpinBox::down-button {
+            }
+            QSpinBox::up-arrow {
+                image: url(__UP_ARROW__);
+                width: 10px;
+                height: 6px;
+            }
+            QSpinBox::down-arrow {
                 image: url(__DOWN_ARROW__);
+                width: 10px;
+                height: 6px;
             }
             QAbstractItemView {
                 background: #1b202a;
@@ -195,6 +205,7 @@ class FirstRunWizard(QWizard):
                 selection-background-color: #3578e5;
                 selection-color: white;
                 outline: none;
+                max-height: 220px;
             }
             QWizard QPushButton {
                 min-height: 30px;
@@ -214,4 +225,4 @@ class FirstRunWizard(QWizard):
                 background: #293140;
                 color: #748097;
             }
-        """.replace("__DOWN_ARROW__", arrow_path)
+        """.replace("__DOWN_ARROW__", arrow_path).replace("__UP_ARROW__", up_arrow_path)
