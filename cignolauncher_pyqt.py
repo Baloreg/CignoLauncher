@@ -320,9 +320,8 @@ class MinecraftLauncher(QMainWindow):
         nav_items = [
             ("Gioca", 0, "assets/nav_play.svg"),
             ("Istanze", 1, "assets/nav_instances.svg"),
-            ("Account", 2, "assets/nav_account.svg"),
-            ("Impostazioni", 3, "assets/nav_settings.svg"),
-            ("Console & Log", 4, "assets/nav_console.svg")
+            ("Impostazioni", 2, "assets/nav_settings.svg"),
+            ("Console & Log", 3, "assets/nav_console.svg")
         ]
 
         self.nav_buttons = []
@@ -376,20 +375,18 @@ class MinecraftLauncher(QMainWindow):
 
         self.nav_group.idClicked.connect(self.pages.setCurrentIndex)
 
-        # Inizializza le 5 tab
+        # Inizializza le 4 tab
         self.home_tab = QWidget()
         self.instances_tab = QWidget()
-        self.account_tab = QWidget()
         self.settings_tab = QWidget()
         self.log_tab = QWidget()
 
         self.setup_home_tab()
         self.setup_instances_tab()
-        self.setup_account_tab()
         self.setup_settings_tab()
         self.setup_log_tab()
 
-        for page in (self.home_tab, self.instances_tab, self.account_tab, self.settings_tab, self.log_tab):
+        for page in (self.home_tab, self.instances_tab, self.settings_tab, self.log_tab):
             page.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
             scroll_area = QScrollArea()
             scroll_area.setWidgetResizable(True)
@@ -606,57 +603,8 @@ class MinecraftLauncher(QMainWindow):
         layout.addLayout(content_row)
 
     def setup_account_tab(self):
-        """Schermata account."""
-        layout = QVBoxLayout(self.account_tab)
-        layout.setContentsMargins(28, 24, 28, 24)
-        layout.setSpacing(20)
-
-        header = QLabel("Gestione Account")
-        header.setObjectName("PageHeader")
-        layout.addWidget(header)
-
-        self.account_details_card = QFrame()
-        self.account_details_card.setObjectName("ModernCard")
-        card_layout = QVBoxLayout(self.account_details_card)
-        card_layout.setContentsMargins(25, 25, 25, 25)
-        card_layout.setSpacing(15)
-
-        self.acc_display_widget = QWidget()
-        self.acc_display_widget.setObjectName("AccountDisplay")
-        self.acc_display_layout = QHBoxLayout(self.acc_display_widget)
-        self.acc_display_layout.setContentsMargins(0, 0, 0, 0)
-        self.acc_display_layout.setSpacing(18)
-
-        self.acc_large_head = QLabel()
-        self.acc_large_head.setFixedSize(64, 64)
-        offline_head = QPixmap(resource_path("assets/steve_head.png"))
-        self.acc_large_head.setPixmap(offline_head.scaled(
-            64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
-        ))
-        self.acc_display_layout.addWidget(self.acc_large_head)
-
-        acc_text_layout = QVBoxLayout()
-        acc_text_layout.setSpacing(4)
-        self.acc_name_label = QLabel("Nessun account selezionato")
-        self.acc_name_label.setObjectName("LargeAccountName")
-        self.acc_desc_label = QLabel("Aggiungi o seleziona un account per giocare.")
-        self.acc_desc_label.setObjectName("AccountSubtitle")
-        acc_text_layout.addWidget(self.acc_name_label)
-        acc_text_layout.addWidget(self.acc_desc_label)
-        self.acc_display_layout.addLayout(acc_text_layout)
-        self.acc_display_layout.addStretch()
-
-        card_layout.addWidget(self.acc_display_widget)
-
-        manage_btn = QPushButton("Gestisci o Aggiungi Account")
-        set_svg_icon(manage_btn, "nav_account.svg")
-        manage_btn.setObjectName("SecondaryButton")
-        manage_btn.setFixedHeight(44)
-        manage_btn.clicked.connect(self.show_account_dialog)
-        card_layout.addWidget(manage_btn)
-
-        layout.addWidget(self.account_details_card)
-        layout.addStretch()
+        """Metodo rimosso: la gestione account è ora nella barra laterale."""
+        pass
 
     def setup_settings_tab(self):
         """Schermata impostazioni globali."""
@@ -1768,7 +1716,7 @@ class MinecraftLauncher(QMainWindow):
         self.update_account_badge()
 
     def update_account_badge(self):
-        """Aggiorna le informazioni dell'account nella sidebar e nella pagina Account."""
+        """Aggiorna le informazioni dell'account nella sidebar."""
         curr = self.account_manager.current_account
         if curr:
             name = curr.get("username", "Giocatore")
@@ -1777,8 +1725,6 @@ class MinecraftLauncher(QMainWindow):
 
             self.sidebar_username_label.setText(name)
             self.sidebar_type_label.setText(acc_type_str)
-            self.acc_name_label.setText(name)
-            self.acc_desc_label.setText(f"Account {acc_type_str} attivo ● Pronto per giocare")
 
             if is_ms:
                 self.load_head_avatar(curr.get("uuid"))
@@ -1787,8 +1733,6 @@ class MinecraftLauncher(QMainWindow):
         else:
             self.sidebar_username_label.setText("Nessun Account")
             self.sidebar_type_label.setText("Clicca per accedere")
-            self.acc_name_label.setText("Nessun account attivo")
-            self.acc_desc_label.setText("Configura un profilo nella tab Account.")
             self.set_offline_avatar()
 
     def set_offline_avatar(self):
@@ -1799,16 +1743,12 @@ class MinecraftLauncher(QMainWindow):
         self.sidebar_head_label.setPixmap(avatar.scaled(
             36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
         ))
-        self.acc_large_head.setPixmap(avatar.scaled(
-            64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
-        ))
 
     def load_head_avatar(self, uuid_str):
         cached_path = os.path.join(self.heads_folder, f"{uuid_str}.png")
         if os.path.exists(cached_path) and os.path.getsize(cached_path) > 0:
             pix = QPixmap(cached_path)
             self.sidebar_head_label.setPixmap(pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
-            self.acc_large_head.setPixmap(pix.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             return
 
         self.set_offline_avatar()
@@ -1816,7 +1756,6 @@ class MinecraftLauncher(QMainWindow):
         def on_loaded(u, pixmap):
             if not pixmap.isNull():
                 self.sidebar_head_label.setPixmap(pixmap.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
-                self.acc_large_head.setPixmap(pixmap.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
 
         dl_thread = QThread(self)
         worker = ImageDownloader(uuid_str, self.heads_folder)
