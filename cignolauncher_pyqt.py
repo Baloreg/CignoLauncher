@@ -467,52 +467,14 @@ class MinecraftLauncher(QMainWindow):
 
         layout.addWidget(news_card)
 
-        # Card Selezione Versione Minecraft
-        version_card = QFrame()
-        version_card.setObjectName("ModernCard")
-        v_layout = QVBoxLayout(version_card)
-        v_layout.setContentsMargins(24, 18, 24, 18)
-        v_layout.setSpacing(12)
-
-        card_header = QLabel("Versione di Minecraft")
-        card_header.setObjectName("SectionHeader")
-        v_layout.addWidget(card_header)
-
-        select_row = QHBoxLayout()
-        select_row.setSpacing(12)
-
-        self.version_combo = MaterialComboBox()
-        self.version_combo.setObjectName("VersionComboBox")
-        self.version_combo.setMinimumHeight(32)
-        self.version_combo.setMaxVisibleItems(8)
-        self.version_combo.setMinimumContentsLength(24)
-        self.version_combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
-        self.version_combo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.version_combo.currentIndexChanged.connect(self.on_version_selected)
-        select_row.addWidget(self.version_combo, 1)
-
-        self.refresh_ver_btn = QPushButton("Aggiorna Lista")
-        set_svg_icon(self.refresh_ver_btn, "action_refresh.svg")
-        self.refresh_ver_btn.setObjectName("SecondaryButton")
-        self.refresh_ver_btn.setFixedHeight(34)
-        self.refresh_ver_btn.clicked.connect(lambda: self.refresh_version_list(force_network=True))
-        select_row.addWidget(self.refresh_ver_btn)
-
-        v_layout.addLayout(select_row)
-
-        ver_info_row = QHBoxLayout()
-        self.version_status_pill = QLabel("Verifica stato versione...")
-        self.version_status_pill.setObjectName("StatusPill")
-        ver_info_row.addWidget(self.version_status_pill)
-        ver_info_row.addStretch()
-
-        self.snapshot_checkbox = QCheckBox("Mostra anche Snapshot e versioni storiche")
+        # Controlli versione non visibili: la versione appartiene all'istanza attiva.
+        self.version_combo = QComboBox()
+        self.refresh_ver_btn = QPushButton()
+        self.version_status_pill = QLabel()
+        self.snapshot_checkbox = QCheckBox()
         self.snapshot_checkbox.setChecked(self.settings.get("show_snapshots", False))
-        self.snapshot_checkbox.toggled.connect(self.on_snapshot_toggled)
-        ver_info_row.addWidget(self.snapshot_checkbox)
-
-        v_layout.addLayout(ver_info_row)
-        layout.addWidget(version_card)
+        for control in (self.version_combo, self.refresh_ver_btn, self.version_status_pill, self.snapshot_checkbox):
+            control.hide()
 
         layout.addStretch()
 
