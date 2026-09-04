@@ -288,12 +288,17 @@ class MinecraftLauncher(QMainWindow):
 
         # Brand
         brand_container = QWidget()
+        brand_container.setObjectName("BrandContainer")
         brand_layout = QHBoxLayout(brand_container)
         brand_layout.setContentsMargins(4, 4, 4, 14)
         brand_layout.setSpacing(10)
 
         logo_icon_label = QLabel()
-        logo_icon_label.setPixmap(create_steve_avatar(36))
+        launcher_logo = QPixmap(resource_path("assets/window_icon.ico"))
+        if not launcher_logo.isNull():
+            logo_icon_label.setPixmap(launcher_logo.scaled(
+                36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+            ))
 
         brand_text_layout = QVBoxLayout()
         brand_text_layout.setSpacing(1)
@@ -617,13 +622,17 @@ class MinecraftLauncher(QMainWindow):
         card_layout.setSpacing(15)
 
         self.acc_display_widget = QWidget()
+        self.acc_display_widget.setObjectName("AccountDisplay")
         self.acc_display_layout = QHBoxLayout(self.acc_display_widget)
         self.acc_display_layout.setContentsMargins(0, 0, 0, 0)
         self.acc_display_layout.setSpacing(18)
 
         self.acc_large_head = QLabel()
         self.acc_large_head.setFixedSize(64, 64)
-        self.acc_large_head.setPixmap(create_steve_avatar(64))
+        offline_head = QPixmap(resource_path("assets/steve_head.png"))
+        self.acc_large_head.setPixmap(offline_head.scaled(
+            64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+        ))
         self.acc_display_layout.addWidget(self.acc_large_head)
 
         acc_text_layout = QVBoxLayout()
@@ -800,6 +809,9 @@ class MinecraftLauncher(QMainWindow):
             QLabel {
                 background-color: transparent;
                 color: #f1f5f9;
+            }
+            QWidget#BrandContainer, QWidget#AccountDisplay {
+                background-color: transparent;
             }
             QWidget#sidebar {
                 background-color: #16181f;
@@ -1771,15 +1783,25 @@ class MinecraftLauncher(QMainWindow):
             if is_ms:
                 self.load_head_avatar(curr.get("uuid"))
             else:
-                self.sidebar_head_label.setPixmap(create_steve_avatar(36))
-                self.acc_large_head.setPixmap(create_steve_avatar(64))
+                self.set_offline_avatar()
         else:
             self.sidebar_username_label.setText("Nessun Account")
             self.sidebar_type_label.setText("Clicca per accedere")
             self.acc_name_label.setText("Nessun account attivo")
             self.acc_desc_label.setText("Configura un profilo nella tab Account.")
-            self.sidebar_head_label.setPixmap(create_steve_avatar(36))
-            self.acc_large_head.setPixmap(create_steve_avatar(64))
+            self.set_offline_avatar()
+
+    def set_offline_avatar(self):
+        avatar_path = resource_path("assets/steve_head.png")
+        avatar = QPixmap(avatar_path)
+        if avatar.isNull():
+            avatar = create_steve_avatar(64)
+        self.sidebar_head_label.setPixmap(avatar.scaled(
+            36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+        ))
+        self.acc_large_head.setPixmap(avatar.scaled(
+            64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+        ))
 
     def load_head_avatar(self, uuid_str):
         cached_path = os.path.join(self.heads_folder, f"{uuid_str}.png")
@@ -1789,8 +1811,7 @@ class MinecraftLauncher(QMainWindow):
             self.acc_large_head.setPixmap(pix.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             return
 
-        self.sidebar_head_label.setPixmap(create_steve_avatar(36))
-        self.acc_large_head.setPixmap(create_steve_avatar(64))
+        self.set_offline_avatar()
 
         def on_loaded(u, pixmap):
             if not pixmap.isNull():
