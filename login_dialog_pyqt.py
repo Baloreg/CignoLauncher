@@ -5,8 +5,8 @@ import threading
 
 import minecraft_launcher_lib
 
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, 
-                             QTabWidget, QWidget, QLineEdit, QMessageBox, QFrame, 
+from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,
+                             QTabWidget, QWidget, QLineEdit, QMessageBox, QFrame,
                              QSpacerItem, QSizePolicy)
 from PyQt6.QtGui import QIcon, QFont, QPixmap
 from PyQt6.QtCore import Qt, QObject, pyqtSignal, QThread
@@ -30,11 +30,11 @@ class MicrosoftLoginWorker(QObject):
         super().__init__()
         self.client_id = client_id
         self.client_secret = client_secret
-        
+
     def run(self):
         try:
             redirect_url = "http://localhost:5000/callback"
-            
+
             login_url, state, code_verifier = minecraft_launcher_lib.microsoft_account.get_secure_login_data(
                 self.client_id, redirect_url
             )
@@ -43,14 +43,14 @@ class MicrosoftLoginWorker(QObject):
 
             from http.server import HTTPServer, BaseHTTPRequestHandler
             auth_code = None
-            
+
             class CallbackHandler(BaseHTTPRequestHandler):
                 def do_GET(self):
                     nonlocal auth_code
                     self.send_response(200)
                     self.send_header('Content-type', 'text/html; charset=utf-8')
                     self.end_headers()
-                    
+
                     html_content = """
                     <!DOCTYPE html>
                     <html>
@@ -83,7 +83,7 @@ class MicrosoftLoginWorker(QObject):
                         except Exception as e:
                             print(f"Errore parsing URL di callback: {e}")
                 def log_message(self, format, *args): pass
-            
+
             server = HTTPServer(('localhost', 5000), CallbackHandler)
             server.handle_request()
 
@@ -110,43 +110,44 @@ class LoginDialog(QDialog):
         self.client_id = client_id
         self.client_secret = client_secret
         self.head_labels = {}
-        
+
         self.setupUi()
         self.apply_stylesheet()
-        
+
     def setupUi(self):
         self.setWindowTitle("Gestione Account - CignoLauncher")
-        self.setMinimumSize(540, 480)
-        self.resize(540, 480)
+        self.setMinimumSize(440, 420)
+        self.resize(600, 520)
+        self.setSizeGripEnabled(True)
 
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(25, 20, 25, 20)
         main_layout.setSpacing(15)
-        
+
         title_box = QHBoxLayout()
         title_label = QLabel("Gestione Account")
         title_label.setObjectName("TitleLabel")
         title_box.addWidget(title_label)
         main_layout.addLayout(title_box)
-        
+
         self.notebook = QTabWidget()
-        
+
         self.accounts_tab = QWidget()
         self.microsoft_tab = QWidget()
         self.offline_tab = QWidget()
-        
+
         self.notebook.addTab(self.accounts_tab, "Account salvati")
         self.notebook.addTab(self.offline_tab, "Modalità Offline")
         self.notebook.addTab(self.microsoft_tab, "Accedi con Microsoft")
-        
+
         self.refresh_accounts_tab()
         self.setup_offline_tab()
         self.setup_microsoft_tab()
-        
+
         close_btn = QPushButton("Chiudi")
         close_btn.setObjectName("SecondaryButton")
         close_btn.clicked.connect(self.accept)
-        
+
         main_layout.addWidget(self.notebook)
         main_layout.addWidget(close_btn, alignment=Qt.AlignmentFlag.AlignRight)
 
@@ -181,6 +182,7 @@ class LoginDialog(QDialog):
                 margin-right: 4px;
                 border: 1px solid #272a34;
                 border-bottom: none;
+                min-width: 92px;
             }
             QTabBar::tab:hover {
                 background-color: #222530;
@@ -263,7 +265,7 @@ class LoginDialog(QDialog):
             widget = item.widget()
             if widget:
                 widget.deleteLater()
-        
+
         self.head_labels.clear()
 
         accounts = self.account_manager.get_all_accounts()
@@ -281,11 +283,11 @@ class LoginDialog(QDialog):
             is_active = (account_id == curr_id)
             frame = QFrame()
             frame.setObjectName("AccountCardActive" if is_active else "AccountCard")
-            
+
             frame_layout = QHBoxLayout(frame)
             frame_layout.setContentsMargins(10, 8, 10, 8)
             frame_layout.setSpacing(12)
-            
+
             head_label = QLabel()
             head_label.setFixedSize(36, 36)
             head_label.setStyleSheet("border-radius: 4px; background: #222530;")
@@ -293,19 +295,19 @@ class LoginDialog(QDialog):
 
             text_layout = QVBoxLayout()
             text_layout.setSpacing(2)
-            
+
             name_text = f"<b>{data['username']}</b>"
             if is_active:
                 name_text += " <span style='color: #10b981; font-size: 9pt;'>● Attivo</span>"
             name_label = QLabel(name_text)
-            
+
             acc_type = "Microsoft Xbox" if data['type'] == 'microsoft' else "Offline"
             type_color = "#38bdf8" if data['type'] == 'microsoft' else "#94a3b8"
             type_label = QLabel(f"<span style='color: {type_color}; font-size: 9pt;'>{acc_type}</span>")
-            
+
             text_layout.addWidget(name_label)
             text_layout.addWidget(type_label)
-            
+
             frame_layout.addWidget(head_label)
             frame_layout.addLayout(text_layout)
             frame_layout.addStretch()
@@ -314,14 +316,14 @@ class LoginDialog(QDialog):
                 use_btn = QPushButton("Usa")
                 use_btn.clicked.connect(lambda _, aid=account_id: self.use_account(aid))
                 frame_layout.addWidget(use_btn)
-            
+
             remove_btn = QPushButton("Rimuovi")
             remove_btn.setObjectName("RemoveButton")
             remove_btn.clicked.connect(lambda _, aid=account_id: self.remove_account(aid))
             frame_layout.addWidget(remove_btn)
 
             layout.addWidget(frame)
-            
+
             # Carica avatar
             if data['type'] == 'microsoft':
                 self.load_head_image_for_dialog(data['uuid'])
@@ -339,9 +341,9 @@ class LoginDialog(QDialog):
             pixmap = QPixmap(cached_path)
             target_label.setPixmap(pixmap.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             return
-        
+
         target_label.setPixmap(create_steve_avatar(36))
-        
+
         # Download in background
         dl_thread = QThread(self)
         img_worker = ImageDownloader(uuid_str, heads_folder)
@@ -362,26 +364,26 @@ class LoginDialog(QDialog):
         layout = QVBoxLayout(self.offline_tab)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setSpacing(16)
-        
+
         desc = QLabel("La modalità offline consente di giocare senza autenticazione Microsoft.")
         desc.setWordWrap(True)
         desc.setAlignment(Qt.AlignmentFlag.AlignCenter)
         desc.setStyleSheet("color: #94a3b8;")
-        
+
         form_layout = QHBoxLayout()
         form_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
         self.offline_username = QLineEdit()
         self.offline_username.setPlaceholderText("Nome giocatore (es. Steve)")
         self.offline_username.setFixedWidth(220)
         self.offline_username.returnPressed.connect(self.offline_login)
-        
+
         login_btn = QPushButton("Aggiungi e Seleziona")
         login_btn.clicked.connect(self.offline_login)
-        
+
         form_layout.addWidget(self.offline_username)
         form_layout.addWidget(login_btn)
-        
+
         layout.addWidget(desc)
         layout.addLayout(form_layout)
 
@@ -389,20 +391,20 @@ class LoginDialog(QDialog):
         layout = QVBoxLayout(self.microsoft_tab)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setSpacing(14)
-        
+
         desc = QLabel("Accedi con il tuo account Microsoft / Xbox per giocare online sui server multiplayer autenticati.")
         desc.setWordWrap(True)
         desc.setAlignment(Qt.AlignmentFlag.AlignCenter)
         desc.setStyleSheet("color: #94a3b8;")
-        
+
         self.ms_login_btn = QPushButton("Apri Browser e Accedi con Microsoft")
         self.ms_login_btn.clicked.connect(self.microsoft_login)
         self.ms_login_btn.setMinimumHeight(38)
-        
+
         self.ms_status_label = QLabel("")
         self.ms_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.ms_status_label.setStyleSheet("color: #38bdf8; font-weight: 500;")
-        
+
         layout.addWidget(desc)
         layout.addWidget(self.ms_login_btn)
         layout.addWidget(self.ms_status_label)
@@ -438,11 +440,11 @@ class LoginDialog(QDialog):
 
         self.ms_login_btn.setEnabled(False)
         self.ms_status_label.setText("In attesa dell'autorizzazione nel browser...")
-        
+
         self.login_thread = QThread(self)
         self.login_worker = MicrosoftLoginWorker(self.client_id, self.client_secret)
         self.login_worker.moveToThread(self.login_thread)
-        
+
         def cleanup_login():
             self.login_thread = None
             self.login_worker = None
@@ -455,7 +457,7 @@ class LoginDialog(QDialog):
         self.login_thread.finished.connect(self.login_thread.deleteLater)
         self.login_thread.finished.connect(cleanup_login)
         self.login_thread.started.connect(self.login_worker.run)
-        
+
         self.login_thread.start()
 
     def on_login_success(self, account_data):
@@ -475,7 +477,7 @@ class CustomMessageBox(QMessageBox):
         super().__init__(parent)
         self.setWindowTitle(title)
         self.setText(message)
-        
+
         icon_map = {
             'info': QMessageBox.Icon.Information,
             'error': QMessageBox.Icon.Critical,
@@ -483,7 +485,7 @@ class CustomMessageBox(QMessageBox):
             'question': QMessageBox.Icon.Question
         }
         self.setIcon(icon_map.get(msg_type, QMessageBox.Icon.NoIcon))
-        
+
         if msg_type == 'question':
             self.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         else:

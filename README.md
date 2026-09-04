@@ -100,6 +100,19 @@ CignoLauncher/
 └── README.md              # Documentazione del progetto
 ```
 
+## 🧰 Build degli eseguibili
+
+Il progetto include un build PyInstaller e una pipeline GitHub Actions che produce gli artefatti su runner nativi:
+
+```bash
+python3 build.py             # build per il sistema operativo corrente
+python3 build.py --onefile   # singolo eseguibile quando supportato
+```
+
+Per ottenere Windows, Linux e macOS insieme, esegui la workflow `Build CignoLauncher Executables` da GitHub Actions oppure crea un tag `v*`. La compilazione multipiattaforma deve girare su ciascun sistema operativo; il risultato viene pubblicato come artefatto separato.
+
+Le istanze vengono salvate in `~/.cignolauncher/instances` (su Windows nella cartella dati dell'applicazione), con versione, RAM, argomenti JVM, mondi e configurazioni isolati per istanza.
+
 ---
 
 ## 📜 Licenza
