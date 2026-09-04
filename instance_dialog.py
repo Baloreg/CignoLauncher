@@ -201,6 +201,12 @@ class InstanceEditDialog(QDialog):
                 color: #aebbd0;
                 spacing: 8px;
                 font-size: 9pt;
+                border: none;
+                background: transparent;
+            }
+            QCheckBox:hover {
+                border: none;
+                background: transparent;
             }
             QCheckBox::indicator {
                 width: 18px;
