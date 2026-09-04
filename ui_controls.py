@@ -2,9 +2,10 @@ from PyQt6.QtCore import QPoint, Qt
 from PyQt6.QtWidgets import QApplication, QComboBox, QListView
 
 
-class NoWheelListView(QListView):
-    def wheelEvent(self, event):
-        event.ignore()
+class PopupListView(QListView):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setAutoScroll(False)
 
 
 class MaterialComboBox(QComboBox):
@@ -17,7 +18,7 @@ class MaterialComboBox(QComboBox):
         super().__init__(parent)
         self.setMinimumHeight(32)
         self.setMaxVisibleItems(self.MAX_VISIBLE_ITEMS)
-        view = NoWheelListView()
+        view = PopupListView()
         view.setUniformItemSizes(True)
         view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setView(view)
