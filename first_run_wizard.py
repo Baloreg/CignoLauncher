@@ -13,10 +13,12 @@ from PyQt6.QtWidgets import (
 
 
 class FirstRunWizard(QWizard):
-    def __init__(self, parent, default_version, instance, logo_path="", arrow_path="assets/chevron_down.svg"):
+    def __init__(self, parent, default_version, instance, logo_path="",
+                 arrow_path="assets/chevron_down.svg", available_versions=None):
         super().__init__(parent)
         self.instance = instance
         self.default_version = default_version
+        self.available_versions = available_versions or []
         self.logo_path = logo_path
         self.arrow_path = arrow_path.replace("\\", "/")
         self.setWindowTitle("Configura CignoLauncher")
@@ -71,7 +73,8 @@ class FirstRunWizard(QWizard):
         form.addRow("Nome istanza", self.name_input)
 
         self.version_combo = QComboBox()
-        self.version_combo.addItem(self.default_version, self.default_version)
+        self.version_combo.setMaxVisibleItems(8)
+        self.set_available_versions(self.available_versions)
         form.addRow("Versione iniziale", self.version_combo)
 
         self.ram_spinbox = QSpinBox()
@@ -83,6 +86,26 @@ class FirstRunWizard(QWizard):
         layout.addLayout(form)
         layout.addStretch()
         return page
+
+    def set_available_versions(self, versions):
+        current_version = self.version_combo.currentData() if self.version_combo.count() else self.default_version
+        self.version_combo.blockSignals(True)
+        self.version_combo.clear()
+        seen = set()
+        entries = []
+        for version in versions:
+            version_id = version.get("id", "") if isinstance(version, dict) else str(version)
+            version_type = version.get("type", "release") if isinstance(version, dict) else "release"
+            if version_id and version_type == "release" and version_id not in seen:
+                entries.append(version_id)
+                seen.add(version_id)
+        if self.default_version not in seen:
+            entries.insert(0, self.default_version)
+        for version_id in entries:
+            self.version_combo.addItem(version_id, version_id)
+        target = current_version if current_version in entries else self.default_version
+        self.version_combo.setCurrentIndex(max(0, self.version_combo.findData(target)))
+        self.version_combo.blockSignals(False)
 
     def create_ready_page(self):
         page = QWizardPage()
@@ -133,8 +156,8 @@ class FirstRunWizard(QWizard):
                 line-height: 1.4;
             }
             QLineEdit, QComboBox, QSpinBox {
-                min-height: 38px;
-                padding: 5px 10px;
+                min-height: 32px;
+                padding: 3px 8px;
                 background: #1b202a;
                 color: #f4f7fb;
                 border: 1px solid #354052;
@@ -155,7 +178,7 @@ class FirstRunWizard(QWizard):
                 height: 8px;
             }
             QSpinBox::up-button, QSpinBox::down-button {
-                width: 24px;
+                width: 18px;
                 border: none;
                 border-left: 1px solid #354052;
                 background: #202633;

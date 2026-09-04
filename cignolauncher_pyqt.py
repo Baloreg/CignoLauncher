@@ -117,6 +117,7 @@ class MinecraftLauncher(QMainWindow):
         self.game_process = None
         self.worker_thread = None
         self.worker = None
+        self.first_run_wizard = None
 
         # Inizializzazione versioni con default
         self.all_versions = list(DEFAULT_POPULAR_VERSIONS)
@@ -156,7 +157,9 @@ class MinecraftLauncher(QMainWindow):
                 active_instance or {},
                 resource_path("assets/logo.png"),
                 resource_path("assets/chevron_down.svg"),
+                available_versions=self.all_versions,
             )
+            self.first_run_wizard = wizard
             if wizard.exec() == FirstRunWizard.DialogCode.Accepted and active_instance:
                 self.instance_manager.update_instance(
                     active_instance["id"],
@@ -168,6 +171,7 @@ class MinecraftLauncher(QMainWindow):
                 self.save_settings()
                 self.refresh_instances_selector()
             self.onboarding_pending = False
+            self.first_run_wizard = None
             self.show()
         self.check_account_on_startup()
 
@@ -420,13 +424,14 @@ class MinecraftLauncher(QMainWindow):
         inst_select_row = QHBoxLayout()
         self.instance_combo = QComboBox()
         self.instance_combo.setObjectName("InstanceComboBox")
-        self.instance_combo.setMinimumHeight(40)
+        self.instance_combo.setMinimumHeight(34)
+        self.instance_combo.setMaxVisibleItems(8)
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         inst_select_row.addWidget(self.instance_combo, 1)
 
         open_dir_btn = QPushButton("📁 Cartella Salvataggi")
         open_dir_btn.setObjectName("SecondaryButton")
-        open_dir_btn.setFixedHeight(40)
+        open_dir_btn.setFixedHeight(34)
         open_dir_btn.clicked.connect(self.open_active_instance_folder)
         inst_select_row.addWidget(open_dir_btn)
 
@@ -458,7 +463,8 @@ class MinecraftLauncher(QMainWindow):
 
         self.version_combo = QComboBox()
         self.version_combo.setObjectName("VersionComboBox")
-        self.version_combo.setMinimumHeight(40)
+        self.version_combo.setMinimumHeight(34)
+        self.version_combo.setMaxVisibleItems(8)
         self.version_combo.setMinimumContentsLength(24)
         self.version_combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
         self.version_combo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -467,7 +473,7 @@ class MinecraftLauncher(QMainWindow):
 
         self.refresh_ver_btn = QPushButton("🔄 Aggiorna Lista")
         self.refresh_ver_btn.setObjectName("SecondaryButton")
-        self.refresh_ver_btn.setFixedHeight(40)
+        self.refresh_ver_btn.setFixedHeight(34)
         self.refresh_ver_btn.clicked.connect(lambda: self.refresh_version_list(force_network=True))
         select_row.addWidget(self.refresh_ver_btn)
 
@@ -1387,6 +1393,8 @@ class MinecraftLauncher(QMainWindow):
     @pyqtSlot(list, str)
     def on_versions_loaded(self, versions, latest_release):
         self.all_versions = versions
+        if self.first_run_wizard is not None:
+            self.first_run_wizard.set_available_versions(versions)
         if self.first_run and latest_release:
             self.selected_version = latest_release
             active_instance = self.instance_manager.get_current_instance()
