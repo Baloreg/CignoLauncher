@@ -6,6 +6,22 @@ from PyQt6.QtWidgets import (
 )
 
 
+class ScrollablePopupMenu(QMenu):
+    def wheelEvent(self, event):
+        actions = [action for action in self.actions() if action.isVisible() and action.isEnabled()]
+        if not actions:
+            event.accept()
+            return
+
+        current = self.activeAction()
+        current_index = actions.index(current) if current in actions else 0
+        steps = max(1, abs(event.angleDelta().y()) // 120)
+        direction = -1 if event.angleDelta().y() > 0 else 1
+        next_index = max(0, min(len(actions) - 1, current_index + direction * steps))
+        self.setActiveAction(actions[next_index])
+        event.accept()
+
+
 class MaterialComboBox(QComboBox):
     """Combo box with a compact popup anchored below the field."""
 
@@ -26,7 +42,7 @@ class MaterialComboBox(QComboBox):
         if self.popup_menu is not None:
             self.hidePopup()
 
-        popup = QMenu(self)
+        popup = ScrollablePopupMenu(self)
         popup.setObjectName("MaterialComboPopup")
         popup.setStyleSheet(self._popup_stylesheet())
         for index in range(self.count()):
