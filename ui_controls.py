@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QPoint, Qt
+from PyQt6.QtCore import QPoint, Qt, QTimer
 from PyQt6 import sip
 from PyQt6.QtWidgets import (
     QApplication,
@@ -77,8 +77,9 @@ class MaterialComboBox(QComboBox):
         popup.show()
 
     def _popup_item_clicked(self, item):
-        self.setCurrentIndex(item.data(Qt.ItemDataRole.UserRole))
+        index = item.data(Qt.ItemDataRole.UserRole)
         self.hidePopup()
+        QTimer.singleShot(0, lambda: self.setCurrentIndex(index))
 
     def hidePopup(self):
         popup = self.popup
