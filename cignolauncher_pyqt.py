@@ -305,16 +305,20 @@ class MinecraftLauncher(QMainWindow):
         self.nav_group.setExclusive(True)
 
         nav_items = [
-            ("🚀  Gioca", 0),
-            ("📦  Istanze", 1),
-            ("👤  Account", 2),
-            ("⚙️  Impostazioni", 3),
-            ("📋  Console & Log", 4)
+            ("Gioca", 0, "assets/home_icon.png"),
+            ("Istanze", 1, "assets/logo.png"),
+            ("Account", 2, "assets/account_icon.png"),
+            ("Impostazioni", 3, "assets/settings_icon.png"),
+            ("Console & Log", 4, "assets/log_icon.png")
         ]
 
         self.nav_buttons = []
-        for text, page_idx in nav_items:
+        for text, page_idx, icon_file in nav_items:
             btn = QPushButton(text)
+            icon_path = resource_path(icon_file)
+            if os.path.exists(icon_path):
+                btn.setIcon(QIcon(icon_path))
+                btn.setIconSize(QSize(18, 18))
             btn.setCheckable(True)
             btn.setObjectName("NavButton")
             btn.setFixedHeight(44)
