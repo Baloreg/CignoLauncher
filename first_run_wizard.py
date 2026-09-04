@@ -13,11 +13,12 @@ from PyQt6.QtWidgets import (
 
 
 class FirstRunWizard(QWizard):
-    def __init__(self, parent, default_version, instance, logo_path=""):
+    def __init__(self, parent, default_version, instance, logo_path="", arrow_path="assets/chevron_down.svg"):
         super().__init__(parent)
         self.instance = instance
         self.default_version = default_version
         self.logo_path = logo_path
+        self.arrow_path = arrow_path.replace("\\", "/")
         self.setWindowTitle("Configura CignoLauncher")
         self.setMinimumSize(520, 430)
         self.resize(620, 480)
@@ -31,7 +32,7 @@ class FirstRunWizard(QWizard):
         self.addPage(self.create_welcome_page())
         self.addPage(self.create_instance_page())
         self.addPage(self.create_ready_page())
-        self.setStyleSheet(self.stylesheet())
+        self.setStyleSheet(self.stylesheet(self.arrow_path))
 
     def create_welcome_page(self):
         page = QWizardPage()
@@ -108,7 +109,7 @@ class FirstRunWizard(QWizard):
         super().accept()
 
     @staticmethod
-    def stylesheet():
+    def stylesheet(arrow_path):
         return """
             QWizard {
                 background: #101318;
@@ -148,6 +149,23 @@ class FirstRunWizard(QWizard):
                 border: none;
                 border-left: 1px solid #354052;
             }
+            QComboBox::down-arrow {
+                image: url(__DOWN_ARROW__);
+                width: 12px;
+                height: 8px;
+            }
+            QSpinBox::up-button, QSpinBox::down-button {
+                width: 24px;
+                border: none;
+                border-left: 1px solid #354052;
+                background: #202633;
+            }
+            QSpinBox::up-button {
+                image: url(assets/chevron_up.svg);
+            }
+            QSpinBox::down-button {
+                image: url(__DOWN_ARROW__);
+            }
             QAbstractItemView {
                 background: #1b202a;
                 color: #f4f7fb;
@@ -156,13 +174,14 @@ class FirstRunWizard(QWizard):
                 outline: none;
             }
             QWizard QPushButton {
-                min-height: 34px;
-                min-width: 90px;
-                padding: 6px 16px;
+                min-height: 30px;
+                min-width: 70px;
+                padding: 5px 12px;
                 background: #3578e5;
                 color: white;
                 border: none;
                 border-radius: 7px;
+                font-size: 9pt;
                 font-weight: 600;
             }
             QWizard QPushButton:hover {
@@ -172,4 +191,4 @@ class FirstRunWizard(QWizard):
                 background: #293140;
                 color: #748097;
             }
-        """
+        """.replace("__DOWN_ARROW__", arrow_path)

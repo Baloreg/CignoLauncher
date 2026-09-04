@@ -14,7 +14,8 @@ def main():
     app.setOrganizationName("Baloreg")
     
     launcher = MinecraftLauncher()
-    launcher.show()
+    if not launcher.onboarding_pending:
+        launcher.show()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

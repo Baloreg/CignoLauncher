@@ -155,6 +155,7 @@ class MinecraftLauncher(QMainWindow):
                 self.get_latest_official_release(),
                 active_instance or {},
                 resource_path("assets/logo.png"),
+                resource_path("assets/chevron_down.svg"),
             )
             if wizard.exec() == FirstRunWizard.DialogCode.Accepted and active_instance:
                 self.instance_manager.update_instance(
@@ -167,6 +168,7 @@ class MinecraftLauncher(QMainWindow):
                 self.save_settings()
                 self.refresh_instances_selector()
             self.onboarding_pending = False
+            self.show()
         self.check_account_on_startup()
 
     def get_latest_official_release(self):
@@ -777,7 +779,9 @@ class MinecraftLauncher(QMainWindow):
 
     def apply_modern_stylesheet(self):
         """Applica il design system dark gaming moderno con bugfix grafici."""
-        self.setStyleSheet("""
+        down_arrow = resource_path("assets/chevron_down.svg").replace("\\", "/")
+        up_arrow = resource_path("assets/chevron_up.svg").replace("\\", "/")
+        stylesheet = """
             QWidget {
                 background-color: #0f1115;
                 color: #f1f5f9;
@@ -895,6 +899,11 @@ class MinecraftLauncher(QMainWindow):
                 border-left: 1px solid #334155;
                 background-color: #1a1d26;
             }
+            QComboBox::down-arrow {
+                image: url(__DOWN_ARROW__);
+                width: 12px;
+                height: 8px;
+            }
             QComboBox:focus {
                 border: 1px solid #3b82f6;
             }
@@ -911,6 +920,23 @@ class MinecraftLauncher(QMainWindow):
             QComboBox QAbstractItemView::item {
                 min-height: 30px;
                 padding: 5px 8px;
+            }
+            QSpinBox {
+                padding: 5px 30px 5px 10px;
+            }
+            QSpinBox::up-button, QSpinBox::down-button {
+                width: 24px;
+                border: none;
+                border-left: 1px solid #334155;
+                background-color: #1a1d26;
+            }
+            QSpinBox::up-button {
+                subcontrol-position: top right;
+                image: url(__UP_ARROW__);
+            }
+            QSpinBox::down-button {
+                subcontrol-position: bottom right;
+                image: url(__DOWN_ARROW__);
             }
             QScrollArea {
                 background-color: #0f1115;
@@ -1118,7 +1144,10 @@ class MinecraftLauncher(QMainWindow):
                 font-size: 9pt;
                 padding: 8px;
             }
-        """)
+        """
+        self.setStyleSheet(
+            stylesheet.replace("__DOWN_ARROW__", down_arrow).replace("__UP_ARROW__", up_arrow)
+        )
 
     # --- GESTIONE ISTANZE ---
 
