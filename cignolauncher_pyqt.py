@@ -436,59 +436,36 @@ class MinecraftLauncher(QMainWindow):
 
         layout.addWidget(hero_card)
 
-        # Card Istanza Attiva
-        instance_card = QFrame()
-        instance_card.setObjectName("ModernCard")
-        inst_layout = QVBoxLayout(instance_card)
-        inst_layout.setContentsMargins(24, 18, 24, 18)
-        inst_layout.setSpacing(12)
+        news_card = QFrame()
+        news_card.setObjectName("NewsCard")
+        news_layout = QVBoxLayout(news_card)
+        news_layout.setContentsMargins(22, 16, 22, 16)
+        news_layout.setSpacing(10)
 
-        inst_top_row = QHBoxLayout()
-        inst_card_header = QLabel("Istanza Attiva")
-        inst_card_header.setObjectName("SectionHeader")
-        inst_top_row.addWidget(inst_card_header)
-        inst_top_row.addStretch()
+        news_header = QLabel("News del Launcher")
+        news_header.setObjectName("SectionHeader")
+        news_layout.addWidget(news_header)
 
-        manage_inst_btn = QPushButton("Gestisci Istanze")
-        set_svg_icon(manage_inst_btn, "nav_settings.svg")
-        manage_inst_btn.setObjectName("SecondaryButton")
-        manage_inst_btn.clicked.connect(self.open_instances_dialog)
-        inst_top_row.addWidget(manage_inst_btn)
+        for title, summary in (
+            ("Gestione istanze più semplice", "Scegli direttamente l'istanza da avviare dalla barra di lancio."),
+            ("Versioni sempre aggiornate", "Il catalogo Minecraft viene sincronizzato con le release disponibili."),
+            ("Configurazione isolata", "Ogni istanza conserva separatamente salvataggi, RAM e impostazioni."),
+        ):
+            item = QFrame()
+            item.setObjectName("NewsItem")
+            item_layout = QVBoxLayout(item)
+            item_layout.setContentsMargins(12, 8, 12, 8)
+            item_layout.setSpacing(2)
+            item_title = QLabel(title)
+            item_title.setObjectName("NewsItemTitle")
+            item_summary = QLabel(summary)
+            item_summary.setObjectName("NewsItemSummary")
+            item_summary.setWordWrap(True)
+            item_layout.addWidget(item_title)
+            item_layout.addWidget(item_summary)
+            news_layout.addWidget(item)
 
-        new_inst_btn = QPushButton("Nuova Istanza")
-        set_svg_icon(new_inst_btn, "action_add.svg")
-        new_inst_btn.setObjectName("SecondaryButton")
-        new_inst_btn.clicked.connect(self.create_new_instance_dialog)
-        inst_top_row.addWidget(new_inst_btn)
-
-        inst_layout.addLayout(inst_top_row)
-
-        inst_select_row = QHBoxLayout()
-        self.instance_combo = MaterialComboBox(fit_popup_to_field=True, popup_row_height=56)
-        self.instance_combo.setObjectName("InstanceComboBox")
-        self.instance_combo.setMinimumHeight(32)
-        self.instance_combo.setMaxVisibleItems(8)
-        self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
-        inst_select_row.addWidget(self.instance_combo, 1)
-
-        open_dir_btn = QPushButton("Cartella Salvataggi")
-        set_svg_icon(open_dir_btn, "action_folder.svg")
-        open_dir_btn.setObjectName("SecondaryButton")
-        open_dir_btn.setFixedHeight(34)
-        open_dir_btn.clicked.connect(self.open_active_instance_folder)
-        inst_select_row.addWidget(open_dir_btn)
-
-        inst_layout.addLayout(inst_select_row)
-
-        # Info badge istanza
-        inst_info_row = QHBoxLayout()
-        self.instance_info_badge = QLabel("Istanza: -")
-        self.instance_info_badge.setObjectName("StatusPill")
-        inst_info_row.addWidget(self.instance_info_badge)
-        inst_info_row.addStretch()
-        inst_layout.addLayout(inst_info_row)
-
-        layout.addWidget(instance_card)
+        layout.addWidget(news_card)
 
         # Card Selezione Versione Minecraft
         version_card = QFrame()
@@ -563,12 +540,23 @@ class MinecraftLauncher(QMainWindow):
         bottom_layout.addWidget(self.progress_bar)
 
         btn_row = QHBoxLayout()
-        btn_row.addStretch()
+        self.instance_combo = MaterialComboBox(fit_popup_to_field=True, popup_row_height=56)
+        self.instance_combo.setObjectName("InstanceComboBox")
+        self.instance_combo.setMinimumHeight(34)
+        self.instance_combo.setMaxVisibleItems(8)
+        self.instance_combo.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
+        btn_row.addWidget(self.instance_combo, 1)
+
+        self.instance_info_badge = QLabel("Istanza: -")
+        self.instance_info_badge.setObjectName("StatusPill")
+        self.instance_info_badge.setMinimumWidth(150)
+        btn_row.addWidget(self.instance_info_badge)
 
         self.main_action_btn = QPushButton("GIOCA")
         set_svg_icon(self.main_action_btn, "action_play.svg", 20)
         self.main_action_btn.setObjectName("PlayButton")
-        self.main_action_btn.setFixedSize(220, 50)
+        self.main_action_btn.setFixedSize(200, 46)
         self.main_action_btn.clicked.connect(self.handle_main_action)
         btn_row.addWidget(self.main_action_btn)
 
@@ -929,6 +917,25 @@ class MinecraftLauncher(QMainWindow):
                 background-color: #16181f;
                 border: 1px solid #232631;
                 border-radius: 12px;
+            }
+            QFrame#NewsCard {
+                background-color: #141922;
+                border: 1px solid #263348;
+                border-radius: 12px;
+            }
+            QFrame#NewsItem {
+                background-color: #1b2230;
+                border: 1px solid #2b3a52;
+                border-radius: 7px;
+            }
+            QLabel#NewsItemTitle {
+                color: #e7eef8;
+                font-size: 9pt;
+                font-weight: 700;
+            }
+            QLabel#NewsItemSummary {
+                color: #91a1b7;
+                font-size: 8pt;
             }
             QLabel#SectionHeader {
                 font-size: 11pt;
