@@ -305,11 +305,11 @@ class MinecraftLauncher(QMainWindow):
         self.nav_group.setExclusive(True)
 
         nav_items = [
-            ("Gioca", 0, "assets/home_icon.png"),
-            ("Istanze", 1, "assets/logo.png"),
-            ("Account", 2, "assets/account_icon.png"),
-            ("Impostazioni", 3, "assets/settings_icon.png"),
-            ("Console & Log", 4, "assets/log_icon.png")
+            ("Gioca", 0, "assets/nav_play.svg"),
+            ("Istanze", 1, "assets/nav_instances.svg"),
+            ("Account", 2, "assets/nav_account.svg"),
+            ("Impostazioni", 3, "assets/nav_settings.svg"),
+            ("Console & Log", 4, "assets/nav_console.svg")
         ]
 
         self.nav_buttons = []
