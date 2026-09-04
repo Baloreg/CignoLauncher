@@ -510,11 +510,6 @@ class MinecraftLauncher(QMainWindow):
         self.instance_combo.currentIndexChanged.connect(self.on_instance_selected)
         btn_row.addWidget(self.instance_combo, 1)
 
-        self.instance_info_badge = QLabel("Istanza: -")
-        self.instance_info_badge.setObjectName("StatusPill")
-        self.instance_info_badge.setMinimumWidth(150)
-        btn_row.addWidget(self.instance_info_badge)
-
         self.main_action_btn = QPushButton("GIOCA")
         set_svg_icon(self.main_action_btn, "action_play.svg", 20)
         self.main_action_btn.setObjectName("PlayButton")
@@ -1226,8 +1221,6 @@ class MinecraftLauncher(QMainWindow):
             return
 
         inst_ver = inst.get("version", "")
-        self.instance_info_badge.setText(f"Istanza: {inst.get('name')}  •  Versione: {inst_ver}  •  RAM: {inst.get('ram_gb', 4)} GB")
-
         # Seleziona la versione dell'istanza nel selettore versioni se diversa
         if inst_ver and inst_ver != self.selected_version:
             self.selected_version = inst_ver
