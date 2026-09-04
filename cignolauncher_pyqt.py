@@ -1191,7 +1191,12 @@ class MinecraftLauncher(QMainWindow):
 
         sel_idx = 0
         idx = 0
-        for inst_id, inst in instances.items():
+        ordered_instances = sorted(
+            instances.items(),
+            key=lambda entry: entry[1].get("created_at", ""),
+            reverse=True,
+        )
+        for inst_id, inst in ordered_instances:
             name = inst.get("name", "Istanza")
             ver = inst.get("version", "Vanilla")
             ram = inst.get("ram_gb", 4)
@@ -1259,7 +1264,12 @@ class MinecraftLauncher(QMainWindow):
         current = self.instance_manager.get_current_instance()
         curr_id = current.get("id") if current else None
 
-        for inst_id, inst in instances.items():
+        ordered_instances = sorted(
+            instances.items(),
+            key=lambda entry: entry[1].get("created_at", ""),
+            reverse=True,
+        )
+        for inst_id, inst in ordered_instances:
             name = inst.get("name", "Istanza")
             ver = inst.get("version", "Vanilla")
             is_active = (inst_id == curr_id)
