@@ -37,14 +37,40 @@ def build():
     dist_dir = PROJECT_ROOT / "dist"
     build_dir = PROJECT_ROOT / "build"
 
-    # Opzioni di base di PyInstaller
+    # Opzioni di base di PyInstaller con ottimizzazioni e compressione
     cmd = [
         sys.executable, "-m", "PyInstaller",
         "--name", APP_NAME,
         "--windowed",              # Nessuna finestra console DOS
         "--clean",
         "--noconfirm",
+        "--noupx",                 # Disabilitato di default per evitare problemi di corruzione binaria su alcune piattaforme, ma escludiamo moduli pesanti
     ]
+
+    # Moduli pesanti o non necessari da escludere per ridurre le dimensioni
+    excluded_modules = [
+        "tkinter",
+        "unittest",
+        "pydoc",
+        "xmlrpc",
+        "email",
+        "http",
+        "sqlite3",
+        "PyQt6.QtSql",
+        "PyQt6.QtTest",
+        "PyQt6.QtPdf",
+        "PyQt6.QtDesigner",
+        "PyQt6.QtHelp",
+        "PyQt6.QtNfc",
+        "PyQt6.QtSensors",
+        "PyQt6.QtSerialPort",
+        "PyQt6.QtSvgWidgets",
+        "PyQt6.QtTextToSpeech",
+        "PyQt6.QtXml",
+    ]
+
+    for mod in excluded_modules:
+        cmd.extend(["--exclude-module", mod])
 
     # Includi assets
     assets_dir = PROJECT_ROOT / "assets"
