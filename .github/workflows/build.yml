@@ -45,6 +45,9 @@ jobs:
       - name: Build Executable
         run: |
           python build.py
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Package macOS Application (if macOS)
         if: runner.os == 'macOS'
