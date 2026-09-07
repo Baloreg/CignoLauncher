@@ -265,7 +265,7 @@ class MinecraftLauncher(QMainWindow):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.1"
+        self.launcher_version = "2.1.2"
 
         self.setup_paths()
         self.load_settings()
