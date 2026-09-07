@@ -25,7 +25,7 @@ def print_banner(msg):
 def ensure_pyinstaller():
     try:
         import PyInstaller
-        print(f"✓ PyInstaller rilevato (v{PyInstaller.__version__})")
+        print(f"[OK] PyInstaller rilevato (v{PyInstaller.__version__})")
     except ImportError:
         print("Installazione di PyInstaller in corso...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", "pyinstaller>=6.0.0"])
@@ -98,10 +98,10 @@ def build():
     result = subprocess.run(cmd, cwd=PROJECT_ROOT)
 
     if result.returncode != 0:
-        print_banner("❌ Errore durante la compilazione!")
+        print_banner("[ERROR] Errore durante la compilazione!")
         sys.exit(result.returncode)
 
-    print_banner(f"✓ Compilazione completata con successo!")
+    print_banner(f"[OK] Compilazione completata con successo!")
     print(f"Gli eseguibili sono disponibili nella cartella: {dist_dir}")
 
     # Se siamo su Linux, creiamo un tar.gz con lo script di installazione
@@ -119,7 +119,7 @@ def build():
             assets_path = PROJECT_ROOT / "assets"
             if assets_path.exists():
                 tar.add(assets_path, arcname="assets")
-        print(f"✓ Archivio Linux creato: {tar_name}")
+        print(f"[OK] Archivio Linux creato: {tar_name}")
 
     # Lista file generati
     if dist_dir.exists():
