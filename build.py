@@ -52,7 +52,7 @@ def build():
         sep = ";" if sys.platform == "win32" else ":"
         cmd.extend(["--add-data", f"{assets_dir}{sep}assets"])
 
-    # Icona specifica piattaforma
+    # Icona per Windows e macOS (su Linux PyInstaller non supporta embedding diretto di file .ico)
     if sys.platform == "win32" and ICON_PATH.exists():
         cmd.extend(["--icon", str(ICON_PATH)])
     elif sys.platform == "darwin":
@@ -89,9 +89,8 @@ def build():
     for mod in hidden_imports:
         cmd.extend(["--hidden-import", mod])
 
-    # Unico file eseguibile (onedir per default su macOS app, onefile su Windows/Linux se richiesto)
-    if "--onefile" in sys.argv or sys.platform == "win32":
-        cmd.append("--onefile")
+    # Unico file eseguibile (onefile su Windows, Linux e macOS)
+    cmd.append("--onefile")
 
     cmd.append(str(MAIN_SCRIPT))
 
@@ -104,6 +103,23 @@ def build():
 
     print_banner(f"✓ Compilazione completata con successo!")
     print(f"Gli eseguibili sono disponibili nella cartella: {dist_dir}")
+
+    # Se siamo su Linux, creiamo un tar.gz con lo script di installazione
+    if sys.platform.startswith("linux"):
+        print_banner("Creazione archivio .tar.gz per Linux con script di installazione...")
+        tar_name = dist_dir / "CignoLauncher-Linux-x86_64.tar.gz"
+        import tarfile
+        with tarfile.open(tar_name, "w:gz") as tar:
+            binary_path = dist_dir / APP_NAME
+            if binary_path.exists():
+                tar.add(binary_path, arcname=APP_NAME)
+            install_script = PROJECT_ROOT / "install.sh"
+            if install_script.exists():
+                tar.add(install_script, arcname="install.sh")
+            assets_path = PROJECT_ROOT / "assets"
+            if assets_path.exists():
+                tar.add(assets_path, arcname="assets")
+        print(f"✓ Archivio Linux creato: {tar_name}")
 
     # Lista file generati
     if dist_dir.exists():

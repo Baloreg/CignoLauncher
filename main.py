@@ -5,6 +5,13 @@ Un launcher Minecraft semplice, moderno e leggero basato su PyQt6 e minecraft-la
 """
 
 import sys
+import os
+
+# Sopprime gli avvisi di moduli GTK mancanti su distribuzioni Linux
+os.environ["NO_AT_BRIDGE"] = "1"
+if "GTK_MODULES" in os.environ:
+    del os.environ["GTK_MODULES"]
+
 from PyQt6.QtWidgets import QApplication
 from cignolauncher_pyqt import MinecraftLauncher
 

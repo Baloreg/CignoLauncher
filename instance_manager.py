@@ -77,7 +77,7 @@ class InstanceManager:
             return True
         return False
 
-    def create_instance(self, name, version, ram_gb=4, jvm_args="", set_as_current=True):
+    def create_instance(self, name, version, loader_type="vanilla", loader_version="", installed_version_id="", ram_gb=4, jvm_args="", set_as_current=True):
         """Crea una nuova istanza con directory dedicata."""
         clean_name = name.strip() or f"Minecraft {version}"
         instance_id = f"inst_{uuid.uuid4().hex[:8]}"
@@ -86,17 +86,24 @@ class InstanceManager:
         if os.path.exists(instance_dir):
             instance_dir = os.path.join(self.instances_folder, f"{folder_name} ({instance_id[-4:]})")
         
-        # Crea le cartelle isolate dell'istanza (per saves, screenshots, options)
+        # Crea le cartelle isolate dell'istanza (per saves, screenshots, options, mods, resourcepacks, shaderpacks)
         os.makedirs(instance_dir, exist_ok=True)
         os.makedirs(os.path.join(instance_dir, "saves"), exist_ok=True)
         os.makedirs(os.path.join(instance_dir, "screenshots"), exist_ok=True)
+        os.makedirs(os.path.join(instance_dir, "mods"), exist_ok=True)
+        os.makedirs(os.path.join(instance_dir, "resourcepacks"), exist_ok=True)
+        os.makedirs(os.path.join(instance_dir, "shaderpacks"), exist_ok=True)
 
         instance = {
             "id": instance_id,
             "name": clean_name,
             "version": version,
+            "loader_type": loader_type.lower() if loader_type else "vanilla",
+            "loader_version": loader_version.strip() if loader_version else "",
+            "installed_version_id": installed_version_id.strip() if installed_version_id else "",
             "ram_gb": int(ram_gb),
             "jvm_args": jvm_args.strip(),
+            "icon": "",
             "created_at": datetime.now().isoformat(),
             "last_played": None,
             "path": instance_dir
@@ -109,7 +116,7 @@ class InstanceManager:
         self.save_instances()
         return instance
 
-    def update_instance(self, instance_id, name=None, version=None, ram_gb=None, jvm_args=None):
+    def update_instance(self, instance_id, name=None, version=None, loader_type=None, loader_version=None, installed_version_id=None, ram_gb=None, jvm_args=None, icon=None):
         """Aggiorna le impostazioni di un'istanza esistente."""
         if instance_id not in self.data.get("instances", {}):
             return False
@@ -119,10 +126,25 @@ class InstanceManager:
             inst["name"] = name.strip()
         if version is not None and version.strip():
             inst["version"] = version.strip()
+        if loader_type is not None:
+            inst["loader_type"] = loader_type.lower().strip()
+        if loader_version is not None:
+            inst["loader_version"] = loader_version.strip()
+        if installed_version_id is not None:
+            inst["installed_version_id"] = installed_version_id.strip()
         if ram_gb is not None:
             inst["ram_gb"] = int(ram_gb)
         if jvm_args is not None:
             inst["jvm_args"] = jvm_args.strip()
+        if icon is not None:
+            inst["icon"] = icon.strip()
+
+        # Garantisci esistenza cartelle
+        inst_path = inst.get("path")
+        if inst_path:
+            os.makedirs(os.path.join(inst_path, "mods"), exist_ok=True)
+            os.makedirs(os.path.join(inst_path, "resourcepacks"), exist_ok=True)
+            os.makedirs(os.path.join(inst_path, "shaderpacks"), exist_ok=True)
 
         self.save_instances()
         return True

@@ -5,6 +5,7 @@ minecraft-launcher-lib>=6.0.0
 
 # GUI Framework
 PyQt6>=6.5.0
+PyQt6-WebEngine>=6.7.0
 
 # HTTP requests for online versions, news, and head avatars
 requests>=2.31.0
