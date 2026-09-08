@@ -9,6 +9,38 @@ from PyQt6.QtWidgets import (
 )
 from dialog_utils import show_warning
 
+def create_procedural_block_icon(block_id, path):
+    from PyQt6.QtGui import QImage, QColor
+    import random
+    
+    img = QImage(32, 32, QImage.Format.Format_RGB32)
+    base_colors = {
+        "dirt": QColor(134, 96, 67),
+        "grass_block": QColor(87, 157, 63),
+        "gravel": QColor(133, 131, 131),
+        "stone": QColor(118, 118, 118),
+        "end_stone": QColor(222, 224, 157),
+        "carved_pumpkin": QColor(219, 125, 29),
+        "oak_log": QColor(107, 83, 51),
+        "hay_bale": QColor(214, 184, 58),
+        "bee_nest": QColor(214, 163, 81),
+        "crafting_table": QColor(153, 115, 69)
+    }
+    color = base_colors.get(block_id, QColor(90, 90, 90))
+    random.seed(hash(block_id))
+    
+    for y in range(32):
+        for x in range(32):
+            variation = random.randint(-15, 15)
+            r = max(0, min(255, color.red() + variation))
+            g = max(0, min(255, color.green() + variation))
+            b = max(0, min(255, color.blue() + variation))
+            img.setPixelColor(x, y, QColor(r, g, b))
+            
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    img.save(path)
+
+
 MINECRAFT_BLOCKS = [
     {"name": "Terra (Dirt)", "id": "dirt"},
     {"name": "Blocco d'Erba", "id": "grass_block"},
@@ -152,6 +184,10 @@ class BlockIconSelectorDialog(QDialog):
             ext = ".gif" if (url and ".gif" in url.lower()) else ".png"
             icon_filename = f"{block['id']}{ext}"
             local_path = os.path.join(blocks_cache_dir, icon_filename)
+
+            # Se non ha un URL remoto o il file non esiste ancora, generiamo una texture procedurale locale
+            if not url and (not os.path.exists(local_path) or os.path.getsize(local_path) == 0):
+                create_procedural_block_icon(block["id"], local_path)
 
             self.set_button_icon(btn, local_path)
 

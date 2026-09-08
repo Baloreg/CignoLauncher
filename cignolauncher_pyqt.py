@@ -75,8 +75,9 @@ def resource_path(relative_path):
 
 
 def create_bedrock_texture():
-    import tempfile
+    import base64
     from PyQt6.QtGui import QImage, QPainter, QColor
+    from PyQt6.QtCore import QBuffer, QIODevice
     import random
     
     img = QImage(64, 64, QImage.Format.Format_RGB32)
@@ -103,14 +104,17 @@ def create_bedrock_texture():
                 
     painter.end()
     
-    path = os.path.join(tempfile.gettempdir(), "cigno_bedrock_texture.png")
-    img.save(path)
-    return path
+    buffer = QBuffer()
+    buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+    img.save(buffer, "PNG")
+    b64 = base64.b64encode(buffer.data()).decode('utf-8')
+    return f"data:image/png;base64,{b64}"
 
 
 def create_autumn_grass_texture():
-    import tempfile
+    import base64
     from PyQt6.QtGui import QImage, QPainter, QColor
+    from PyQt6.QtCore import QBuffer, QIODevice
     import random
     
     img = QImage(64, 64, QImage.Format.Format_RGB32)
@@ -138,9 +142,11 @@ def create_autumn_grass_texture():
                 
     painter.end()
     
-    path = os.path.join(tempfile.gettempdir(), "cigno_autumn_grass_texture.png")
-    img.save(path)
-    return path
+    buffer = QBuffer()
+    buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+    img.save(buffer, "PNG")
+    b64 = base64.b64encode(buffer.data()).decode('utf-8')
+    return f"data:image/png;base64,{b64}"
 
 
 def set_svg_icon(button, asset_name, size=18):
@@ -265,7 +271,7 @@ class MinecraftLauncher(QMainWindow):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.2"
+        self.launcher_version = "2.1.3"
 
         self.setup_paths()
         self.load_settings()
