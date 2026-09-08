@@ -213,6 +213,7 @@ class BlockIconSelectorDialog(QDialog):
     def set_button_icon(self, btn, path):
         if os.path.exists(path) and os.path.getsize(path) > 0:
             if path.lower().endswith(".gif"):
+                # Rimuovi eventuale movie precedente associato al bottone se esiste
                 movie = QMovie(path, parent=self)
                 movie.setScaledSize(QSize(64, 64))
                 movie.frameChanged.connect(lambda: self.update_grid_movie_frame(btn, movie))
@@ -247,14 +248,18 @@ class BlockIconSelectorDialog(QDialog):
             }
 
             for btn, local_path, url in self.icon_buttons:
-                if (not os.path.exists(local_path) or os.path.getsize(local_path) == 0) and url:
-                    try:
-                        req = urllib.request.Request(url, headers=headers)
-                        with urllib.request.urlopen(req, context=context, timeout=15) as response, open(local_path, 'wb') as out_file:
-                            out_file.write(response.read())
+                if url:
+                    file_exists_and_valid = os.path.exists(local_path) and os.path.getsize(local_path) > 0
+                    if not file_exists_and_valid:
+                        try:
+                            req = urllib.request.Request(url, headers=headers)
+                            with urllib.request.urlopen(req, context=context, timeout=15) as response, open(local_path, 'wb') as out_file:
+                                out_file.write(response.read())
+                        except Exception as e:
+                            print(f"[BlockIconSelectorDialog] Errore download icona in background {local_path} ({url}): {e}")
+                    
+                    if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
                         self.icon_ready_signal.emit(btn, local_path)
-                    except Exception as e:
-                        print(f"[BlockIconSelectorDialog] Errore download icona in background {local_path} ({url}): {e}")
 
         thread = threading.Thread(target=download_missing, daemon=True)
         thread.start()
