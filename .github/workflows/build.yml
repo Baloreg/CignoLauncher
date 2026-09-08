@@ -21,7 +21,7 @@ jobs:
         include:
           - os: windows-latest
             artifact_name: CignoLauncher-Windows
-            asset_path: dist/CignoLauncher.exe
+            asset_path: dist/CignoLauncher-Windows.zip
           - os: ubuntu-latest
             artifact_name: CignoLauncher-Linux
             asset_path: dist/CignoLauncher-Linux-x86_64.tar.gz
@@ -63,7 +63,7 @@ jobs:
         with:
           name: ${{ matrix.artifact_name }}
           path: |
-            dist/CignoLauncher.exe
+            dist/CignoLauncher-Windows.zip
             dist/CignoLauncher-Linux-x86_64.tar.gz
             dist/CignoLauncher-macOS.zip
           if-no-files-found: warn

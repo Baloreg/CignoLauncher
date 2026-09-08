@@ -102,8 +102,11 @@ AZURE_CLIENT_SECRET = "{azure_client_secret}"
     for mod in hidden_imports:
         cmd.extend(["--hidden-import", mod])
 
-    # Unico file eseguibile (onefile su Windows, Linux e macOS)
-    cmd.append("--onefile")
+    # --onedir su Windows per un avvio immediato senza estrazione _MEIPASS, onefile altrove
+    if sys.platform == "win32":
+        cmd.append("--onedir")
+    else:
+        cmd.append("--onefile")
 
     cmd.append(str(MAIN_SCRIPT))
 
@@ -116,6 +119,21 @@ AZURE_CLIENT_SECRET = "{azure_client_secret}"
 
     print_banner(f"[OK] Compilazione completata con successo!")
     print(f"Gli eseguibili sono disponibili nella cartella: {dist_dir}")
+
+    # Se siamo su Windows, creiamo uno zip della cartella onedir
+    if sys.platform == "win32":
+        print_banner("Creazione archivio .zip per Windows (modalità onedir)...")
+        import zipfile
+        win_zip_path = dist_dir / "CignoLauncher-Windows.zip"
+        launcher_folder = dist_dir / APP_NAME
+        if launcher_folder.exists():
+            with zipfile.ZipFile(win_zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                for root, dirs, files in os.walk(launcher_folder):
+                    for file in files:
+                        file_path = Path(root) / file
+                        arcname = file_path.relative_to(dist_dir)
+                        zipf.write(file_path, arcname)
+            print(f"[OK] Archivio Windows creato: {win_zip_path}")
 
     # Se siamo su Linux, creiamo un tar.gz con lo script di installazione
     if sys.platform.startswith("linux"):
