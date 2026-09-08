@@ -723,7 +723,7 @@ class ModManagerDialog(QDialog):
     def apply_stylesheet(self):
         self.setStyleSheet("""
             QDialog {
-                background-color: #0b0f19;
+                background-color: #0f1115;
                 color: #f8fafc;
                 font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             }

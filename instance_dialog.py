@@ -75,13 +75,14 @@ class InstanceEditDialog(QDialog):
         icon_label.setObjectName("FieldLabel")
         
         self.edit_icon_btn = QPushButton()
+        self.edit_icon_btn.setObjectName("IconEditButton")
         self.edit_icon_btn.setFixedSize(64, 64)
         self.edit_icon_btn.setToolTip("Clicca per scegliere un'icona (blocco o GIF animata)")
         self.edit_icon_btn.setStyleSheet("""
             QPushButton {
                 background-color: #1a1d26;
                 border: 1px solid #334155;
-                border-radius: 12px;
+                border-radius: 6px;
             }
             QPushButton:hover {
                 border-color: #3b82f6;
@@ -251,7 +252,6 @@ class InstanceEditDialog(QDialog):
                 from PyQt6.QtGui import QMovie, QIcon
                 from PyQt6.QtCore import QSize
                 movie = QMovie(self.current_icon_path, parent=self)
-                movie.setScaledSize(QSize(48, 48))
                 movie.frameChanged.connect(lambda: self.update_dialog_movie_frame(movie))
                 movie.start()
                 self.current_movie = movie
@@ -261,7 +261,8 @@ class InstanceEditDialog(QDialog):
                 from PyQt6.QtCore import QSize, Qt
                 pix = QPixmap(self.current_icon_path)
                 if not pix.isNull():
-                    self.edit_icon_btn.setIcon(QIcon(pix.scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.FastTransformation)))
+                    scaled = pix.scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                    self.edit_icon_btn.setIcon(QIcon(scaled))
                     self.edit_icon_btn.setIconSize(QSize(48, 48))
                     return
 
@@ -277,9 +278,12 @@ class InstanceEditDialog(QDialog):
         if self.edit_icon_btn and movie:
             try:
                 from PyQt6.QtGui import QIcon
-                from PyQt6.QtCore import QSize
-                self.edit_icon_btn.setIcon(QIcon(movie.currentPixmap()))
-                self.edit_icon_btn.setIconSize(QSize(48, 48))
+                from PyQt6.QtCore import QSize, Qt
+                current_pix = movie.currentPixmap()
+                if not current_pix.isNull():
+                    scaled = current_pix.scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                    self.edit_icon_btn.setIcon(QIcon(scaled))
+                    self.edit_icon_btn.setIconSize(QSize(48, 48))
             except RuntimeError:
                 pass
 
@@ -345,7 +349,7 @@ class InstanceEditDialog(QDialog):
     def apply_stylesheet(self):
         self.setStyleSheet("""
             QDialog {
-                background-color: #121316;
+                background-color: #0f1115;
                 color: #f1f5f9;
                 font-family: 'Segoe UI', system-ui, sans-serif;
             }
@@ -689,7 +693,7 @@ class InstanceManagerDialog(QDialog):
     def apply_stylesheet(self):
         self.setStyleSheet("""
             QDialog {
-                background-color: #121316;
+                background-color: #0f1115;
                 color: #f1f5f9;
                 font-family: 'Segoe UI', system-ui, sans-serif;
             }

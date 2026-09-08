@@ -120,8 +120,8 @@ class BlockIconSelectorDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Scegli Icona Istanza")
-        self.setMinimumSize(480, 440)
-        self.resize(540, 500)
+        self.setMinimumSize(560, 500)
+        self.resize(600, 560)
         self.selected_path = None
         self.active_movies = []
 
@@ -239,27 +239,30 @@ class BlockIconSelectorDialog(QDialog):
         bottom_row.addWidget(close_btn)
 
         main_layout.addLayout(bottom_row)
+        self.adjustSize()
 
     def set_button_icon(self, btn, path):
         if os.path.exists(path) and os.path.getsize(path) > 0:
             if path.lower().endswith(".gif"):
                 movie = QMovie(path, parent=self)
-                movie.setScaledSize(QSize(64, 64))
                 movie.frameChanged.connect(lambda: self.update_grid_movie_frame(btn, movie))
                 movie.start()
                 self.active_movies.append(movie)
             else:
                 pix = QPixmap(path)
                 if not pix.isNull():
-                    scaled = pix.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.FastTransformation)
+                    scaled = pix.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
                     btn.setIcon(QIcon(scaled))
                     btn.setIconSize(QSize(64, 64))
 
     def update_grid_movie_frame(self, btn, movie):
         if btn and movie:
             try:
-                btn.setIcon(QIcon(movie.currentPixmap()))
-                btn.setIconSize(QSize(64, 64))
+                current_pix = movie.currentPixmap()
+                if not current_pix.isNull():
+                    scaled = current_pix.scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                    btn.setIcon(QIcon(scaled))
+                    btn.setIconSize(QSize(64, 64))
             except RuntimeError:
                 pass
 
@@ -328,7 +331,7 @@ class BlockIconSelectorDialog(QDialog):
     def apply_stylesheet(self):
         self.setStyleSheet("""
             QDialog {
-                background-color: #0f172a;
+                background-color: #0f1115;
                 color: #f8fafc;
                 font-family: 'Segoe UI', Arial, sans-serif;
             }
@@ -365,12 +368,12 @@ class BlockIconSelectorDialog(QDialog):
                 border-color: #475569;
             }
             QPushButton#BlockIconButton {
-                background-color: #1e293b;
-                border: 2px solid #334155;
-                border-radius: 10px;
+                background-color: #1a1d26;
+                border: 1px solid #334155;
+                border-radius: 8px;
             }
-            QPushButton#BlockIconSelectorDialog QPushButton#BlockIconButton:hover, QPushButton#BlockIconButton:hover {
-                border-color: #38bdf8;
-                background-color: #334155;
+            QPushButton#BlockIconButton:hover {
+                border-color: #3b82f6;
+                background-color: #222633;
             }
         """)

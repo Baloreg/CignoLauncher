@@ -271,7 +271,7 @@ class MinecraftLauncher(QMainWindow):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.7"
+        self.launcher_version = "2.1.8"
 
         self.setup_paths()
         self.load_settings()
@@ -342,22 +342,14 @@ class MinecraftLauncher(QMainWindow):
                 available_versions=self.all_versions,
             )
             self.first_run_wizard = wizard
-            if wizard.exec() == FirstRunWizard.DialogCode.Accepted and active_instance:
-                self.instance_manager.update_instance(
-                    active_instance["id"],
-                    name=wizard.instance_name,
-                    version=wizard.instance_version,
-                    ram_gb=wizard.instance_ram,
-                )
+            if wizard.exec() == FirstRunWizard.DialogCode.Accepted:
                 self.settings["onboarding_completed"] = True
-                self.settings["last_version"] = wizard.instance_version
-                self.settings["profile_mode"] = wizard.profile_mode
+                self.settings["last_version"] = getattr(wizard, "instance_version", self.get_latest_official_release())
+                self.settings["profile_mode"] = getattr(wizard, "profile_mode", "online")
                 self.save_settings()
                 self.refresh_instances_selector()
                 self.first_run = False
-                if wizard.profile_mode == "offline" and wizard.offline_username_value:
-                    self.account_manager.add_offline_account(wizard.offline_username_value)
-                    self.update_account_badge()
+                self.update_account_badge()
             self.onboarding_pending = False
             self.first_run_wizard = None
             self.show()
