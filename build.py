@@ -34,6 +34,18 @@ def build():
     print_banner(f"Avvio compilazione {APP_NAME} per {platform.system()} ({platform.machine()})")
     ensure_pyinstaller()
 
+    # Genera il file di configurazione con i secrets prelevati dall'ambiente o vuoti se assenti
+    azure_client_id = os.getenv("AZURE_CLIENT_ID", "")
+    azure_client_secret = os.getenv("AZURE_CLIENT_SECRET", "")
+    
+    config_content = f'''# Generato automaticamente durante la build
+AZURE_CLIENT_ID = "{azure_client_id}"
+AZURE_CLIENT_SECRET = "{azure_client_secret}"
+'''
+    with open(PROJECT_ROOT / "azure_config.py", "w", encoding="utf-8") as f:
+        f.write(config_content)
+    print("[INFO] azure_config.py generato correttamente.")
+
     dist_dir = PROJECT_ROOT / "dist"
     build_dir = PROJECT_ROOT / "build"
 
@@ -64,6 +76,7 @@ def build():
 
     # Hidden imports critici per PyQt6 e minecraft-launcher-lib
     hidden_imports = [
+        "azure_config",
         "minecraft_launcher_lib",
         "minecraft_launcher_lib.utils",
         "minecraft_launcher_lib.install",

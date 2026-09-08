@@ -304,8 +304,13 @@ class MinecraftLauncher(QMainWindow):
         # Assicura che l'istanza di default usi l'ultima versione disponibile
         self.instance_manager.ensure_default_instance(default_version=default_latest)
 
-        self.AZURE_CLIENT_ID = os.getenv("AZURE_CLIENT_ID", "")
-        self.AZURE_CLIENT_SECRET = os.getenv("AZURE_CLIENT_SECRET", "")
+        try:
+            import azure_config
+            self.AZURE_CLIENT_ID = getattr(azure_config, "AZURE_CLIENT_ID", "") or os.getenv("AZURE_CLIENT_ID", "")
+            self.AZURE_CLIENT_SECRET = getattr(azure_config, "AZURE_CLIENT_SECRET", "") or os.getenv("AZURE_CLIENT_SECRET", "")
+        except ImportError:
+            self.AZURE_CLIENT_ID = os.getenv("AZURE_CLIENT_ID", "")
+            self.AZURE_CLIENT_SECRET = os.getenv("AZURE_CLIENT_SECRET", "")
 
         self.setupUi()
         self.apply_modern_stylesheet()
