@@ -235,15 +235,26 @@ class BlockIconSelectorDialog(QDialog):
 
     def start_background_downloads(self):
         def download_missing():
+            import ssl
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+            
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                'Accept-Language': 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7'
+            }
+
             for btn, local_path, url in self.icon_buttons:
                 if (not os.path.exists(local_path) or os.path.getsize(local_path) == 0) and url:
                     try:
-                        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-                        with urllib.request.urlopen(req, timeout=15) as response, open(local_path, 'wb') as out_file:
+                        req = urllib.request.Request(url, headers=headers)
+                        with urllib.request.urlopen(req, context=context, timeout=15) as response, open(local_path, 'wb') as out_file:
                             out_file.write(response.read())
                         self.icon_ready_signal.emit(btn, local_path)
                     except Exception as e:
-                        print(f"[BlockIconSelectorDialog] Errore download icona in background {local_path}: {e}")
+                        print(f"[BlockIconSelectorDialog] Errore download icona in background {local_path} ({url}): {e}")
 
         thread = threading.Thread(target=download_missing, daemon=True)
         thread.start()
@@ -273,16 +284,32 @@ class BlockIconSelectorDialog(QDialog):
             os.makedirs(icons_dir, exist_ok=True)
             
             ext = ".gif" if ".gif" in url.lower() else ".png"
-            if "." in url.split("/")[-1] and len(url.split("/")[-1].split("?")[0]) <= 8:
+            lower_url = url.lower()
+            if ".webp" in lower_url:
+                ext = ".webp"
+            elif ".jpg" in lower_url or ".jpeg" in lower_url:
+                ext = ".jpg"
+            elif "." in url.split("/")[-1] and len(url.split("/")[-1].split("?")[0]) <= 8:
                 possible_ext = os.path.splitext(url.split("/")[-1].split("?")[0])[1].lower()
-                if possible_ext in [".png", ".jpg", ".jpeg", ".gif", ".ico"]:
+                if possible_ext in [".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp"]:
                     ext = possible_ext
 
             filename = f"icon_{uuid.uuid4().hex[:8]}{ext}"
             local_path = os.path.join(icons_dir, filename)
 
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=15) as response, open(local_path, 'wb') as out_file:
+            import ssl
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                'Accept-Language': 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7'
+            }
+
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, context=context, timeout=15) as response, open(local_path, 'wb') as out_file:
                 out_file.write(response.read())
 
             if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
