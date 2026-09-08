@@ -42,21 +42,61 @@ def create_procedural_block_icon(block_id, path):
 
 
 MINECRAFT_BLOCKS = [
-    {"name": "Terra (Dirt)", "id": "dirt"},
-    {"name": "Blocco d'Erba", "id": "grass_block"},
-    {"name": "Ghiaia", "id": "gravel"},
+    {
+        "name": "Terra (Dirt)",
+        "id": "dirt",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2f/Dirt.png/revision/latest?cb=20220112085643"
+    },
+    {
+        "name": "Blocco d'Erba",
+        "id": "grass_block",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c7/Grass_Block.png/revision/latest?cb=20230226144250"
+    },
+    {
+        "name": "Ghiaia",
+        "id": "gravel",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/9/9d/Gravel_JE5_BE4.png/revision/latest?cb=20200315183831"
+    },
     {
         "name": "Blocco di Magma",
         "id": "magma_block",
         "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d1/Magma_Block_JE2_BE2.gif/revision/latest?cb=20200915183320"
     },
-    {"name": "Pietra", "id": "stone"},
-    {"name": "Pietra dell'End", "id": "end_stone"},
-    {"name": "Zucca Intagliata", "id": "carved_pumpkin"},
-    {"name": "Tronco di Quercia", "id": "oak_log"},
-    {"name": "Balla di Fieno", "id": "hay_bale"},
-    {"name": "Nido d'Ape", "id": "bee_nest"},
-    {"name": "Banco da Lavoro", "id": "crafting_table"},
+    {
+        "name": "Pietra",
+        "id": "stone",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d4/Stone.png/revision/latest?cb=20220112085705"
+    },
+    {
+        "name": "Pietra dell'End",
+        "id": "end_stone",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/43/End_Stone_JE3_BE2.png/revision/latest?cb=20200315175115"
+    },
+    {
+        "name": "Zucca Intagliata",
+        "id": "carved_pumpkin",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/8/8e/Carved_Pumpkin_%28S%29_JE4.png/revision/latest?cb=20210112033634"
+    },
+    {
+        "name": "Tronco di Quercia",
+        "id": "oak_log",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e9/Oak_Log_%28UD%29_JE5_BE3.png/revision/latest?cb=20200317191604"
+    },
+    {
+        "name": "Balla di Fieno",
+        "id": "hay_bale",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c7/Hay_Bale_%28UD%29_JE2_BE2.png/revision/latest?cb=20200315184142"
+    },
+    {
+        "name": "Nido d'Ape",
+        "id": "bee_nest",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/44/Bee_Nest_%28S%29_JE1.png/revision/latest?cb=20210115133016"
+    },
+    {
+        "name": "Banco da Lavoro",
+        "id": "crafting_table",
+        "url": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b7/Crafting_Table_JE4_BE3.png/revision/latest?cb=20191229083528"
+    },
     {
         "name": "Tagliapietre",
         "id": "stonecutter",
