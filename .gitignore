@@ -6,6 +6,7 @@ __pycache__/
 # Azure config generated during build
 azure_config.py
 dist/
+build/
 *.egg-info/
 
 # Virtual environments

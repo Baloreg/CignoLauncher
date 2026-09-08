@@ -236,6 +236,16 @@ class InstanceEditDialog(QDialog):
             self.current_movie.stop()
             self.current_movie = None
 
+        if self.current_icon_path and "block_icons" in self.current_icon_path:
+            base_name = os.path.basename(self.current_icon_path)
+            block_id = os.path.splitext(base_name)[0]
+            bundled_gif = resource_path(f"assets/block_icons/{block_id}.gif")
+            bundled_png = resource_path(f"assets/block_icons/{block_id}.png")
+            if os.path.exists(bundled_gif):
+                self.current_icon_path = bundled_gif
+            elif os.path.exists(bundled_png):
+                self.current_icon_path = bundled_png
+
         if self.current_icon_path and os.path.exists(self.current_icon_path):
             if self.current_icon_path.lower().endswith(".gif"):
                 from PyQt6.QtGui import QMovie, QIcon

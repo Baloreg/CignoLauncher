@@ -210,6 +210,17 @@ class InstanceCard(QFrame):
             self.current_movie = None
 
         icon_path = self.instance.get("icon", "")
+        
+        # Se l'icona dell'istanza punta alla cache locale di block_icons, preferiamo la versione 3D bundled se presente
+        if icon_path and "block_icons" in icon_path:
+            base_name = os.path.basename(icon_path)
+            block_id = os.path.splitext(base_name)[0]
+            bundled_gif = resource_path(f"assets/block_icons/{block_id}.gif")
+            bundled_png = resource_path(f"assets/block_icons/{block_id}.png")
+            if os.path.exists(bundled_gif):
+                icon_path = bundled_gif
+            elif os.path.exists(bundled_png):
+                icon_path = bundled_png
         if icon_path and os.path.exists(icon_path):
             if icon_path.lower().endswith(".gif"):
                 # Supporto GIF animate con QMovie

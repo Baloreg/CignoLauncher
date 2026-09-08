@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLa
                              QSpacerItem, QSizePolicy, QMenu, QInputDialog)
 from PyQt6.QtGui import QIcon, QFont, QPixmap, QAction
 from PyQt6.QtCore import Qt, QObject, pyqtSignal, QThread, QTimer
-from utils import create_steve_avatar
+from utils import create_steve_avatar, resource_path, download_head_pixmap
 from dialog_utils import ask_confirmation, show_warning
 
 def resource_path(relative_path):
@@ -324,8 +324,9 @@ class LoginDialog(QDialog):
 
             # Carica avatar
             if data['type'] == 'microsoft':
-                identifier = data.get('username') or data['uuid']
-                self.load_head_image_for_dialog(identifier, head_label)
+                identifier = data.get('username')
+                user_uuid = data.get('uuid')
+                self.load_head_image_for_dialog(identifier, head_label, user_uuid=user_uuid)
             else:
                 steve_path = resource_path("assets/steve_head.png")
                 steve_pix = QPixmap(steve_path)
@@ -333,14 +334,15 @@ class LoginDialog(QDialog):
                     steve_pix = create_steve_avatar(36)
                 head_label.setPixmap(steve_pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
 
-    def load_head_image_for_dialog(self, identifier, target_label):
-        if not identifier or not target_label:
+    def load_head_image_for_dialog(self, identifier, target_label, user_uuid=None):
+        if not (identifier or user_uuid) or not target_label:
             return
 
         heads_folder = getattr(self.parent(), 'heads_folder', os.path.expanduser("~/.cignolauncher/heads"))
-        cached_path = os.path.join(heads_folder, f"{identifier}.png")
+        key = identifier or user_uuid
+        cached_path = os.path.join(heads_folder, f"{key}.png")
 
-        if os.path.exists(cached_path) and os.path.getsize(cached_path) > 0:
+        if os.path.exists(cached_path) and os.path.getsize(cached_path) > 100:
             pixmap = QPixmap(cached_path)
             if not pixmap.isNull():
                 target_label.setPixmap(pixmap.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
@@ -349,26 +351,18 @@ class LoginDialog(QDialog):
         target_label.setPixmap(create_steve_avatar(36))
 
         def fetch_and_set():
-            try:
-                os.makedirs(heads_folder, exist_ok=True)
-                url = f"https://minotar.net/helm/{identifier}/64.png"
-                res = requests.get(url, timeout=8)
-                if res.status_code == 200 and len(res.content) > 100:
-                    with open(cached_path, 'wb') as f:
-                        f.write(res.content)
-                    
-                    pix = QPixmap(cached_path)
-                    if not pix.isNull():
-                        scaled = pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-                        QTimer.singleShot(0, lambda: target_label.setPixmap(scaled))
-            except Exception as e:
-                print(f"[load_head_image_for_dialog] Errore download da Minotar: {e}")
+            pix = download_head_pixmap(identifier, heads_folder, user_uuid=user_uuid)
+            if pix and not pix.isNull():
+                scaled = pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                QTimer.singleShot(0, lambda: target_label.setPixmap(scaled))
 
         threading.Thread(target=fetch_and_set, daemon=True).start()
 
     def use_account(self, account_id):
         self.account_manager.switch_account(account_id)
         self.refresh_accounts_list()
+        if hasattr(self.parent(), 'update_account_badge'):
+            self.parent().update_account_badge()
         self.accept()
 
     def remove_account(self, account_id):
@@ -416,6 +410,8 @@ class LoginDialog(QDialog):
     def on_login_success(self, account_data):
         self.account_manager.add_microsoft_account(account_data)
         self.refresh_accounts_list()
+        if hasattr(self.parent(), 'update_account_badge'):
+            self.parent().update_account_badge()
         self.accept()
 
     def on_login_error(self, error_message):

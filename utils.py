@@ -12,40 +12,82 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+def download_head_pixmap(identifier, heads_folder, user_uuid=None):
+    """
+    Scarica la testa/avatar 2D di un giocatore Minecraft provando vari provider in sequenza.
+    Supporta User-Agent e salvataggio sia per username che per UUID.
+    Ritorna un QPixmap valido o None se fallisce.
+    """
+    if not identifier and not user_uuid:
+        return None
+
+    os.makedirs(heads_folder, exist_ok=True)
+
+    target_id = str(user_uuid).strip() if user_uuid else str(identifier).strip()
+    target_name = str(identifier).strip() if identifier else target_id
+
+    # Lista di URL candidati per il download dell'avatar (helm con overlay)
+    urls = []
+    if user_uuid:
+        clean_uuid = str(user_uuid).replace("-", "").strip()
+        urls.append(f"https://crafthead.net/helm/{clean_uuid}/64")
+        urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
+        urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
+
+    if target_name:
+        urls.append(f"https://crafthead.net/helm/{target_name}/64")
+        urls.append(f"https://mc-heads.net/avatar/{target_name}/64")
+        urls.append(f"https://minotar.net/helm/{target_name}/64.png")
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'image/png,image/webp,image/*,*/*'
+    }
+
+    for url in urls:
+        try:
+            res = requests.get(url, headers=headers, timeout=5)
+            if res.status_code == 200 and len(res.content) > 100:
+                pix = QPixmap()
+                if pix.loadFromData(res.content) and not pix.isNull():
+                    # Salva su disco per cache sia con nome utente che con UUID
+                    if target_name:
+                        path_name = os.path.join(heads_folder, f"{target_name}.png")
+                        with open(path_name, 'wb') as f:
+                            f.write(res.content)
+                    if user_uuid:
+                        path_uuid = os.path.join(heads_folder, f"{user_uuid}.png")
+                        with open(path_uuid, 'wb') as f:
+                            f.write(res.content)
+
+                    print(f"[download_head_pixmap] Avatar per {target_name} ({user_uuid}) scaricato da {url}")
+                    return pix
+        except Exception as e:
+            print(f"[download_head_pixmap] Tentativo fallito con {url}: {e}")
+
+    return None
+
+
 class ImageDownloader(QObject):
-    """Worker in background per scaricare l'avatar 2D del giocatore esclusivamente da Minotar."""
+    """Worker in background per scaricare l'avatar 2D del giocatore."""
     finished = pyqtSignal()
     image_ready = pyqtSignal(str, QPixmap)
 
-    def __init__(self, identifier, heads_folder):
+    def __init__(self, identifier, heads_folder, uuid=None):
         super().__init__()
         self.identifier = str(identifier).strip()
+        self.uuid = str(uuid).strip() if uuid else None
         self.heads_folder = heads_folder
 
     def run(self):
         try:
-            os.makedirs(self.heads_folder, exist_ok=True)
-            image_path = os.path.join(self.heads_folder, f"{self.identifier}.png")
-            
-            # Usiamo esclusivamente Minotar con l'endpoint helm (testa 2D con overlay)
-            url = f"https://minotar.net/helm/{self.identifier}/64.png"
-            
-            response = requests.get(url, timeout=10)
-            if response.status_code == 200 and len(response.content) > 100:
-                with open(image_path, 'wb') as f:
-                    f.write(response.content)
-                print(f"[ImageDownloader] Avatar per {self.identifier} scaricato con successo da Minotar.")
+            pixmap = download_head_pixmap(self.identifier, self.heads_folder, user_uuid=self.uuid)
+            if pixmap and not pixmap.isNull():
+                self.image_ready.emit(self.identifier, pixmap)
             else:
-                print(f"[ImageDownloader] Errore risposta Minotar per {self.identifier}: {response.status_code}")
-
-            if os.path.exists(image_path):
-                pixmap = QPixmap(image_path)
-                if not pixmap.isNull():
-                    self.image_ready.emit(self.identifier, pixmap)
-                else:
-                    print(f"[ImageDownloader] Errore: l'immagine scaricata per {self.identifier} è corrotta o non leggibile da QPixmap.")
+                print(f"[ImageDownloader] Impossibile recuperare avatar per {self.identifier}")
         except Exception as e:
-            print(f"[ImageDownloader] Errore download avatar per {self.identifier}: {e}")
+            print(f"[ImageDownloader] Errore worker download avatar: {e}")
         finally:
             self.finished.emit()
 

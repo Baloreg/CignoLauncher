@@ -31,7 +31,7 @@ from instance_card import InstanceCard
 from first_run_wizard import FirstRunWizard
 from ui_controls import MaterialComboBox
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
-from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap
+from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap, download_head_pixmap
 from dialog_utils import ask_confirmation, show_warning
 
 def parse_version(v_str):
@@ -271,7 +271,7 @@ class MinecraftLauncher(QMainWindow):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.6"
+        self.launcher_version = "2.1.7"
 
         self.setup_paths()
         self.load_settings()
@@ -2372,9 +2372,9 @@ class MinecraftLauncher(QMainWindow):
             self.sidebar_type_label.setText(acc_type_str)
 
             if is_ms:
-                # Usa prima lo username (es. Baloreg) o l'UUID per scaricare da Cravatar
                 identifier = name if name else curr.get("uuid")
-                self.load_head_avatar(identifier)
+                user_uuid = curr.get("uuid")
+                self.load_head_avatar(identifier, user_uuid=user_uuid)
             else:
                 self.set_offline_avatar()
         else:
@@ -2391,12 +2391,13 @@ class MinecraftLauncher(QMainWindow):
             36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
         ))
 
-    def load_head_avatar(self, identifier, force_refresh=False):
-        if not identifier:
+    def load_head_avatar(self, identifier, user_uuid=None, force_refresh=False):
+        if not identifier and not user_uuid:
             self.set_offline_avatar()
             return
 
-        cached_path = os.path.join(self.heads_folder, f"{identifier}.png")
+        key = identifier if identifier else user_uuid
+        cached_path = os.path.join(self.heads_folder, f"{key}.png")
 
         if force_refresh and os.path.exists(cached_path):
             try:
@@ -2404,7 +2405,7 @@ class MinecraftLauncher(QMainWindow):
             except Exception:
                 pass
 
-        if os.path.exists(cached_path) and os.path.getsize(cached_path) > 0:
+        if not force_refresh and os.path.exists(cached_path) and os.path.getsize(cached_path) > 100:
             pix = QPixmap(cached_path)
             if not pix.isNull():
                 self.sidebar_head_label.setPixmap(pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
@@ -2413,21 +2414,10 @@ class MinecraftLauncher(QMainWindow):
         self.set_offline_avatar()
 
         def fetch_and_set():
-            try:
-                os.makedirs(self.heads_folder, exist_ok=True)
-                url = f"https://minotar.net/helm/{identifier}/64.png"
-                res = requests.get(url, timeout=8)
-                if res.status_code == 200 and len(res.content) > 100:
-                    with open(cached_path, 'wb') as f:
-                        f.write(res.content)
-
-                    pix = QPixmap(cached_path)
-                    if not pix.isNull():
-                        scaled = pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-                        # Aggiornamento sicuro nel thread principale della UI
-                        QTimer.singleShot(0, lambda: self.sidebar_head_label.setPixmap(scaled))
-            except Exception as e:
-                print(f"[load_head_avatar] Errore download da Minotar: {e}")
+            pix = download_head_pixmap(identifier, self.heads_folder, user_uuid=user_uuid)
+            if pix and not pix.isNull():
+                scaled = pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                QTimer.singleShot(0, lambda: self.sidebar_head_label.setPixmap(scaled))
 
         threading.Thread(target=fetch_and_set, daemon=True).start()
 

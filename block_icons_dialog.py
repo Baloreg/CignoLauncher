@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QGridLayout, QScrollArea, QWidget, QFileDialog, QLineEdit
 )
 from dialog_utils import show_warning
+from utils import resource_path
 
 
 MINECRAFT_BLOCKS = [
@@ -183,31 +184,42 @@ class BlockIconSelectorDialog(QDialog):
             btn.setToolTip(block["name"])
             btn.setObjectName("BlockIconButton")
 
+            block_id = block["id"]
             url = block.get("url")
-            ext = ".gif" if (url and ".gif" in url.lower()) else ".png"
-            if url and ".webp" in url.lower():
-                ext = ".webp"
-            elif url and (".jpg" in url.lower() or ".jpeg" in url.lower()):
-                ext = ".jpg"
 
-            icon_filename = f"{block['id']}{ext}"
-            local_path = os.path.join(blocks_cache_dir, icon_filename)
+            # Priorità alle risorse 3D bundled ufficiali nell'applicazione
+            bundled_gif = resource_path(f"assets/block_icons/{block_id}.gif")
+            bundled_png = resource_path(f"assets/block_icons/{block_id}.png")
 
-            if url and (not os.path.exists(local_path) or os.path.getsize(local_path) == 0):
-                try:
-                    import ssl
-                    context = ssl.create_default_context()
-                    context.check_hostname = False
-                    context.verify_mode = ssl.CERT_NONE
-                    headers = {
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
-                    }
-                    req = urllib.request.Request(url, headers=headers)
-                    with urllib.request.urlopen(req, context=context, timeout=10) as response, open(local_path, 'wb') as out_file:
-                        out_file.write(response.read())
-                except Exception as e:
-                    print(f"[BlockIconSelectorDialog] Errore download sincrono icona {local_path} ({url}): {e}")
+            if os.path.exists(bundled_gif) and os.path.getsize(bundled_gif) > 0:
+                local_path = bundled_gif
+            elif os.path.exists(bundled_png) and os.path.getsize(bundled_png) > 0:
+                local_path = bundled_png
+            else:
+                ext = ".gif" if (url and ".gif" in url.lower()) else ".png"
+                if url and ".webp" in url.lower():
+                    ext = ".webp"
+                elif url and (".jpg" in url.lower() or ".jpeg" in url.lower()):
+                    ext = ".jpg"
+
+                icon_filename = f"{block_id}{ext}"
+                local_path = os.path.join(blocks_cache_dir, icon_filename)
+
+                if url and (not os.path.exists(local_path) or os.path.getsize(local_path) == 0):
+                    try:
+                        import ssl
+                        context = ssl.create_default_context()
+                        context.check_hostname = False
+                        context.verify_mode = ssl.CERT_NONE
+                        headers = {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                            'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+                        }
+                        req = urllib.request.Request(url, headers=headers)
+                        with urllib.request.urlopen(req, context=context, timeout=10) as response, open(local_path, 'wb') as out_file:
+                            out_file.write(response.read())
+                    except Exception as e:
+                        print(f"[BlockIconSelectorDialog] Errore download sincrono icona {local_path} ({url}): {e}")
 
             if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
                 self.set_button_icon(btn, local_path)
