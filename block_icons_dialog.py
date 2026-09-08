@@ -1,6 +1,5 @@
 import os
 import uuid
-import threading
 import urllib.request
 from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QMovie
@@ -8,37 +7,6 @@ from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QGridLayout, QScrollArea, QWidget, QFileDialog, QLineEdit
 )
 from dialog_utils import show_warning
-
-def create_procedural_block_icon(block_id, path):
-    from PyQt6.QtGui import QImage, QColor
-    import random
-    
-    img = QImage(32, 32, QImage.Format.Format_RGB32)
-    base_colors = {
-        "dirt": QColor(134, 96, 67),
-        "grass_block": QColor(87, 157, 63),
-        "gravel": QColor(133, 131, 131),
-        "stone": QColor(118, 118, 118),
-        "end_stone": QColor(222, 224, 157),
-        "carved_pumpkin": QColor(219, 125, 29),
-        "oak_log": QColor(107, 83, 51),
-        "hay_bale": QColor(214, 184, 58),
-        "bee_nest": QColor(214, 163, 81),
-        "crafting_table": QColor(153, 115, 69)
-    }
-    color = base_colors.get(block_id, QColor(90, 90, 90))
-    random.seed(hash(block_id))
-    
-    for y in range(32):
-        for x in range(32):
-            variation = random.randint(-15, 15)
-            r = max(0, min(255, color.red() + variation))
-            g = max(0, min(255, color.green() + variation))
-            b = max(0, min(255, color.blue() + variation))
-            img.setPixelColor(x, y, QColor(r, g, b))
-            
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    img.save(path)
 
 
 MINECRAFT_BLOCKS = [
@@ -147,7 +115,6 @@ MINECRAFT_BLOCKS = [
 class BlockIconSelectorDialog(QDialog):
     """Finestra di dialogo per selezionare l'icona dell'istanza dai blocchi locali."""
     icon_selected = pyqtSignal(str)
-    icon_ready_signal = pyqtSignal(object, str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -156,13 +123,9 @@ class BlockIconSelectorDialog(QDialog):
         self.resize(540, 500)
         self.selected_path = None
         self.active_movies = []
-        self.icon_buttons = []
-
-        self.icon_ready_signal.connect(self.set_button_icon)
 
         self.setupUi()
         self.apply_stylesheet()
-        self.start_background_downloads()
 
     def setupUi(self):
         main_layout = QVBoxLayout(self)
@@ -222,11 +185,14 @@ class BlockIconSelectorDialog(QDialog):
 
             url = block.get("url")
             ext = ".gif" if (url and ".gif" in url.lower()) else ".png"
+            if url and ".webp" in url.lower():
+                ext = ".webp"
+            elif url and (".jpg" in url.lower() or ".jpeg" in url.lower()):
+                ext = ".jpg"
+
             icon_filename = f"{block['id']}{ext}"
             local_path = os.path.join(blocks_cache_dir, icon_filename)
 
-            # Rimuoviamo completamente la generazione procedurale: se manca l'immagine o l'URL, non vogliamo icone procedurali.
-            # Se l'URL è presente ma il file non esiste ancora, proviamo a scaricarlo subito in modo sincrono o mettiamo un placeholder vuoto.
             if url and (not os.path.exists(local_path) or os.path.getsize(local_path) == 0):
                 try:
                     import ssl
@@ -246,15 +212,12 @@ class BlockIconSelectorDialog(QDialog):
             if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
                 self.set_button_icon(btn, local_path)
 
-            # Collega direttamente il path locale al click
             btn.clicked.connect(lambda _, path=local_path: self.on_block_chosen(path))
             grid_layout.addWidget(btn, row, col)
-            self.icon_buttons.append((btn, local_path, url))
 
         scroll.setWidget(grid_widget)
         main_layout.addWidget(scroll, 1)
 
-        # Pulsante Annulla in basso
         bottom_row = QHBoxLayout()
         bottom_row.addStretch()
 
@@ -268,7 +231,6 @@ class BlockIconSelectorDialog(QDialog):
     def set_button_icon(self, btn, path):
         if os.path.exists(path) and os.path.getsize(path) > 0:
             if path.lower().endswith(".gif"):
-                # Rimuovi eventuale movie precedente associato al bottone se esiste
                 movie = QMovie(path, parent=self)
                 movie.setScaledSize(QSize(64, 64))
                 movie.frameChanged.connect(lambda: self.update_grid_movie_frame(btn, movie))
@@ -289,36 +251,6 @@ class BlockIconSelectorDialog(QDialog):
             except RuntimeError:
                 pass
 
-    def start_background_downloads(self):
-        def download_missing():
-            import ssl
-            context = ssl.create_default_context()
-            context.check_hostname = False
-            context.verify_mode = ssl.CERT_NONE
-            
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-                'Accept-Language': 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7'
-            }
-
-            for btn, local_path, url in self.icon_buttons:
-                if url:
-                    file_exists_and_valid = os.path.exists(local_path) and os.path.getsize(local_path) > 0
-                    if not file_exists_and_valid:
-                        try:
-                            req = urllib.request.Request(url, headers=headers)
-                            with urllib.request.urlopen(req, context=context, timeout=15) as response, open(local_path, 'wb') as out_file:
-                                out_file.write(response.read())
-                        except Exception as e:
-                            print(f"[BlockIconSelectorDialog] Errore download icona in background {local_path} ({url}): {e}")
-                    
-                    if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
-                        self.icon_ready_signal.emit(btn, local_path)
-
-        thread = threading.Thread(target=download_missing, daemon=True)
-        thread.start()
-
     def on_block_chosen(self, path):
         if os.path.exists(path) and os.path.getsize(path) > 0:
             self.selected_path = path
@@ -327,7 +259,7 @@ class BlockIconSelectorDialog(QDialog):
 
     def browse_custom_image(self):
         file_path, _ = QFileDialog.getOpenFileName(
-            self, "Seleziona Immagine Personalizzata", "", "Immagini (*.png *.jpg *.jpeg *.ico *.gif)"
+            self, "Seleziona Immagine Personalizzata", "", "Immagini (*.png *.jpg *.jpeg *.ico *.gif *.webp)"
         )
         if file_path:
             self.selected_path = file_path
@@ -339,6 +271,7 @@ class BlockIconSelectorDialog(QDialog):
         if not url:
             show_warning(self, "Link vuoto", "Inserisci un link URL valido per l'immagine o GIF.")
             return
+
         try:
             icons_dir = os.path.expanduser("~/.cignolauncher/instance_icons")
             os.makedirs(icons_dir, exist_ok=True)
@@ -364,8 +297,7 @@ class BlockIconSelectorDialog(QDialog):
 
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-                'Accept-Language': 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7'
+                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
             }
 
             req = urllib.request.Request(url, headers=headers)
@@ -377,51 +309,56 @@ class BlockIconSelectorDialog(QDialog):
                 self.icon_selected.emit(local_path)
                 self.accept()
             else:
-                show_warning(self, "Errore Download", "Impossibile scaricare l'immagine dal link specificato.")
+                show_warning(self, "Errore", "Impossibile scaricare l'immagine dal link specificato.")
         except Exception as e:
-            print(f"[BlockIconSelectorDialog] Errore download icona da URL: {e}")
-            show_warning(self, "Errore Download", f"Errore durante il download dal link:\n{e}")
+            show_warning(self, "Errore di Connessione", f"Impossibile scaricare l'immagine:\n{e}")
 
     def apply_stylesheet(self):
         self.setStyleSheet("""
             QDialog {
-                background-color: #0b0f19;
+                background-color: #0f172a;
                 color: #f8fafc;
-                font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+            QLabel {
+                color: #f8fafc;
+                font-size: 10pt;
             }
             QLabel#DialogHeader {
-                font-size: 15pt;
+                font-size: 16pt;
                 font-weight: bold;
+                color: #ffffff;
+            }
+            QLineEdit#UrlInput {
+                background-color: #1e293b;
+                border: 1px solid #334155;
+                border-radius: 6px;
+                padding: 8px 12px;
                 color: #f8fafc;
+                font-size: 9.5pt;
+            }
+            QLineEdit#UrlInput:focus {
+                border: 1px solid #38bdf8;
+            }
+            QPushButton#SecondaryButton {
+                background-color: #1e293b;
+                border: 1px solid #334155;
+                color: #f8fafc;
+                padding: 8px 16px;
+                border-radius: 6px;
+                font-weight: 600;
+            }
+            QPushButton#SecondaryButton:hover {
+                background-color: #334155;
+                border-color: #475569;
             }
             QPushButton#BlockIconButton {
                 background-color: #1e293b;
                 border: 2px solid #334155;
-                border-radius: 12px;
+                border-radius: 10px;
             }
-            QPushButton#BlockIconButton:hover {
-                background-color: #2563eb;
-                border-color: #60a5fa;
-            }
-            QLineEdit#UrlInput {
-                background-color: #1e293b;
-                color: #f8fafc;
-                border: 1px solid #334155;
-                border-radius: 8px;
-                padding: 8px 12px;
-                font-size: 9.5pt;
-            }
-            QLineEdit#UrlInput:focus {
+            QPushButton#BlockIconSelectorDialog QPushButton#BlockIconButton:hover, QPushButton#BlockIconButton:hover {
                 border-color: #38bdf8;
-            }
-            QPushButton#SecondaryButton {
-                background-color: #1e293b;
-                color: #f8fafc;
-                border: 1px solid #334155;
-                border-radius: 8px;
-                padding: 8px 16px;
-            }
-            QPushButton#SecondaryButton:hover {
                 background-color: #334155;
             }
         """)
