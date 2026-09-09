@@ -73,7 +73,8 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
         self.wizard.setStyleSheet(self.stylesheet(self.arrow_path, self.up_arrow_path))
 
         self.content_layout.addWidget(self.wizard)
-        self.wizard.finished.connect(self.done)
+        self.wizard.accepted.connect(self.accept)
+        self.wizard.rejected.connect(self.reject)
         self.adjustSize()
 
     def create_welcome_page(self):
@@ -336,8 +337,13 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
 
     def set_available_versions(self, versions, preferred_version=None):
         self.available_versions = versions or []
+        current_data = self.version_combo.currentData()
         self.populate_versions()
-        if preferred_version:
+        if current_data:
+            idx = self.version_combo.findData(current_data)
+            if idx >= 0:
+                self.version_combo.setCurrentIndex(idx)
+        elif preferred_version:
             idx = self.version_combo.findData(preferred_version)
             if idx >= 0:
                 self.version_combo.setCurrentIndex(idx)
@@ -469,7 +475,7 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
                 frame.setStyleSheet("""
                     QFrame {
                         background-color: #152238;
-                        border: 1px solid #3b82f6;
+                        border: 1px solid #282c39;
                         border-radius: 8px;
                     }
                 """)
@@ -479,8 +485,8 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
             frame_layout.setSpacing(12)
 
             head_label = QLabel()
-            head_label.setFixedSize(32, 32)
-            head_label.setStyleSheet("border-radius: 4px; background: #0f1115;")
+            head_label.setFixedSize(36, 36)
+            head_label.setStyleSheet("border-radius: 4px; background: #222530;")
             self.head_labels[data['uuid']] = head_label
 
             text_layout = QVBoxLayout()
@@ -490,10 +496,12 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
             if is_active:
                 name_text += " <span style='color: #10b981; font-size: 9pt;'>● Attivo</span>"
             name_label = QLabel(name_text)
+            name_label.setStyleSheet("background: transparent; border: none; color: #f8fafc;")
 
             acc_type = "Microsoft Xbox" if data['type'] == 'microsoft' else "Offline"
             type_color = "#38bdf8" if data['type'] == 'microsoft' else "#94a3b8"
             type_label = QLabel(f"<span style='color: {type_color}; font-size: 9pt;'>{acc_type}</span>")
+            type_label.setStyleSheet("background: transparent; border: none;")
 
             text_layout.addWidget(name_label)
             text_layout.addWidget(type_label)
@@ -518,8 +526,11 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
             if data['type'] == 'microsoft':
                 self.load_head_image_for_dialog(data.get('username'), head_label, user_uuid=data.get('uuid'))
             else:
-                steve_pix = create_steve_avatar(32)
-                head_label.setPixmap(steve_pix.scaled(32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+                steve_path = resource_path("assets/steve_head.png")
+                steve_pix = QPixmap(steve_path)
+                if steve_pix.isNull():
+                    steve_pix = create_steve_avatar(36)
+                head_label.setPixmap(steve_pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
 
     def load_head_image_for_dialog(self, identifier, target_label, user_uuid=None):
         if not (identifier or user_uuid) or not target_label:
@@ -530,14 +541,18 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
         if os.path.exists(cached_path) and os.path.getsize(cached_path) > 100:
             pixmap = QPixmap(cached_path)
             if not pixmap.isNull():
-                target_label.setPixmap(pixmap.scaled(32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+                target_label.setPixmap(pixmap.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
                 return
-        target_label.setPixmap(create_steve_avatar(32))
+        steve_path = resource_path("assets/steve_head.png")
+        steve_pix = QPixmap(steve_path)
+        if steve_pix.isNull():
+            steve_pix = create_steve_avatar(36)
+        target_label.setPixmap(steve_pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
 
         def fetch_and_set():
             pix = download_head_pixmap(identifier, heads_folder, user_uuid=user_uuid)
             if pix and not pix.isNull():
-                scaled = pix.scaled(32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                scaled = pix.scaled(36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
                 QTimer.singleShot(0, lambda: target_label.setPixmap(scaled))
 
         threading.Thread(target=fetch_and_set, daemon=True).start()
@@ -627,14 +642,14 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
 
     def accept(self):
         name = self.name_input.text().strip() or "Vanilla Principale"
-        version = self.version_combo.currentData() or self.default_version
+        version = self.version_combo.currentData() or self.version_combo.currentText().split("•")[0].strip() or self.default_version
         loader_type = self.loader_combo.currentData() or "vanilla"
         loader_version = self.loader_version_combo.currentData() if loader_type != "vanilla" else ""
         ram_gb = self.ram_spinbox.value()
         jvm_args = self.jvm_input.text().strip()
 
         if self.instance_manager:
-            if self.instance and "id" in self.instance:
+            if self.instance and isinstance(self.instance, dict) and self.instance.get("id"):
                 self.instance_manager.update_instance(
                     self.instance["id"],
                     name=name,

@@ -16,7 +16,7 @@ class InstanceManager:
         
         os.makedirs(self.instances_folder, exist_ok=True)
         self.data = self.load_instances()
-        self.ensure_default_instance()
+        # Non creiamo un'istanza di default automatica con versioni hardcoded all'avvio se non ci sono istanze
 
     def load_instances(self):
         """Carica le istanze salvate da instances.json."""
@@ -38,9 +38,9 @@ class InstanceManager:
         except Exception as e:
             print(f"[InstanceManager] Errore salvataggio instances.json: {e}")
 
-    def ensure_default_instance(self, default_version="1.21.4"):
-        """Garantisce la presenza di almeno un'istanza predefinita."""
-        if not self.data.get("instances"):
+    def ensure_default_instance(self, default_version=None):
+        """Garantisce la presenza di almeno un'istanza predefinita se necessario."""
+        if not self.data.get("instances") and default_version:
             self.create_instance(
                 name="Vanilla Principale",
                 version=default_version,
@@ -48,9 +48,11 @@ class InstanceManager:
                 set_as_current=True
             )
         elif not self.data.get("current_instance") or self.data["current_instance"] not in self.data["instances"]:
-            first_id = next(iter(self.data["instances"]))
-            self.data["current_instance"] = first_id
-            self.save_instances()
+            instances = self.data.get("instances", {})
+            if instances:
+                first_id = next(iter(instances))
+                self.data["current_instance"] = first_id
+                self.save_instances()
 
     def get_instances(self):
         """Ritorna tutte le istanze registrate."""

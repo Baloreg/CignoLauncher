@@ -225,7 +225,6 @@ class LoginDialog(QDialog, CustomWindowMixin):
                 border-radius: 10px;
             }
             QFrame#AccountCardActive {
-                border: 1px solid #38bdf8;
                 background-color: #152238;
             }
             QMenu {

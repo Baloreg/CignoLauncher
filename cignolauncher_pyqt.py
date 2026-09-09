@@ -32,7 +32,7 @@ from instance_card import InstanceCard
 from first_run_wizard import FirstRunWizard
 from ui_controls import MaterialComboBox
 from login_dialog_pyqt import LoginDialog, CustomMessageBox
-from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap, download_head_pixmap
+from utils import ImageDownloader, create_steve_avatar, create_app_logo_pixmap, download_head_pixmap, parse_version_key
 from dialog_utils import ask_confirmation, show_warning
 
 def parse_version(v_str):
@@ -51,6 +51,7 @@ def parse_version(v_str):
     return tuple(parts[:3])
 
 DEFAULT_POPULAR_VERSIONS = [
+    {"id": "26.2", "type": "snapshot"},
     {"id": "1.21.4", "type": "release"},
     {"id": "1.21.3", "type": "release"},
     {"id": "1.21.1", "type": "release"},
@@ -285,7 +286,7 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.9"
+        self.launcher_version = "2.2.0"
 
         self.setup_paths()
         self.load_settings()
@@ -315,8 +316,9 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
         default_latest = self.get_latest_official_release()
         self.selected_version = self.settings.get("last_version") or default_latest
 
-        # Assicura che l'istanza di default usi l'ultima versione disponibile
-        self.instance_manager.ensure_default_instance(default_version=default_latest)
+        # Assicura istanza di default solo se esistono già istanze salvate
+        if self.instance_manager.get_instances():
+            self.instance_manager.ensure_default_instance(default_version=default_latest)
 
         try:
             import azure_config
@@ -370,13 +372,17 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
         self.check_account_on_startup()
 
     def get_latest_official_release(self):
-        """Identifica l'ultima versione Release ufficiale Mojang disponibile."""
-        for v in self.all_versions:
-            if isinstance(v, dict) and v.get("type") == "release":
-                return v.get("id")
-            elif isinstance(v, str) and not ("-" in v or "w" in v or "pre" in v or "rc" in v):
-                return v
-        return "1.21.4"
+        """Identifica l'ultima versione disponibile in assoluto (ordinata semanticamente)."""
+        if not self.all_versions:
+            return "26.2"
+        try:
+            sorted_versions = sorted(self.all_versions, key=parse_version_key, reverse=True)
+            if sorted_versions:
+                first = sorted_versions[0]
+                return first.get("id") if isinstance(first, dict) else str(first)
+        except Exception:
+            pass
+        return "26.2"
 
     def load_cached_versions(self):
         if os.path.exists(self.versions_cache_file):
