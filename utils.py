@@ -171,3 +171,29 @@ def create_app_logo_pixmap(width=280, height=80) -> QPixmap:
 
     painter.end()
     return pixmap
+
+
+def parse_version_key(v):
+    """Chiave di ordinamento semantico robusta per versioni Minecraft e Loader (es. 1.21.1 dopo 1.4.2)."""
+    if isinstance(v, dict):
+        v = v.get("id", "") or v.get("name", "")
+    s = str(v).strip()
+    for prefix in ["Forge ", "Fabric ", "Quilt ", "NeoForge "]:
+        if s.startswith(prefix):
+            s = s[len(prefix):]
+    
+    parts = []
+    import re
+    tokens = re.split(r'[\.\-\_]', s)
+    for token in tokens:
+        if token.isdigit():
+            parts.append((0, int(token)))
+        else:
+            m = re.match(r'^(\d+)(.*)$', token)
+            if m:
+                parts.append((0, int(m.group(1))))
+                if m.group(2):
+                    parts.append((1, m.group(2)))
+            else:
+                parts.append((1, token))
+    return parts

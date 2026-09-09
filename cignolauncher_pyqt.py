@@ -18,11 +18,12 @@ from PyQt6.QtWidgets import (
     QButtonGroup, QListWidget, QListWidgetItem, QScrollArea, QGridLayout, QTextBrowser,
     QGraphicsOpacityEffect
 )
-from PyQt6.QtGui import QIcon, QFont, QTextCursor, QPixmap, QColor, QDesktopServices
+from PyQt6.QtGui import QIcon, QFont, QTextCursor, QPixmap, QColor, QDesktopServices, QPainter
 from PyQt6.QtCore import QObject, QThread, pyqtSignal, Qt, pyqtSlot, QEvent, QSize, QTimer, QPropertyAnimation
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtCore import QUrl
 
+from custom_window import CustomWindowMixin
 from account_manager import AccountManager
 from instance_manager import InstanceManager
 from instance_dialog import InstanceEditDialog, InstanceManagerDialog
@@ -152,8 +153,21 @@ def create_autumn_grass_texture():
 def set_svg_icon(button, asset_name, size=18):
     icon_path = resource_path(f"assets/{asset_name}")
     if os.path.exists(icon_path):
-        button.setIcon(QIcon(icon_path))
-        button.setIconSize(QSize(size, size))
+        pixmap = QPixmap(icon_path)
+        if not pixmap.isNull():
+            normal_icon = QIcon(pixmap)
+            disabled_pixmap = QPixmap(pixmap.size())
+            disabled_pixmap.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(disabled_pixmap)
+            painter.setOpacity(0.4)
+            painter.drawPixmap(0, 0, pixmap)
+            painter.end()
+            disabled_icon = QIcon()
+            disabled_icon.addPixmap(normal_icon.pixmap(size, size), QIcon.Mode.Normal, QIcon.State.Off)
+            disabled_icon.addPixmap(disabled_pixmap, QIcon.Mode.Disabled, QIcon.State.Off)
+
+            button.setIcon(disabled_icon)
+            button.setIconSize(QSize(size, size))
 
 if sys.platform == 'win32':
     _original_Popen = subprocess.Popen
@@ -259,7 +273,7 @@ def markdown_to_html(md_text):
     return "".join(html_lines)
 
 
-class MinecraftLauncher(QMainWindow):
+class MinecraftLauncher(QMainWindow, CustomWindowMixin):
     """Launcher Minecraft moderno multi-versione e multi-istanza."""
 
     news_ready_signal = pyqtSignal(str)
@@ -271,7 +285,7 @@ class MinecraftLauncher(QMainWindow):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.1.8"
+        self.launcher_version = "2.1.9"
 
         self.setup_paths()
         self.load_settings()
@@ -439,10 +453,14 @@ class MinecraftLauncher(QMainWindow):
         else:
             self.setWindowIcon(QIcon(create_steve_avatar(32)))
 
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
+        self.init_custom_frame(
+            title=f"{self.launcher_name} v{self.launcher_version} - Vanilla & Instances",
+            icon=self.windowIcon(),
+            show_maximize=True
+        )
 
-        main_layout = QHBoxLayout(central_widget)
+        main_layout = QHBoxLayout()
+        self.content_layout.addLayout(main_layout)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
@@ -511,6 +529,7 @@ class MinecraftLauncher(QMainWindow):
         # Widget account in fondo alla sidebar
         self.sidebar_account_frame = QFrame()
         self.sidebar_account_frame.setObjectName("SidebarAccountCard")
+        self.sidebar_account_frame.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.sidebar_account_frame.setCursor(Qt.CursorShape.PointingHandCursor)
         acc_box = QHBoxLayout(self.sidebar_account_frame)
         acc_box.setContentsMargins(8, 8, 8, 8)
@@ -541,7 +560,12 @@ class MinecraftLauncher(QMainWindow):
         self.pages = QStackedWidget()
         main_layout.addWidget(self.pages, 1)
 
-        self.nav_group.idClicked.connect(self.pages.setCurrentIndex)
+        def on_nav_clicked(page_idx):
+            if page_idx == 1:
+                self.refresh_instances_page_list()
+            self.pages.setCurrentIndex(page_idx)
+
+        self.nav_group.idClicked.connect(on_nav_clicked)
 
         # Inizializza le 4 tab
         self.home_tab = QWidget()
@@ -575,6 +599,7 @@ class MinecraftLauncher(QMainWindow):
         # Header Hero Card (Netflix-style Carousel Banner)
         hero_card = QFrame()
         hero_card.setObjectName("HeroCard")
+        hero_card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         hero_card.setFixedHeight(96)
         hero_card.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
@@ -659,6 +684,7 @@ class MinecraftLauncher(QMainWindow):
 
         news_card = QFrame()
         news_card.setObjectName("NewsCard")
+        news_card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         news_card.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         news_layout = QVBoxLayout(news_card)
         news_layout.setContentsMargins(16, 12, 16, 12)
@@ -737,6 +763,7 @@ class MinecraftLauncher(QMainWindow):
         # Bottom Launch Bar
         bottom_card = QFrame()
         bottom_card.setObjectName("ModernCard")
+        bottom_card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         bottom_layout = QVBoxLayout(bottom_card)
         bottom_layout.setContentsMargins(24, 16, 24, 18)
         bottom_layout.setSpacing(10)
@@ -1057,6 +1084,7 @@ class MinecraftLauncher(QMainWindow):
 
             is_active = (inst_id == curr_id)
             card = InstanceCard(inst, instance_manager=self.instance_manager, is_active=is_active)
+            card.set_play_enabled(not self.is_task_running())
 
             # Collega i segnali della card ai metodi del launcher
             card.launched.connect(lambda iid=inst_id: self.launch_instance_from_card(iid))
@@ -1077,11 +1105,17 @@ class MinecraftLauncher(QMainWindow):
             self.instances_container_layout.addWidget(no_inst, 0, 0, 1, columns)
 
     def launch_instance_from_card(self, inst_id):
+        if self.is_task_running():
+            CustomMessageBox("Attendi", "Un'operazione di download o installazione è in corso.", "info", self).exec()
+            return
         self.instance_manager.set_current_instance(inst_id)
         self.refresh_instances_selector()
         self.launch_game()
 
     def activate_instance_from_card(self, inst_id):
+        if self.is_task_running():
+            CustomMessageBox("Attendi", "Un'operazione di download o installazione è in corso.", "info", self).exec()
+            return
         self.instance_manager.set_current_instance(inst_id)
         self.refresh_instances_selector()
 
@@ -1143,6 +1177,7 @@ class MinecraftLauncher(QMainWindow):
 
         settings_card = QFrame()
         settings_card.setObjectName("ModernCard")
+        settings_card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         card_layout = QVBoxLayout(settings_card)
         card_layout.setContentsMargins(25, 25, 25, 25)
         card_layout.setSpacing(16)
@@ -1290,12 +1325,13 @@ class MinecraftLauncher(QMainWindow):
         up_arrow = resource_path("assets/chevron_up.svg").replace("\\", "/")
         stylesheet = """
             QWidget {
-                background-color: #0f1115;
+                background-color: transparent;
                 color: #f1f5f9;
                 font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             }
-            QMainWindow {
+            QMainWindow, QDialog {
                 background-color: #0f1115;
+                color: #f1f5f9;
             }
             /* FIX CRITICO: I QLabel devono avere sfondo trasparente per evitare riquadri neri */
             QLabel {
@@ -1357,6 +1393,7 @@ class MinecraftLauncher(QMainWindow):
                 color: #38bdf8;
             }
             QFrame#HeroCard {
+                background-color: #1e293b;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1e293b, stop:1 #0f172a);
                 border: 1px solid #334155;
                 border-radius: 12px;
@@ -1404,6 +1441,11 @@ class MinecraftLauncher(QMainWindow):
             QFrame#NewsCard {
                 background-color: #141922;
                 border: 1px solid #263348;
+                border-radius: 12px;
+            }
+            QFrame#ModernCard {
+                background-color: #16181f;
+                border: 1px solid #232631;
                 border-radius: 12px;
             }
             QFrame#NewsItem {
@@ -1497,20 +1539,43 @@ class MinecraftLauncher(QMainWindow):
                 border: none;
             }
             QScrollBar:vertical {
-                background: #0f1115;
-                width: 10px;
-                margin: 4px 0;
+                background: transparent;
+                width: 8px;
+                margin: 4px 2px 4px 2px;
+                border-radius: 4px;
             }
             QScrollBar::handle:vertical {
-                background: #334155;
-                min-height: 36px;
-                border-radius: 5px;
+                background: #2e3b52;
+                min-height: 40px;
+                border-radius: 4px;
             }
             QScrollBar::handle:vertical:hover {
-                background: #475569;
+                background: #3b82f6;
             }
-            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+                background: transparent;
                 height: 0;
+            }
+
+            QScrollBar:horizontal {
+                background: transparent;
+                height: 8px;
+                margin: 2px 4px 2px 4px;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:horizontal {
+                background: #2e3b52;
+                min-width: 40px;
+                border-radius: 4px;
+            }
+            QScrollBar::handle:horizontal:hover {
+                background: #3b82f6;
+            }
+            QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal,
+            QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+                background: transparent;
+                width: 0;
             }
             QLabel#StatusPill {
                 font-size: 9pt;
@@ -1770,6 +1835,8 @@ class MinecraftLauncher(QMainWindow):
         self.refresh_instances_page_list()
 
     def on_instance_selected(self, index):
+        if self.is_task_running():
+            return
         inst_id = self.instance_combo.currentData()
         if inst_id:
             self.instance_manager.set_current_instance(inst_id)
@@ -1811,58 +1878,6 @@ class MinecraftLauncher(QMainWindow):
                 subprocess.Popen(['open', path])
             else:
                 subprocess.Popen(['xdg-open', path])
-
-    def refresh_instances_page_list(self):
-        """Aggiorna la lista delle card nella tab Istanze."""
-        while self.instances_container_layout.count() > 0:
-            item = self.instances_container_layout.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
-
-        instances = self.instance_manager.get_instances()
-        current = self.instance_manager.get_current_instance()
-        curr_id = current.get("id") if current else None
-
-        ordered_instances = sorted(
-            instances.items(),
-            key=lambda entry: entry[1].get("created_at", ""),
-            reverse=True,
-        )
-
-        columns = 3  # Numero di card per riga nella griglia
-
-        for idx, (inst_id, inst) in enumerate(ordered_instances):
-            row = idx // columns
-            col = idx % columns
-
-            is_active = (inst_id == curr_id)
-            card = InstanceCard(inst, instance_manager=self.instance_manager, is_active=is_active)
-
-            # Collega i segnali della card ai metodi del launcher
-            card.launched.connect(lambda iid=inst_id: self.launch_instance_from_card(iid))
-            card.activated.connect(lambda iid=inst_id: self.activate_instance_from_card(iid))
-            card.edited.connect(lambda iid=inst_id: self.edit_instance_from_card(iid))
-            card.mods_requested.connect(lambda iid=inst_id: self.open_mods_from_card(iid))
-            card.folder_requested.connect(lambda iid=inst_id: self.open_folder_from_card(iid))
-            card.deleted.connect(lambda iid=inst_id: self.delete_instance_from_card(iid))
-            card.icon_changed.connect(lambda iid=inst_id, path=None: self.refresh_instances_selector())
-
-            self.instances_container_layout.addWidget(card, row, col)
-
-        if not ordered_instances:
-            no_inst = QLabel("Nessuna istanza creata.\nClicca su 'Crea Nuova Istanza' per iniziare.")
-            no_inst.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            no_inst.setStyleSheet("color: #94a3b8; font-size: 11pt; padding: 40px;")
-            self.instances_container_layout.addWidget(no_inst, 0, 0, 1, columns)
-
-    def launch_instance_from_card(self, inst_id):
-        self.instance_manager.set_current_instance(inst_id)
-        self.refresh_instances_selector()
-        self.launch_game()
-
-    def activate_instance_from_card(self, inst_id):
-        self.instance_manager.set_current_instance(inst_id)
-        self.refresh_instances_selector()
 
     def edit_instance_from_card(self, inst_id):
         inst = self.instance_manager.get_instances().get(inst_id)
@@ -2076,6 +2091,10 @@ class MinecraftLauncher(QMainWindow):
                 QPushButton#PlayButton:hover {
                     background-color: #059669;
                 }
+                QPushButton#PlayButton:disabled {
+                    background-color: #272a34;
+                    color: #64748b;
+                }
             """)
             self.main_action_btn.setEnabled(self.game_process is None)
         else:
@@ -2089,6 +2108,10 @@ class MinecraftLauncher(QMainWindow):
                 }
                 QPushButton#PlayButton:hover {
                     background-color: #2563eb;
+                }
+                QPushButton#PlayButton:disabled {
+                    background-color: #272a34;
+                    color: #64748b;
                 }
             """)
             self.main_action_btn.setEnabled(self.game_process is None)
@@ -2169,10 +2192,10 @@ class MinecraftLauncher(QMainWindow):
         def on_complete():
             self.update_installed_versions_cache()
             self.populate_version_dropdown()
-            self.action_status_label.setText("Installazione completata con successo!")
+            self.action_status_label.setText("Installazione completata. Avvio del gioco...")
             self.progress_bar.setValue(100)
             self.progress_percentage_label.setText("100%")
-            CustomMessageBox("Installazione Completata", f"Minecraft {version_id} è pronto per essere giocato!", "success", self).exec()
+            self.launch_game()
 
         self.run_task(install_task, on_finish=on_complete)
 
@@ -2195,6 +2218,21 @@ class MinecraftLauncher(QMainWindow):
         active_inst = self.instance_manager.get_current_instance()
         if not active_inst:
             CustomMessageBox("Errore", "Nessuna istanza configurata.", "error", self).exec()
+            return
+
+        loader_type = active_inst.get("loader_type", "vanilla")
+        installed_ver_id = active_inst.get("installed_version_id")
+        base_ver = active_inst.get("version")
+        target_ver_id = installed_ver_id if (loader_type != "vanilla" and installed_ver_id) else base_ver
+
+        installed_versions = [v.get("id") for v in minecraft_launcher_lib.utils.get_installed_versions(self.minecraft_directory)]
+        is_installed = target_ver_id in installed_versions
+
+        if not is_installed:
+            self.nav_buttons[0].setChecked(True)
+            self.pages.setCurrentIndex(0)
+            self.update_active_instance_ui()
+            self.install_selected_version()
             return
 
         instance_dir = self.instance_manager.get_instance_directory(active_inst["id"])
@@ -2517,6 +2555,13 @@ class MinecraftLauncher(QMainWindow):
             self.log("Un'operazione è già in corso.", "ERROR")
             return
 
+        self.main_action_btn.setEnabled(False)
+        if hasattr(self, 'instance_combo'):
+            self.instance_combo.setEnabled(False)
+        for card in self.findChildren(InstanceCard):
+            card.set_play_enabled(False)
+        self.refresh_instances_page_list()
+
         thread = QThread(self)
         worker = Worker(target, *args, **kwargs)
         worker.moveToThread(thread)
@@ -2528,6 +2573,11 @@ class MinecraftLauncher(QMainWindow):
             if self.worker_thread is thread:
                 self.worker_thread = None
                 self.worker = None
+            if hasattr(self, 'instance_combo'):
+                self.instance_combo.setEnabled(True)
+            for card in self.findChildren(InstanceCard):
+                card.set_play_enabled(True)
+            self.refresh_instances_page_list()
 
         worker.finished.connect(thread.quit)
         worker.finished.connect(worker.deleteLater)

@@ -12,7 +12,8 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLa
 from PyQt6.QtGui import QIcon, QFont, QPixmap, QAction
 from PyQt6.QtCore import Qt, QObject, pyqtSignal, QThread, QTimer
 from utils import create_steve_avatar, resource_path, download_head_pixmap
-from dialog_utils import ask_confirmation, show_warning
+from custom_window import CustomWindowMixin
+from dialog_utils import ask_confirmation, show_warning, custom_text_input, CustomMessageBox
 
 def resource_path(relative_path):
     try:
@@ -110,7 +111,7 @@ class MicrosoftLoginWorker(QObject):
             self.finished.emit()
 
 
-class LoginDialog(QDialog):
+class LoginDialog(QDialog, CustomWindowMixin):
     """Finestra unificata di gestione account"""
     def __init__(self, parent, account_manager, client_id, client_secret, initial_mode=""):
         super().__init__(parent)
@@ -129,17 +130,15 @@ class LoginDialog(QDialog):
         self.setWindowTitle("Account - CignoLauncher")
         self.setMinimumSize(480, 420)
         self.resize(540, 480)
-        self.setSizeGripEnabled(True)
 
-        main_layout = QVBoxLayout(self)
+        self.init_custom_frame(title="Account - CignoLauncher", icon=self.windowIcon(), show_maximize=False)
+
+        main_layout = self.content_layout
         main_layout.setContentsMargins(24, 20, 24, 20)
         main_layout.setSpacing(14)
 
-        # Intestazione con titolo e pulsante "+"
+        # Intestazione con pulsante "+"
         header_layout = QHBoxLayout()
-        title_label = QLabel("Account")
-        title_label.setObjectName("TitleLabel")
-        header_layout.addWidget(title_label)
         header_layout.addStretch()
 
         self.add_account_btn = QPushButton("+ Aggiungi Account")
@@ -371,7 +370,7 @@ class LoginDialog(QDialog):
             self.refresh_accounts_list()
 
     def prompt_offline_login(self):
-        username, ok = QInputDialog.getText(self, "Aggiungi Account Offline", "Inserisci il nome giocatore:")
+        username, ok = custom_text_input(self, "Aggiungi Account Offline", "Inserisci il nome giocatore:")
         if ok and username:
             clean_name = username.strip()
             if not (3 <= len(clean_name) <= 16):
@@ -419,17 +418,4 @@ class LoginDialog(QDialog):
         self.add_account_btn.setEnabled(True)
 
 
-class CustomMessageBox(QMessageBox):
-    """Wrapper QMessageBox con stile dark moderno coerente"""
-    def __init__(self, title, message, msg_type='info', parent=None):
-        super().__init__(parent)
-        self.setWindowTitle(title)
-        self.setText(message)
 
-        icon_map = {
-            'info': QMessageBox.Icon.Information,
-            'error': QMessageBox.Icon.Critical,
-            'success': QMessageBox.Icon.Information,
-            'question': QMessageBox.Icon.Question
-        }
-        self.setIcon(icon_map.get(msg_type, QMessageBox.Icon.NoIcon))

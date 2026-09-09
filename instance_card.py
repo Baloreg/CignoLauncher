@@ -27,6 +27,7 @@ class InstanceCard(QFrame):
 
     def __init__(self, instance_data, instance_manager=None, is_active=False, parent=None):
         super().__init__(parent)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.instance = instance_data
         self.instance_manager = instance_manager
         self.instance_id = instance_data.get("id")
@@ -34,13 +35,14 @@ class InstanceCard(QFrame):
         self.current_movie = None
         self.setObjectName("InstanceCardActive" if is_active else "InstanceCard")
         
-        self.setFixedSize(210, 255)
+        self.setFixedSize(210, 215)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setupUi()
 
     def setupUi(self):
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(12, 12, 12, 12)
-        layout.setSpacing(8)
+        layout.setContentsMargins(12, 10, 12, 10)
+        layout.setSpacing(6)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # 1. Icona Quadrata Centrale in alto
@@ -105,6 +107,10 @@ class InstanceCard(QFrame):
             QPushButton#PrimaryActionButton:hover {
                 background-color: #1d4ed8;
             }
+            QPushButton#PrimaryActionButton:disabled {
+                background-color: #272a34;
+                color: #64748b;
+            }
         """)
         self.play_btn.clicked.connect(lambda: self.launched.emit(self.instance_id))
         bottom_row.addWidget(self.play_btn, 1)
@@ -137,7 +143,7 @@ class InstanceCard(QFrame):
         # Pulsante Menu Altre Azioni ("...")
         self.more_btn = QPushButton("•••")
         self.more_btn.setObjectName("SecondaryButton")
-        self.more_btn.setFixedSize(34, 30)
+        self.more_btn.setFixedSize(38, 30)
         self.more_btn.setToolTip("Altre opzioni (Addon, Modifica, Cartella, Elimina)")
         self.more_btn.setStyleSheet("""
             QPushButton#SecondaryButton {
@@ -146,6 +152,8 @@ class InstanceCard(QFrame):
                 border: 1px solid #334155;
                 border-radius: 7px;
                 font-weight: bold;
+                text-align: center;
+                padding-bottom: 2px;
             }
             QPushButton#SecondaryButton:hover {
                 background-color: #334155;
@@ -155,6 +163,21 @@ class InstanceCard(QFrame):
         bottom_row.addWidget(self.more_btn)
 
         layout.addLayout(bottom_row)
+
+    def set_play_enabled(self, enabled):
+        if hasattr(self, 'play_btn'):
+            self.play_btn.setEnabled(enabled)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            # Controlla se il launcher sta eseguendo un task in background
+            parent_launcher = self.parent()
+            while parent_launcher and not hasattr(parent_launcher, 'is_task_running'):
+                parent_launcher = parent_launcher.parent()
+            if parent_launcher and parent_launcher.is_task_running():
+                return
+            self.activated.emit(self.instance_id)
+        super().mousePressEvent(event)
 
     def show_context_menu(self):
         menu = QMenu(self)

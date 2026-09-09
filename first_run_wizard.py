@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QWizard,
     QWizardPage,
+    QDialog,
     QPushButton,
     QSlider,
     QCheckBox,
@@ -24,11 +25,13 @@ from PyQt6.QtWidgets import (
 )
 from ui_controls import MaterialComboBox
 from utils import resource_path, download_head_pixmap, create_steve_avatar
+from custom_window import CustomWindowMixin
+from dialog_utils import ask_confirmation, show_warning, custom_text_input
 from instance_dialog import LoaderFetchWorker
 from login_dialog_pyqt import MicrosoftLoginWorker
 
 
-class FirstRunWizard(QWizard):
+class FirstRunWizard(QDialog, CustomWindowMixin):
     def __init__(self, parent, default_version, instance, logo_path="",
                  arrow_path="assets/chevron_down.svg", available_versions=None):
         super().__init__(parent)
@@ -52,18 +55,25 @@ class FirstRunWizard(QWizard):
         self.setWindowTitle("Configura CignoLauncher")
         self.setMinimumSize(640, 560)
         self.resize(700, 620)
-        self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
-        self.setOption(QWizard.WizardOption.NoCancelButtonOnLastPage, True)
-        self.setButtonText(QWizard.WizardButton.NextButton, "Continua")
-        self.setButtonText(QWizard.WizardButton.BackButton, "Indietro")
-        self.setButtonText(QWizard.WizardButton.FinishButton, "Inizia")
-        self.setButtonText(QWizard.WizardButton.CancelButton, "Salta")
 
-        self.addPage(self.create_welcome_page())
-        self.addPage(self.create_instance_page())
-        self.addPage(self.create_account_page())
-        self.addPage(self.create_ready_page())
-        self.setStyleSheet(self.stylesheet(self.arrow_path, self.up_arrow_path))
+        self.init_custom_frame(title="Configura CignoLauncher", icon=self.windowIcon(), show_maximize=False)
+
+        self.wizard = QWizard(self)
+        self.wizard.setWizardStyle(QWizard.WizardStyle.ModernStyle)
+        self.wizard.setOption(QWizard.WizardOption.NoCancelButtonOnLastPage, True)
+        self.wizard.setButtonText(QWizard.WizardButton.NextButton, "Continua")
+        self.wizard.setButtonText(QWizard.WizardButton.BackButton, "Indietro")
+        self.wizard.setButtonText(QWizard.WizardButton.FinishButton, "Inizia")
+        self.wizard.setButtonText(QWizard.WizardButton.CancelButton, "Salta")
+
+        self.wizard.addPage(self.create_welcome_page())
+        self.wizard.addPage(self.create_instance_page())
+        self.wizard.addPage(self.create_account_page())
+        self.wizard.addPage(self.create_ready_page())
+        self.wizard.setStyleSheet(self.stylesheet(self.arrow_path, self.up_arrow_path))
+
+        self.content_layout.addWidget(self.wizard)
+        self.wizard.finished.connect(self.done)
         self.adjustSize()
 
     def create_welcome_page(self):
@@ -547,11 +557,11 @@ class FirstRunWizard(QWizard):
                 self.parent().update_account_badge()
 
     def prompt_offline_login(self):
-        username, ok = QInputDialog.getText(self, "Aggiungi Account Offline", "Inserisci il nome giocatore:")
+        username, ok = custom_text_input(self, "Aggiungi Account Offline", "Inserisci il nome giocatore:")
         if ok and username:
             clean_name = username.strip()
             if not (3 <= len(clean_name) <= 16):
-                QMessageBox.warning(self, "Nome non valido", "Il nome utente deve avere una lunghezza compresa tra 3 e 16 caratteri.")
+                show_warning(self, "Nome non valido", "Il nome utente deve avere una lunghezza compresa tra 3 e 16 caratteri.")
                 return
             if self.account_manager:
                 self.account_manager.add_offline_account(clean_name)

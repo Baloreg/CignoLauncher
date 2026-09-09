@@ -11,7 +11,8 @@ from PyQt6.QtGui import QIcon, QFont, QColor
 from PyQt6.QtCore import Qt, QSize, pyqtSignal, QObject
 from ui_controls import MaterialComboBox
 from dialog_utils import ask_confirmation, show_warning
-from utils import resource_path
+from utils import resource_path, parse_version_key
+from custom_window import CustomWindowMixin
 
 
 def set_svg_icon(button, asset_name, size=18):
@@ -39,7 +40,7 @@ class LoaderFetchWorker(QObject):
             self.finished.emit([])
 
 
-class InstanceEditDialog(QDialog):
+class InstanceEditDialog(QDialog, CustomWindowMixin):
     """Dialogo per creare o modificare una singola istanza di Minecraft."""
     def __init__(self, parent, instance_manager, available_versions, instance=None):
         super().__init__(parent)
@@ -57,17 +58,14 @@ class InstanceEditDialog(QDialog):
         is_edit = self.instance is not None
         title_text = "Modifica Istanza" if is_edit else "Crea Nuova Istanza"
         self.setWindowTitle(title_text)
-        self.setMinimumSize(460, 560)
-        self.resize(520, 600)
-        self.setSizeGripEnabled(True)
+        self.setMinimumSize(460, 630)
+        self.resize(520, 660)
 
-        main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(24, 20, 24, 20)
-        main_layout.setSpacing(14)
+        self.init_custom_frame(title=title_text, icon=self.windowIcon(), show_maximize=False)
 
-        header = QLabel(title_text)
-        header.setObjectName("DialogHeader")
-        main_layout.addWidget(header)
+        main_layout = self.content_layout
+        main_layout.setContentsMargins(20, 14, 20, 14)
+        main_layout.setSpacing(10)
 
         # Icona dell'Istanza
         icon_row = QHBoxLayout()
@@ -315,13 +313,23 @@ class InstanceEditDialog(QDialog):
                 import minecraft_launcher_lib as mll
                 loader = mll.mod_loader.get_mod_loader(loader_type)
                 mc_versions = loader.get_minecraft_versions(stable_only=not show_snapshots)
+                try:
+                    mc_versions = sorted(mc_versions, key=parse_version_key, reverse=True)
+                except Exception:
+                    mc_versions = sorted(mc_versions, reverse=True)
+
                 for ver_str in mc_versions:
                     label = f"{loader_prefix}{ver_str}   •   Release"
                     self.version_combo.addItem(QIcon(icon_path), label, ver_str)
             except Exception as e:
                 print(f"[populate_versions] Errore recupero versioni moddate: {e}")
                 # Fallback su available_versions
-                for version in self.available_versions:
+                try:
+                    sorted_versions = sorted(self.available_versions, key=parse_version_key, reverse=True)
+                except Exception:
+                    sorted_versions = self.available_versions
+
+                for version in sorted_versions:
                     version_id = version.get("id", "") if isinstance(version, dict) else str(version)
                     version_type = version.get("type", "release") if isinstance(version, dict) else "release"
                     if not show_snapshots and version_type != "release" and version_id != self.current_instance_version:
@@ -330,7 +338,12 @@ class InstanceEditDialog(QDialog):
                     self.version_combo.addItem(QIcon(icon_path), label, version_id)
         else:
             # Modalità Vanilla standard
-            for version in self.available_versions:
+            try:
+                sorted_versions = sorted(self.available_versions, key=parse_version_key, reverse=True)
+            except Exception:
+                sorted_versions = self.available_versions
+
+            for version in sorted_versions:
                 version_id = version.get("id", "") if isinstance(version, dict) else str(version)
                 version_type = version.get("type", "release") if isinstance(version, dict) else "release"
                 if not show_snapshots and version_type != "release" and version_id != self.current_instance_version:
@@ -527,6 +540,15 @@ class InstanceEditDialog(QDialog):
             self.adjustSize()
             return
 
+        # Ordina le versioni dal più recente al più vecchio (inverso) con parsing semantico
+        try:
+            versions = sorted(versions, key=parse_version_key, reverse=True)
+        except Exception:
+            try:
+                versions = sorted(versions, key=lambda v: v.get("id") if isinstance(v, dict) else str(v), reverse=True)
+            except Exception:
+                pass
+
         for v in versions:
             v_id = v.get("id") if isinstance(v, dict) else str(v)
             v_name = v.get("name") if isinstance(v, dict) else str(v)
@@ -589,7 +611,7 @@ class InstanceEditDialog(QDialog):
         self.accept()
 
 
-class InstanceManagerDialog(QDialog):
+class InstanceManagerDialog(QDialog, CustomWindowMixin):
     """Dialogo per visualizzare, selezionare, creare, modificare ed eliminare tutte le istanze."""
     def __init__(self, parent, instance_manager, available_versions):
         super().__init__(parent)
@@ -604,9 +626,11 @@ class InstanceManagerDialog(QDialog):
         self.setWindowTitle("Gestione Istanze Minecraft - CignoLauncher")
         self.setMinimumSize(560, 420)
         self.resize(760, 540)
-        self.setSizeGripEnabled(True)
 
-        main_layout = QHBoxLayout(self)
+        self.init_custom_frame(title="Gestione Istanze Minecraft - CignoLauncher", icon=self.windowIcon(), show_maximize=True)
+
+        main_layout = QHBoxLayout()
+        self.content_layout.addLayout(main_layout)
         main_layout.setContentsMargins(20, 20, 20, 20)
         main_layout.setSpacing(18)
 

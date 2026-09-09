@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
 from modrinth_manager import ModrinthManager
 from dialog_utils import ask_confirmation, show_warning
 from utils import resource_path
+from custom_window import CustomWindowMixin
 
 def set_svg_icon(widget, icon_name, size=18):
     """Utility per impostare un'icona SVG da assets a un widget."""
@@ -642,7 +643,7 @@ class ModrinthCategoryTab(QWidget):
             show_error(self, "Errore Cartella", f"Impossibile aprire la cartella: {e}")
 
 
-class ModManagerDialog(QDialog):
+class ModManagerDialog(QDialog, CustomWindowMixin):
     """Finestra di gestione completa di Mod, Resource Pack e Shader per un'istanza."""
 
     def __init__(self, parent, instance):
@@ -656,7 +657,13 @@ class ModManagerDialog(QDialog):
         self.apply_stylesheet()
 
     def setupUi(self):
-        main_layout = QVBoxLayout(self)
+        self.init_custom_frame(
+            title=f"Gestione Addon - {self.instance.get('name', 'Istanza')}",
+            icon=self.windowIcon(),
+            show_maximize=True
+        )
+
+        main_layout = self.content_layout
         main_layout.setContentsMargins(20, 20, 20, 20)
         main_layout.setSpacing(14)
 
@@ -666,10 +673,6 @@ class ModManagerDialog(QDialog):
         inst_name = self.instance.get('name', 'Istanza')
         mc_ver = self.instance.get('version', '1.20.4')
         loader = self.instance.get('loader_type', 'vanilla').capitalize()
-
-        title_label = QLabel(f"Gestione Contenuti: {inst_name}")
-        title_label.setObjectName("DialogHeader")
-        header_layout.addWidget(title_label)
 
         header_layout.addStretch()
 

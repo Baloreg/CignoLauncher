@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import (
 )
 from dialog_utils import show_warning
 from utils import resource_path
+from custom_window import CustomWindowMixin
 
 
 MINECRAFT_BLOCKS = [
@@ -113,7 +114,7 @@ MINECRAFT_BLOCKS = [
     }
 ]
 
-class BlockIconSelectorDialog(QDialog):
+class BlockIconSelectorDialog(QDialog, CustomWindowMixin):
     """Finestra di dialogo per selezionare l'icona dell'istanza dai blocchi locali."""
     icon_selected = pyqtSignal(str)
 
@@ -129,13 +130,11 @@ class BlockIconSelectorDialog(QDialog):
         self.apply_stylesheet()
 
     def setupUi(self):
-        main_layout = QVBoxLayout(self)
+        self.init_custom_frame(title="Scegli Icona Istanza", icon=self.windowIcon(), show_maximize=False)
+
+        main_layout = self.content_layout
         main_layout.setContentsMargins(20, 20, 20, 20)
         main_layout.setSpacing(14)
-
-        header = QLabel("Seleziona Icona Blocco")
-        header.setObjectName("DialogHeader")
-        main_layout.addWidget(header)
 
         desc = QLabel("Scegli un'icona per personalizzare questa istanza:")
         desc.setStyleSheet("color: #94a3b8; font-size: 9.5pt;")
