@@ -86,6 +86,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: release-artifacts/**/*
+          tag_name: v2.1.9
+          name: Release v2.1.9
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
