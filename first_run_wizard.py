@@ -483,6 +483,7 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
 
             head_label = QLabel()
             head_label.setFixedSize(36, 36)
+            head_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             head_label.setStyleSheet("border-radius: 4px; background: #222530;")
             self.head_labels[data['uuid']] = head_label
 
