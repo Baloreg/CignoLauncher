@@ -642,7 +642,7 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
 
     def accept(self):
         name = self.name_input.text().strip() or "Vanilla Principale"
-        version = self.version_combo.currentData() or self.version_combo.currentText().split("•")[0].strip() or self.default_version
+        version = self.version_combo.currentData() or self.version_combo.currentText().split("•")[0].strip() or (self.version_combo.itemData(0) if self.version_combo.count() > 0 else "")
         loader_type = self.loader_combo.currentData() or "vanilla"
         loader_version = self.loader_version_combo.currentData() if loader_type != "vanilla" else ""
         ram_gb = self.ram_spinbox.value()

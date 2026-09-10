@@ -348,9 +348,10 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
     def start_startup_flow(self):
         if self.onboarding_pending:
             active_instance = self.instance_manager.get_current_instance()
+            default_ver = self.all_versions[0].get("id") if (self.all_versions and isinstance(self.all_versions[0], dict)) else (self.all_versions[0] if self.all_versions else "")
             wizard = FirstRunWizard(
                 self,
-                self.get_latest_official_release(),
+                default_ver,
                 active_instance or {},
                 resource_path("assets/logo.png"),
                 resource_path("assets/chevron_down.svg"),
@@ -359,7 +360,7 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
             self.first_run_wizard = wizard
             if wizard.exec() == FirstRunWizard.DialogCode.Accepted:
                 self.settings["onboarding_completed"] = True
-                self.settings["last_version"] = getattr(wizard, "instance_version", self.get_latest_official_release())
+                self.settings["last_version"] = getattr(wizard, "instance_version", default_ver)
                 self.settings["profile_mode"] = getattr(wizard, "profile_mode", "online")
                 self.save_settings()
                 self.refresh_instances_selector()
