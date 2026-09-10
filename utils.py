@@ -14,8 +14,8 @@ def resource_path(relative_path):
 
 def download_head_pixmap(identifier, heads_folder, user_uuid=None):
     """
-    Scarica la testa/avatar 2D di un giocatore Minecraft provando vari provider in sequenza.
-    Supporta User-Agent e salvataggio sia per username che per UUID.
+    Scarica o genera la testa/avatar 2D con overlay del casco di un giocatore Minecraft
+    direttamente dai server ufficiali Mojang (Sessionserver) o tramite provider alternativi.
     Ritorna un QPixmap valido o None se fallisce.
     """
     if not identifier and not user_uuid:
@@ -25,15 +25,55 @@ def download_head_pixmap(identifier, heads_folder, user_uuid=None):
 
     target_id = str(user_uuid).strip() if user_uuid else str(identifier).strip()
     target_name = str(identifier).strip() if identifier else target_id
+    clean_uuid = str(user_uuid).replace("-", "").strip() if user_uuid else ""
 
+    # 1. Tentativo ufficiale Mojang Sessionserver se abbiamo un UUID Java valido (32 hex chars)
+    if len(clean_uuid) == 32 and all(c in "0123456789abcdefABCDEF" for c in clean_uuid):
+        try:
+            profile_url = f"https://sessionserver.mojang.com/session/minecraft/profile/{clean_uuid}"
+            res = requests.get(profile_url, timeout=5)
+            if res.status_code == 200:
+                data = res.json()
+                for prop in data.get("properties", []):
+                    if prop.get("name") == "textures":
+                        val = prop.get("value", "")
+                        import base64
+                        import json
+                        decoded = base64.b64decode(val).decode("utf-8")
+                        tex_data = json.loads(decoded)
+                        skin_url = tex_data.get("textures", {}).get("SKIN", {}).get("url")
+                        if skin_url:
+                            skin_res = requests.get(skin_url, timeout=5)
+                            if skin_res.status_code == 200:
+                                skin_img = QImage.fromData(skin_res.content)
+                                if not skin_img.isNull():
+                                    # Estrai testa (8x8 a 8,8) e overlay elmo/cappello (8x8 a 40,8)
+                                    head_img = skin_img.copy(8, 8, 8, 8)
+                                    overlay_img = skin_img.copy(40, 8, 8, 8)
+
+                                    final_img = QImage(8, 8, QImage.Format.Format_ARGB32)
+                                    final_img.fill(Qt.GlobalColor.transparent)
+                                    painter = QPainter(final_img)
+                                    painter.drawImage(0, 0, head_img)
+                                    painter.drawImage(0, 0, overlay_img)
+                                    painter.end()
+
+                                    pix = QPixmap.fromImage(final_img).scaled(64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.FastTransformation)
+                                    if not pix.isNull():
+                                        if target_name:
+                                            pix.save(os.path.join(heads_folder, f"{target_name}.png"), "PNG")
+                                        pix.save(os.path.join(heads_folder, f"{clean_uuid}.png"), "PNG")
+                                        print(f"[download_head_pixmap] Avatar generato da skin ufficiale Mojang per {target_name} ({clean_uuid})")
+                                        return pix
+        except Exception as e:
+            print(f"[download_head_pixmap] Tentativo Mojang sessionserver fallito: {e}")
+
+    # 2. Fallback su provider alternativi (Minotar, MC-Heads, Crafatar)
     urls = []
-    if user_uuid:
-        clean_uuid = str(user_uuid).replace("-", "").strip()
-        # Verifica che sia un UUID Java valido (32 caratteri esadecimali) e non un Xbox XUID numerico
-        if len(clean_uuid) == 32 and all(c in "0123456789abcdefABCDEF" for c in clean_uuid):
-            urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
-            urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
-            urls.append(f"https://crafatar.com/avatars/{clean_uuid}?size=64&helm")
+    if len(clean_uuid) == 32 and all(c in "0123456789abcdefABCDEF" for c in clean_uuid):
+        urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
+        urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
+        urls.append(f"https://crafatar.com/avatars/{clean_uuid}?size=64&helm")
 
     if target_name:
         urls.append(f"https://minotar.net/helm/{target_name}/64.png")
@@ -51,17 +91,14 @@ def download_head_pixmap(identifier, heads_folder, user_uuid=None):
             if res.status_code == 200 and len(res.content) > 100:
                 pix = QPixmap()
                 if pix.loadFromData(res.content) and not pix.isNull():
-                    # Salva su disco per cache sia con nome utente che con UUID
                     if target_name:
-                        path_name = os.path.join(heads_folder, f"{target_name}.png")
-                        with open(path_name, 'wb') as f:
+                        with open(os.path.join(heads_folder, f"{target_name}.png"), 'wb') as f:
                             f.write(res.content)
-                    if user_uuid:
-                        path_uuid = os.path.join(heads_folder, f"{user_uuid}.png")
-                        with open(path_uuid, 'wb') as f:
+                    if clean_uuid:
+                        with open(os.path.join(heads_folder, f"{clean_uuid}.png"), 'wb') as f:
                             f.write(res.content)
 
-                    print(f"[download_head_pixmap] Avatar per {target_name} ({user_uuid}) scaricato da {url}")
+                    print(f"[download_head_pixmap] Avatar per {target_name} ({clean_uuid}) scaricato da {url}")
                     return pix
         except Exception as e:
             print(f"[download_head_pixmap] Tentativo fallito con {url}: {e}")
