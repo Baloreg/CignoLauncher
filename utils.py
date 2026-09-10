@@ -26,16 +26,19 @@ def download_head_pixmap(identifier, heads_folder, user_uuid=None):
     target_id = str(user_uuid).strip() if user_uuid else str(identifier).strip()
     target_name = str(identifier).strip() if identifier else target_id
 
-    # URL candidati per il download dell'avatar (Minotar + MC-Heads)
     urls = []
     if user_uuid:
         clean_uuid = str(user_uuid).replace("-", "").strip()
-        urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
-        urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
+        # Verifica che sia un UUID Java valido (32 caratteri esadecimali) e non un Xbox XUID numerico
+        if len(clean_uuid) == 32 and all(c in "0123456789abcdefABCDEF" for c in clean_uuid):
+            urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
+            urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
+            urls.append(f"https://crafatar.com/avatars/{clean_uuid}?size=64&helm")
 
     if target_name:
         urls.append(f"https://minotar.net/helm/{target_name}/64.png")
         urls.append(f"https://mc-heads.net/avatar/{target_name}/64")
+        urls.append(f"https://crafatar.com/avatars/{target_name}?size=64&helm")
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
