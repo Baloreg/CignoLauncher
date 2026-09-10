@@ -44,6 +44,7 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
 
         self.instance_manager = getattr(parent, 'instance_manager', None)
         self.account_manager = getattr(parent, 'account_manager', None)
+        self.heads_folder = getattr(parent, 'heads_folder', os.path.join(getattr(parent, 'launcher_directory', os.path.expanduser("~/.cignolauncher")), "heads"))
 
         self.current_icon_path = instance.get("icon", "") if instance else ""
         self.current_movie = None
@@ -535,7 +536,7 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
     def load_head_image_for_dialog(self, identifier, target_label, user_uuid=None):
         if not (identifier or user_uuid) or not target_label:
             return
-        heads_folder = getattr(self.parent(), 'heads_folder', os.path.expanduser("~/.cignolauncher/heads"))
+        heads_folder = getattr(self, 'heads_folder', None) or getattr(self.parent(), 'heads_folder', os.path.expanduser("~/.cignolauncher/heads"))
         key = identifier or user_uuid
         cached_path = os.path.join(heads_folder, f"{key}.png")
         if os.path.exists(cached_path) and os.path.getsize(cached_path) > 100:
