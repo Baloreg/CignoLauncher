@@ -481,14 +481,14 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
                     }
                 """)
 
-            frame_layout = QHBoxLayout(frame)
-            frame_layout.setContentsMargins(12, 8, 12, 8)
-            frame_layout.setSpacing(12)
-
             head_label = QLabel()
             head_label.setFixedSize(36, 36)
             head_label.setStyleSheet("border-radius: 4px; background: #222530;")
             self.head_labels[data['uuid']] = head_label
+
+            frame_layout = QHBoxLayout(frame)
+            frame_layout.setContentsMargins(14, 10, 14, 10)
+            frame_layout.setSpacing(14)
 
             text_layout = QVBoxLayout()
             text_layout.setSpacing(2)
