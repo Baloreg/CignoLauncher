@@ -50,22 +50,7 @@ def parse_version(v_str):
         parts.append(0)
     return tuple(parts[:3])
 
-DEFAULT_POPULAR_VERSIONS = [
-    {"id": "1.21.4", "type": "release"},
-    {"id": "1.21.3", "type": "release"},
-    {"id": "1.21.1", "type": "release"},
-    {"id": "1.20.6", "type": "release"},
-    {"id": "1.20.4", "type": "release"},
-    {"id": "1.20.2", "type": "release"},
-    {"id": "1.20.1", "type": "release"},
-    {"id": "1.19.4", "type": "release"},
-    {"id": "1.18.2", "type": "release"},
-    {"id": "1.17.1", "type": "release"},
-    {"id": "1.16.5", "type": "release"},
-    {"id": "1.12.2", "type": "release"},
-    {"id": "1.8.9", "type": "release"},
-    {"id": "1.7.10", "type": "release"}
-]
+DEFAULT_POPULAR_VERSIONS = []
 
 def resource_path(relative_path):
     try:
