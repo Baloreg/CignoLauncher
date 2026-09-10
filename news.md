@@ -1,4 +1,4 @@
-# Benvenuti su CignoLauncher v2.1.0!
+# Benvenuti su CignoLauncher v2.2.0!
 
 Il launcher definitivo per Minecraft Java Edition progettato per offrire velocità, isolamento totale e personalizzazione avanzata.
 
