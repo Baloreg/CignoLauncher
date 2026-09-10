@@ -2179,18 +2179,32 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
             loader_type = active_inst.get("loader_type", "vanilla")
             loader_version = active_inst.get("loader_version")
 
-            with suppress_stdout_stderr():
-                if loader_type != "vanilla":
-                    try:
-                        loader = minecraft_launcher_lib.mod_loader.get_mod_loader(loader_type)
-                        installed_id = loader.install(version_id, self.minecraft_directory, loader_version=loader_version, callback=callback)
-                        self.instance_manager.update_instance(active_inst["id"], installed_version_id=installed_id)
-                        self.worker.log_message.emit(f"Loader {loader_type} ({installed_id}) installato!", "SUCCESS")
-                    except Exception as e:
-                        self.worker.log_message.emit(f"Errore loader: {e}", "ERROR")
-                        minecraft_launcher_lib.install.install_minecraft_version(version_id, self.minecraft_directory, callback=callback)
-                else:
-                    minecraft_launcher_lib.install.install_minecraft_version(version_id, self.minecraft_directory, callback=callback)
+            max_retries = 3
+            retry_delay = 2
+
+            for attempt in range(1, max_retries + 1):
+                try:
+                    with suppress_stdout_stderr():
+                        if loader_type != "vanilla":
+                            try:
+                                loader = minecraft_launcher_lib.mod_loader.get_mod_loader(loader_type)
+                                installed_id = loader.install(version_id, self.minecraft_directory, loader_version=loader_version, callback=callback)
+                                self.instance_manager.update_instance(active_inst["id"], installed_version_id=installed_id)
+                                self.worker.log_message.emit(f"Loader {loader_type} ({installed_id}) installato!", "SUCCESS")
+                            except Exception as e:
+                                self.worker.log_message.emit(f"Errore loader: {e}", "ERROR")
+                                minecraft_launcher_lib.install.install_minecraft_version(version_id, self.minecraft_directory, callback=callback)
+                        else:
+                            minecraft_launcher_lib.install.install_minecraft_version(version_id, self.minecraft_directory, callback=callback)
+                    
+                    # Se arriviamo qui, l'installazione è riuscita
+                    break
+                except Exception as ex:
+                    self.worker.log_message.emit(f"[Tentativo {attempt}/{max_retries}] Errore di download/installazione: {ex}", "WARNING")
+                    if attempt == max_retries:
+                        raise ex
+                    import time
+                    time.sleep(retry_delay)
 
             self.worker.log_message.emit(f"Minecraft {version_id} pronto!", "SUCCESS")
 
