@@ -51,7 +51,6 @@ def parse_version(v_str):
     return tuple(parts[:3])
 
 DEFAULT_POPULAR_VERSIONS = [
-    {"id": "26.2", "type": "snapshot"},
     {"id": "1.21.4", "type": "release"},
     {"id": "1.21.3", "type": "release"},
     {"id": "1.21.1", "type": "release"},
@@ -372,17 +371,31 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
         self.check_account_on_startup()
 
     def get_latest_official_release(self):
-        """Identifica l'ultima versione disponibile in assoluto (ordinata semanticamente)."""
+        """Identifica l'ultima versione RELEASE ufficiale Mojang stabile (escludendo alpha, beta, snapshot e vecchie versioni sperimentali)."""
         if not self.all_versions:
-            return "26.2"
+            return "1.21.4"
         try:
-            sorted_versions = sorted(self.all_versions, key=parse_version_key, reverse=True)
-            if sorted_versions:
-                first = sorted_versions[0]
+            releases = []
+            for v in self.all_versions:
+                v_id = v.get("id") if isinstance(v, dict) else str(v)
+                v_type = v.get("type", "release") if isinstance(v, dict) else "release"
+                v_lower = v_id.lower()
+                is_experimental = any(tag in v_lower for tag in ["rd-", "inf-", "c0.", "b1.", "a1.", "alpha", "beta", "snapshot", "w", "pre", "rc"])
+                if v_type == "release" and not is_experimental:
+                    releases.append(v)
+            
+            if not releases:
+                releases = [v for v in self.all_versions if not any(tag in str(v).lower() for tag in ["rd-", "inf-", "c0.", "b1.", "a1.", "alpha", "beta"])]
+            if not releases:
+                releases = self.all_versions
+
+            sorted_releases = sorted(releases, key=parse_version_key, reverse=True)
+            if sorted_releases:
+                first = sorted_releases[0]
                 return first.get("id") if isinstance(first, dict) else str(first)
         except Exception:
             pass
-        return "26.2"
+        return "1.21.4"
 
     def load_cached_versions(self):
         if os.path.exists(self.versions_cache_file):
