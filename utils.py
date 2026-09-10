@@ -26,14 +26,18 @@ def download_head_pixmap(identifier, heads_folder, user_uuid=None):
     target_id = str(user_uuid).strip() if user_uuid else str(identifier).strip()
     target_name = str(identifier).strip() if identifier else target_id
 
-    # URL candidato esclusivo Minotar helm per il download dell'avatar
+    # URL candidati per il download dell'avatar (Minotar + fallback affidabili)
     urls = []
     if user_uuid:
         clean_uuid = str(user_uuid).replace("-", "").strip()
         urls.append(f"https://minotar.net/helm/{clean_uuid}/64.png")
+        urls.append(f"https://crafthead.net/helm/{clean_uuid}/64")
+        urls.append(f"https://mc-heads.net/avatar/{clean_uuid}/64")
 
     if target_name:
         urls.append(f"https://minotar.net/helm/{target_name}/64.png")
+        urls.append(f"https://crafthead.net/helm/{target_name}/64")
+        urls.append(f"https://mc-heads.net/avatar/{target_name}/64")
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
