@@ -615,6 +615,11 @@ class FirstRunWizard(QDialog, CustomWindowMixin):
     def on_login_success(self, account_data):
         if self.account_manager:
             self.account_manager.add_microsoft_account(account_data)
+        username = account_data.get('name')
+        uuid_str = account_data.get('id')
+        if username or uuid_str:
+            download_head_pixmap(username, self.heads_folder, user_uuid=uuid_str)
+
         self.refresh_accounts_list()
         self.add_account_btn.setEnabled(True)
         if hasattr(self.parent(), 'update_account_badge'):
