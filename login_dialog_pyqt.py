@@ -14,6 +14,7 @@ from PyQt6.QtCore import Qt, QObject, pyqtSignal, QThread, QTimer
 from utils import create_steve_avatar, resource_path, download_head_pixmap
 from custom_window import CustomWindowMixin
 from dialog_utils import ask_confirmation, show_warning, custom_text_input, CustomMessageBox
+from skin_manager_dialog import SkinManagerDialog
 
 def resource_path(relative_path):
     try:
@@ -314,6 +315,12 @@ class LoginDialog(QDialog, CustomWindowMixin):
                 use_btn.clicked.connect(lambda _, aid=account_id: self.use_account(aid))
                 frame_layout.addWidget(use_btn)
 
+            if data['type'] == 'microsoft':
+                skin_btn = QPushButton("Cambia Skin")
+                skin_btn.setObjectName("SecondaryButton")
+                skin_btn.clicked.connect(lambda _, acc=data: self.open_skin_manager(acc))
+                frame_layout.addWidget(skin_btn)
+
             remove_btn = QPushButton("Rimuovi")
             remove_btn.setObjectName("RemoveButton")
             remove_btn.clicked.connect(lambda _, aid=account_id: self.remove_account(aid))
@@ -356,6 +363,19 @@ class LoginDialog(QDialog, CustomWindowMixin):
                 QTimer.singleShot(0, lambda: target_label.setPixmap(scaled))
 
         threading.Thread(target=fetch_and_set, daemon=True).start()
+
+    def open_skin_manager(self, account_data):
+        dialog = SkinManagerDialog(
+            self,
+            account_data,
+            account_manager=self.account_manager,
+            client_id=self.client_id,
+            client_secret=self.client_secret
+        )
+        dialog.exec()
+        self.refresh_accounts_list()
+        if hasattr(self.parent(), 'update_account_badge'):
+            self.parent().update_account_badge(force_refresh=True)
 
     def use_account(self, account_id):
         self.account_manager.switch_account(account_id)

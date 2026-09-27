@@ -270,7 +270,7 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
     def __init__(self):
         super().__init__()
         self.launcher_name = "CignoLauncher"
-        self.launcher_version = "2.2.0"
+        self.launcher_version = "2.3.0"
 
         self.setup_paths()
         self.load_settings()
@@ -2409,7 +2409,7 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
         dialog.exec()
         self.update_account_badge()
 
-    def update_account_badge(self):
+    def update_account_badge(self, force_refresh=False):
         """Aggiorna le informazioni dell'account nella sidebar."""
         curr = self.account_manager.current_account
         if curr:
@@ -2423,7 +2423,7 @@ class MinecraftLauncher(QMainWindow, CustomWindowMixin):
             if is_ms:
                 identifier = name if name else curr.get("uuid")
                 user_uuid = curr.get("uuid")
-                self.load_head_avatar(identifier, user_uuid=user_uuid)
+                self.load_head_avatar(identifier, user_uuid=user_uuid, force_refresh=force_refresh)
             else:
                 self.set_offline_avatar()
         else:
